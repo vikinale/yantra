@@ -1,0 +1,14 @@
+
+
+@media (min-width: 320px) and (max-width: 767px) {
+    .big-logo img {
+        width: 75px;
+    }
+    .adm-editor {
+        font-size: 13px;
+    }
+    .bg-boxshadow {
+        padding: 12px;
+    }
+}
+

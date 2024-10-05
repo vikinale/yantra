@@ -1,0 +1,6 @@
+[:template.main]
+[:/template]
+
+[:template.init]
+    [set module.theme_url][php]echo theme_url();[/php][/set]
+[:/template]

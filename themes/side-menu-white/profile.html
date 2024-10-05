@@ -1,0 +1,1462 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Title -->
+    <title>Fojota- Bootstrap Admin Template</title>
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <!-- Plugins File -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <!-- Master Stylesheet [If you remove this CSS file, your file will be broken undoubtedly.] -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+   <!-- Preloader -->
+   <div id="preloader">
+    <div class="preloader-book">
+        <div class="inner">
+            <div class="left"></div>
+            <div class="middle"></div>
+            <div class="right"></div>
+        </div>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</div>
+<!-- /Preloader -->
+
+<!-- Choose Layout -->
+<div class="choose-layout-area">
+    <div class="setting-trigger-icon" id="settingTrigger">
+        <i class="ti-settings"></i>
+    </div>
+    <div class="choose-layout" id="chooseLayout">
+        <div class="quick-setting-tab">
+            <div class="widgets-todo-list-area">
+                <h4 class="todo-title">Todo List:</h4>
+                <form id="form-add-todo" class="form-add-todo">
+                    <input type="text" id="new-todo-item" class="new-todo-item form-control" name="todo"
+                        placeholder="Add New">
+                    <input type="submit" id="add-todo-item" class="add-todo-item" value="+">
+                </form>
+
+                <form id="form-todo-list">
+                    <ul id="flaptToDo-list" class="todo-list">
+                        <li><label class="ckbox"><input type="checkbox" name="todo-item-done" class="todo-item-done"
+                                    value="test"><span></span></label>Go to Market
+                            <i class="todo-item-delete ti-close"></i></li>
+
+                        <li><label class="ckbox"><input type="checkbox" name="todo-item-done" class="todo-item-done"
+                                    value="hello"><span></span></label>Meeting with AD
+                            <i class="todo-item-delete ti-close"></i></li>
+
+                        <li><label class="ckbox"><input type="checkbox" name="todo-item-done" class="todo-item-done"
+                                    value="hello"><span></span></label>Check Mail
+                            <i class="todo-item-delete ti-close"></i></li>
+
+                        <li><label class="ckbox"><input type="checkbox" name="todo-item-done" class="todo-item-done"
+                                    value="hello"><span></span></label>Work for Theme
+                            <i class="todo-item-delete ti-close"></i></li>
+
+                        <li><label class="ckbox"><input type="checkbox" name="todo-item-done" class="todo-item-done"
+                                    value="hello"><span></span></label>Create a Plugin
+                            <i class="todo-item-delete ti-close"></i></li>
+
+                        <li><label class="ckbox"><input type="checkbox" name="todo-item-done" class="todo-item-done"
+                                    value="hello"><span></span></label>Fixed Template Issues
+                            <i class="todo-item-delete ti-close"></i></li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ======================================
+******* Page Wrapper Area Start **********
+======================================= -->
+<div class="flapt-page-wrapper">
+    <!-- Sidemenu Area -->
+    <div class="flapt-sidemenu-wrapper">
+        <!-- Desktop Logo -->
+        <div class="flapt-logo">
+            <a href="index.html"><img class="desktop-logo" src="img/core-img/logo.png" alt="Desktop Logo"> <img
+                    class="small-logo" src="img/core-img/small-logo.png" alt="Mobile Logo"></a>
+        </div>
+
+        <!-- Side Nav -->
+        <div class="flapt-sidenav" id="flaptSideNav">
+            <!-- Side Menu Area -->
+            <div class="side-menu-area">
+                <!-- Sidebar Menu -->
+                <nav>
+                    <ul class="sidebar-menu" data-widget="tree">
+                        <li class="menu-header-title">Dashboard</li>
+                        <li class="treeview">
+                            <a class="menu-active" href="javascript:void(0)"><i class='bx bx-home-heart'></i>
+                                <span>Dashboard</span>
+                                <i class="fa fa-angle-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="index.html">Dashboard 1</a></li>
+                                 <li><a href="index-2.html">Dashboard 2</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="javascript:void(0)"><i class='bx bxs-cart'></i><span>Shop</span> <i
+                                    class="fa fa-angle-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="product.html">Products</a></li>
+                                <li><a href="product-details.html">Products Details</a></li>
+                                <li><a href="order.html">Orders</a></li>
+                                <li><a href="cart.html">Cart</a></li>
+                                <li><a href="checkout.html">Checkout</a></li>
+                                <li><a href="invoice.html">Invoice</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-header-title">Apps</li>
+                        <li><a href="calendar.html"><i class='bx bx-calendar'></i><span>Calendar</span></a></li>
+                        <li><a href="chat-box.html"><i class='bx bx-message-rounded-dots'></i><span>Chat</span></a>
+                        </li>
+                        <li class="treeview">
+                            <a href="javascript:void(0)"><i class="bx bx-envelope"></i> <span>Email</span> <i
+                                    class="fa fa-angle-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="mail-inbox.html">Inbox</a></li>
+                                <li><a href="mail-view.html">Mail View</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="widgets.html"><i class="zmdi zmdi-widgets"></i><span>Widgets</span></a></li>
+                        <li class="menu-header-title">Custom</li>
+                        <li class="treeview active">
+                            <a href="javascript:void(0)"><i class="bx bx-file"></i><span>Pages</span> <i
+                                    class="fa fa-angle-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="account.html">Account Settings</a></li>
+                                <li><a href="filemanager.html">File Manager</a></li>
+                                <li class="active"><a href="profile.html">Profile</a></li>
+                                <li><a href="kanban-board.html">Kanban Board</a></li>
+                                <li><a href="timeline.html">Timeline</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="nestable-list.html">Nestable List</a></li>
+                                <li><a href="notification.html">Notification</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="javascript:void(0)"><i
+                                    class="bx bx-user-circle"></i><span>Authentication</span> <i
+                                    class="fa fa-angle-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="login.html">Login</a></li>
+                                <li><a href="register.html">Register</a></li>
+                                <li><a href="forget-password.html">Forget Password</a></li>
+                                <li><a href="lock-screen.html">Lock Screen</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-header-title">Components</li>
+                        <li class="treeview">
+                            <a href="javascript:void(0)"><i class="bx bx-tone"></i> <span>UI Elements</span> <i
+                                    class="fa fa-angle-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="accordion.html">Accordion</a></li>
+                                <li><a href="alert.html">Alert</a></li>
+                                <li><a href="badge.html">Badge</a></li>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="breadcrumb.html">Breadcrumb</a></li>
+                                <li><a href="card.html">Card</a></li>
+                                <li><a href="carousel.html">Carousel</a></li>
+                                <li><a href="collapse.html">Collapse</a></li>
+                                <li><a href="modals.html">Modals</a></li>
+                                <li><a href="list-group.html">List Group</a></li>
+                                <li><a href="dropdown.html">Dropdown</a></li>
+                                <li><a href="progressbar.html">Progressbar</a></li>
+                                <li><a href="preloader.html">Preloader</a></li>
+                                <li><a href="popovers.html">Popovers</a></li>
+                                <li><a href="pagination.html">Pagination</a></li>
+                                <li><a href="scrollspy.html">Scrollspy</a></li>
+                                <li><a href="session-timeout.html">Session timeout</a></li>
+                                <li><a href="offcanvas.html">Offcanvas</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="javascript:void(0)"><i class='bx bx-bar-chart-square'></i><span>Charts</span>
+                                <i class="fa fa-angle-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="apex-chart.html">Apex Chart</a></li>
+                                <li><a href="chart-js.html">Chart Js</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="treeview">
+                            <a href="javascript:void(0)"><i class="bx bxs-eraser"></i><span>Forms</span> <i
+                                    class="fa fa-angle-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="basic-form.html">Basic Form</a></li>
+                                <li><a href="form-advanced.html">Basic Advanced</a></li>
+                                <li><a href="form-editor.html">Form Editor</a></li>
+                                <li><a href="clipboard.html">Clipboard</a></li>
+                                <li><a href="form-validation.html">Validation</a></li>
+                                <li><a href="form-wizard.html">Form Wizard</a></li>
+                                <li><a href="form-mask.html">Input Mask</a></li>
+                                <li><a href="form-upload.html">File upload</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="javascript:void(0)"><i class="bx bx-list-ul"></i><span>Tables</span> <i
+                                    class="fa fa-angle-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="basic-table.html">Basic Table</a></li>
+                                <li><a href="data-table.html">Data Table</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="javascript:void(0)"><i class="bx bx-list-ul"></i><span>Icons</span> <i
+                                    class="fa fa-angle-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="elegant-icons.html">Elegant icon</a></li>
+                                <li><a href="et-line-icons.html">Etline icon</a></li>
+                                <li><a href="font-awesome.html">Font-awsome</a></li>
+                                <li><a href="matarial-icons.html">Matarial Icon</a></li>
+                                <li><a href="pe-7-stroke.html">Pe-7-Stroke</a></li>
+                                <li><a href="themify-icons.html">Themify Icon</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="javascript:void(0)"><i class="bx bx-share-alt"></i> <span>Dropdown</span> <i
+                                    class="fa fa-angle-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a href="#">Level One</a></li>
+                                <li class="treeview">
+                                    <a href="#">Level One <i class="fa fa-angle-right"></i></a>
+                                    <ul class="treeview-menu">
+                                        <li><a href="#">Level Two</a></li>
+                                        <li><a href="#">Level Two</a></li>
+                                        <li><a href="#">Level Two</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Level One</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Upgrade Card -->
+            <div class="upgrade-card card">
+                <div class="card-body">
+                    <img class="mb-4" src="./img/bg-img/1.png" alt="">
+                    <p>Upgrade to pro!</p>
+                    <a class="btn btn-sm btn-warning" href="#">Upgrade Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="flapt-page-content">
+        <!-- Top Header Area -->
+        <header class="top-header-area d-flex align-items-center justify-content-between">
+            <div class="left-side-content-area d-flex align-items-center">
+                <!-- Mobile Logo -->
+                <div class="mobile-logo">
+                    <a href="index.html"><img src="img/core-img/small-logo.png" alt="Mobile Logo"></a>
+                </div>
+
+                <!-- Triggers -->
+                <div class="flapt-triggers">
+                    <div class="menu-collasped" id="menuCollasped">
+                        <i class='bx bx-grid-alt'></i>
+                    </div>
+                    <div class="mobile-menu-open" id="mobileMenuOpen">
+                        <i class='bx bx-grid-alt'></i>
+                    </div>
+                </div>
+
+                <!-- Left Side Nav -->
+                <ul class="left-side-navbar d-flex align-items-center">
+                    <li class="hide-phone app-search">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <span class="bx bx-search-alt"></span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="right-side-navbar d-flex align-items-center justify-content-end">
+                <!-- Mobile Trigger -->
+                <div class="right-side-trigger" id="rightSideTrigger">
+                    <i class='bx bx-menu-alt-right'></i>
+                </div>
+
+                <!-- Top Bar Nav -->
+                <ul class="right-side-content d-flex align-items-center">
+                    <li class="nav-item dropdown">
+                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"><span><i
+                                    class='bx bx-world'></i></span></button>
+                        <div class="dropdown-menu language-dropdown dropdown-menu-right">
+                            <div class="user-profile-area">
+                                <a href="#" class="dropdown-item mb-15"><img src="img/core-img/l5.jpg" alt="Image">
+                                    <span>USA</span></a>
+                                <a href="#" class="dropdown-item mb-15"><img src="img/core-img/l2.jpg" alt="Image">
+                                    <span>German</span></a>
+                                <a href="#" class="dropdown-item mb-15"><img src="img/core-img/l3.jpg" alt="Image">
+                                    <span>Italian</span></a>
+                                <a href="#" class="dropdown-item"><img src="img/core-img/l4.jpg" alt="Image">
+                                    <span>Russian</span></a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"><i class='bx bx-envelope'></i></button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <!-- Message Area -->
+                            <div class="top-message-area">
+                                <!-- Heading -->
+                                <div class="message-heading">
+                                    <div class="heading-title">
+                                        <h6 class="mb-0">All Messages</h6>
+                                    </div>
+                                    <span>10</span>
+                                </div>
+
+                                <div class="message-box" id="messageBox">
+                                    <a href="#" class="dropdown-item">
+                                        <i class='bx bx-dollar-circle'></i>
+                                        <div>
+                                            <span>Did you know?</span>
+                                            <p class="mb-0 font-12">Adipisicing elit. Ipsa, porro!</p>
+                                        </div>
+                                    </a>
+
+                                    <a href="#" class="dropdown-item">
+                                        <i class='bx bx-shopping-bag'></i>
+                                        <div>
+                                            <span>Congratulations!
+                                            </span>
+                                            <p class="mb-0 font-12">Consectetur adipisicing elit.</p>
+                                        </div>
+                                    </a>
+
+                                    <a href="#" class="dropdown-item">
+                                        <i class='bx bx-wallet-alt'></i>
+                                        <div>
+                                            <span>Hello Obeta</span>
+                                            <p class="mb-0 font-12">Consectetur adipisicing elit.</p>
+                                        </div>
+                                    </a>
+
+                                    <a href="#" class="dropdown-item">
+                                        <i class='bx bx-border-all'></i>
+                                        <div>
+                                            <span>Your order is placed</span>
+                                            <p class="mb-0 font-12">Consectetur adipisicing elit.</p>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="dropdown-item">
+                                        <i class='bx bx-wallet-alt'></i>
+                                        <div>
+                                            <span>Haslina Obeta</span>
+                                            <p class="mb-0 font-12">Consectetur adipisicing elit.</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"><i class='bx bx-bell bx-tada'></i> <span
+                                class="active-status"></span></button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <!-- Top Notifications Area -->
+                            <div class="top-notifications-area">
+                                <!-- Heading -->
+                                <div class="notifications-heading">
+                                    <div class="heading-title">
+                                        <h6>Notifications</h6>
+                                    </div>
+                                    <span>11</span>
+                                </div>
+
+                                <div class="notifications-box" id="notificationsBox">
+                                    <a href="#" class="dropdown-item">
+                                        <i class='bx bx-shopping-bag'></i>
+                                        <div>
+                                            <span>Your order is placed</span>
+                                            <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
+                                        </div>
+                                    </a>
+
+                                    <a href="#" class="dropdown-item">
+                                        <i class='bx bx-wallet-alt'></i>
+                                        <div>
+                                            <span>Haslina Obeta</span>
+                                            <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
+                                        </div>
+                                    </a>
+
+                                    <a href="#" class="dropdown-item">
+                                        <i class='bx bx-dollar-circle'></i>
+                                        <div>
+                                            <span>Your order is Dollar</span>
+                                            <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
+                                        </div>
+                                    </a>
+
+                                    <a href="#" class="dropdown-item">
+                                        <i class='bx bx-border-all'></i>
+                                        <div>
+                                            <span>Your order is placed</span>
+                                            <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="dropdown-item">
+                                        <i class='bx bx-wallet-alt'></i>
+                                        <div>
+                                            <span>Haslina Obeta</span>
+                                            <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"><img src="img/bg-img/person_1.jpg"
+                                alt=""></button>
+                        <div class="dropdown-menu profile dropdown-menu-right">
+                            <!-- User Profile Area -->
+                            <div class="user-profile-area">
+                                <a href="#" class="dropdown-item"><i class="bx bx-user font-15"
+                                        aria-hidden="true"></i> My profile</a>
+                                <a href="#" class="dropdown-item"><i class="bx bx-wallet font-15"
+                                        aria-hidden="true"></i> My wallet</a>
+                                <a href="#" class="dropdown-item"><i class="bx bx-wrench font-15"
+                                        aria-hidden="true"></i> settings</a>
+                                <a href="#" class="dropdown-item"><i class="bx bx-power-off font-15"
+                                        aria-hidden="true"></i> Sign-out</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+            <!-- Main Content Area -->
+            <div class="main-content">
+                <div class="content-wraper-area">
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        <div class="row g-4">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body card-breadcrumb">
+                                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                                            <h4 class="mb-0">Profile</h4>
+                                            <div class="page-title-right">
+                                                <ol class="breadcrumb m-0">
+                                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a>
+                                                    </li>
+                                                    <li class="breadcrumb-item active">Profile</li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-sm-flex align-items-top profile-user-header main-profile-cover">
+                                            <div class="single-profile-image">
+                                                <img src="img/bg-img/person_1.jpg" alt="">
+                                            </div>
+                                            <div class="flex-fill main-profile-meta">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div>
+                                                        <h6>Json Taylor</h6>
+                                                        <p class="mb-2">Chief Developer</p>
+                                                    </div>
+                                                    <div class="follow--btn-area">
+                                                        <button class="btn btn-primary">Follow</button>
+                                                    </div>
+                                                </div>
+
+                                                <p class="mb-4"> <span class="me-2"><i class='bx bx-location-plus'></i>
+                                                        USA</span>
+                                                    <span><i class='bx bx-location-plus'></i> Washington D.C</span> </p>
+                                                <div class="d-flex mb-0">
+                                                    <div class="me-4">
+                                                        <p class="mb-0 text-dark">70</p>
+                                                        <p class="mb-0">Projects</p>
+                                                    </div>
+                                                    <div class="me-4">
+                                                        <p class="mb-0 text-dark">10.2k</p>
+                                                        <p class="mb-0">Followers</p>
+                                                    </div>
+                                                    <div class="me-4">
+                                                        <p class="mb-0 text-dark">125</p>
+                                                        <p class="mb-0">Following</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pt-4 pb-4 border-bottom ">
+                                            <div class="mb-4">
+                                                <p class="mb-2 text-dark">Professional Bio:</p>
+                                                <p class="text-muted op-7 mb-0"> I am <b>Ajoy Dash,</b> here by
+                                                    conclude that,i am the founder of the prestigeous company name
+                                                    abndevs
+                                                    at all and acts as the
+                                                    cheif Developer of the company. </p>
+                                            </div>
+
+                                            <div class="personal-info-area">
+                                                <p class="mb-2 text-dark">Personal Info:</p>
+                                                <ul class="list-group personal-data">
+                                                    <li class="list-group-item">
+                                                        <div class="d-flex flex-wrap align-items-center">
+                                                            <div class="me-2"> Name : </div> <span
+                                                                class="text-muted">Ajoy Das</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <div class="d-flex flex-wrap align-items-center">
+                                                            <div class="me-2"> Email : </div> <span
+                                                                class="text-muted">ajoy245@gmail.com</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <div class="d-flex flex-wrap align-items-center">
+                                                            <div class="me-2"> Phone : </div> <span
+                                                                class="text-muted">+(444) 555-1234</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <div class="d-flex flex-wrap align-items-center">
+                                                            <div class="me-2"> Designation : </div> <span
+                                                                class="text-muted">Founder</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <div class="d-flex flex-wrap align-items-center">
+                                                            <div class="me-2"> Age : </div> <span
+                                                                class="text-muted">27</span>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <div class="d-flex flex-wrap align-items-center">
+                                                            <div class="me-2"> Experience : </div> <span
+                                                                class="text-muted">4 Years</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="mb-0 pt-4">
+                                                <p class="mb-2 text-dark">Links:</p>
+                                                <div class="mb-0">
+                                                    <p class="mb-1"> <a href="#"
+                                                            class="text-primary"><u>https://www.designing-world.com</u></a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="pt-4">
+                                            <p class="mb-2 text-dark">Skills:</p>
+                                            <div class="profile-tag-area">
+                                                <a class="m-1" href="#">Computing</a>
+                                                <a class="m-1" href="#">Developer</a>
+                                                <a class="m-1" href="#">Html</a>
+                                                <a class="m-1" href="#">Css</a>
+                                                <a class="m-1" href="#">Javascript</a>
+                                                <a class="m-1" href="#">Laravel</a>
+                                                <a class="m-1" href="#">Php</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div
+                                            class="d-md-flex align-items-center justify-content-between profile-body-header">
+                                            <ul class="nav nav-tabs justify-content-start profile-body-tabs" id="myTab"
+                                                role="tablist">
+                                                <li class="nav-item" role="presentation"> <button
+                                                        class="nav-link active" id="activity-tab" data-bs-toggle="tab"
+                                                        data-bs-target="#activity-tab-pane" type="button" role="tab"
+                                                        aria-controls="activity-tab-pane"
+                                                        aria-selected="true">About</button>
+                                                </li>
+                                                <li class="nav-item" role="presentation"> <button class="nav-link"
+                                                        id="posts-tab" data-bs-toggle="tab"
+                                                        data-bs-target="#posts-tab-pane" type="button" role="tab"
+                                                        aria-controls="posts-tab-pane" aria-selected="false"
+                                                        tabindex="-1">Tasks</button>
+                                                </li>
+                                                <li class="nav-item" role="presentation"> <button class="nav-link"
+                                                        id="followers-tab" data-bs-toggle="tab"
+                                                        data-bs-target="#followers-tab-pane" type="button" role="tab"
+                                                        aria-controls="followers-tab-pane" aria-selected="false"
+                                                        tabindex="-1">Friends</button>
+                                                </li>
+                                                <li class="nav-item" role="presentation"> <button class="nav-link"
+                                                        id="gallery-tab" data-bs-toggle="tab"
+                                                        data-bs-target="#gallery-tab-pane" type="button" role="tab"
+                                                        aria-controls="gallery-tab-pane" aria-selected="false"
+                                                        tabindex="-1">Gallery</button>
+                                                </li>
+                                            </ul>
+
+                                            <div>
+                                                <p class="mb-1 font-13 title-badges">Profile 70% completed - <a href="#"
+                                                        class="text-primary">Finish now</a></p>
+                                                <div class="progress h-6 progress-xs progress-animate">
+                                                    <div class="progress-bar  bg-success" role="progressbar"
+                                                        aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+                                                        style="width: 70%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-content" id="myTabContent">
+                                            <div class="tab-pane fade active show" id="activity-tab-pane"
+                                                role="tabpanel" aria-labelledby="activity-tab" tabindex="0">
+                                                <div>
+                                                    <div>
+                                                        <h5 class="mb-4">Experience</h5>
+
+                                                        <ol class="activity-checkout mb-0 px-4 mt-3">
+                                                            <li class="checkout-item">
+                                                                <div class="avatar checkout-icon p-1">
+                                                                    <div class="pro-avatar-title rounded-circle">
+                                                                        <i class="bx bxs-pencil text-white"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-item-list">
+                                                                    <div>
+                                                                        <h5 class="mb-1">Web Developer</h5>
+                                                                        <p class="text-muted text-truncate mb-2">
+                                                                            2019 - 2023</p>
+                                                                        <div class="mb-3">
+                                                                            <p>abnDevs Company</p>
+                                                                            <p class="mb-0">Lorem ipsum dolor
+                                                                                sit amet consectetur adipisicing
+                                                                                elit. Officia cupiditate dolores
+                                                                                quis. Magnam, rem. Totam dolores
+                                                                                officia provident iusto voluptas
+                                                                                sit
+                                                                                ipsam quod, molestias nemo?</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+
+                                                            <li class="checkout-item">
+                                                                <div class="avatar checkout-icon p-1">
+                                                                    <div class="pro-avatar-title rounded-circle">
+                                                                        <i class='bx bx-code-curly text-white'></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-item-list">
+                                                                    <div>
+                                                                        <h5 class="mb-1">Front end Developer
+                                                                        </h5>
+                                                                        <p class="text-muted text-truncate mb-2">
+                                                                            2019 - 2023</p>
+                                                                        <div class="mb-3">
+                                                                            <p>abnDevs Company</p>
+                                                                            <p class="mb-0">Lorem ipsum dolor
+                                                                                sit amet consectetur adipisicing
+                                                                                elit. Officia cupiditate dolores
+                                                                                quis. Magnam, rem. Totam dolores
+                                                                                officia provident iusto voluptas
+                                                                                sit
+                                                                                ipsam quod, molestias nemo?</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+
+                                                            <li class="checkout-item">
+                                                                <div class="avatar checkout-icon p-1">
+                                                                    <div class="pro-avatar-title rounded-circle">
+                                                                        <i class='bx bx-palette text-white'></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="profile-item-list">
+                                                                    <div>
+                                                                        <h5 class="mb-1">Web Designer</h5>
+                                                                        <p class="text-muted text-truncate mb-2">
+                                                                            2019 - 2023</p>
+                                                                        <div class="mb-3">
+                                                                            <p>abnDevs Company</p>
+                                                                            <p class="mb-0">Lorem ipsum dolor
+                                                                                sit amet consectetur adipisicing
+                                                                                elit. Officia cupiditate dolores
+                                                                                quis. Magnam, rem. Totam dolores
+                                                                                officia provident iusto voluptas
+                                                                                sit
+                                                                                ipsam quod, molestias nemo?</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane fade p-0 border-0" id="posts-tab-pane" role="tabpanel"
+                                                aria-labelledby="posts-tab" tabindex="0">
+                                                <div class="single-project-card- mb-25">
+                                                    <div class="card-body">
+                                                        <div class="card-title">
+                                                            <h4>Active</h4>
+                                                        </div>
+
+                                                        <div class="table-responsive">
+                                                            <table class="table table-nowrap table-centered">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div
+                                                                                class="form-check font-size-16 text-center">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input"
+                                                                                    id="tasks-activeCheck20">
+                                                                                <label class="form-check-label"
+                                                                                    for="tasks-activeCheck20"></label>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <a class="text-muted" href="#">AI
+                                                                                Product Detail</a>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p class="ms-4 mb-0">Product Design
+                                                                            </p>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            <p class="ms-4 text-muted mb-0">
+                                                                                <i
+                                                                                    class="bx bx-message-rounded-dots"></i>
+                                                                                3
+                                                                            </p>
+                                                                        </td>
+
+                                                                        <td>27 May, 2023</td>
+                                                                        <td><span
+                                                                                class="badge text-bg-primary">Active</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div
+                                                                                class="form-check font-size-16 text-center">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input"
+                                                                                    id="tasks-activeCheck2">
+                                                                                <label class="form-check-label"
+                                                                                    for="tasks-activeCheck2"></label>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <a class="text-muted" href="#">Design
+                                                                                Detail</a>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p class="ms-4 mb-0">Product Design</p>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            <p class="ms-4 text-muted mb-0">
+                                                                                <i
+                                                                                    class="bx bx-message-rounded-dots"></i>
+                                                                                9
+                                                                            </p>
+                                                                        </td>
+
+                                                                        <td>27 May, 2023</td>
+                                                                        <td><span
+                                                                                class="badge text-bg-warning">Upcoming</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div
+                                                                                class="form-check font-size-16 text-center">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input"
+                                                                                    id="tasks-activeCheck3">
+                                                                                <label class="form-check-label"
+                                                                                    for="tasks-activeCheck3"></label>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <a class="text-muted" href="#">Marketing
+                                                                                Product</a>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p class="ms-4 mb-0">Product Design</p>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            <p class="ms-4 text-muted mb-0">
+                                                                                <i
+                                                                                    class="bx bx-message-rounded-dots"></i>
+                                                                                5
+                                                                            </p>
+                                                                        </td>
+
+                                                                        <td>29 May, 2023</td>
+                                                                        <td><span
+                                                                                class="badge text-bg-success">Done</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div
+                                                                                class="form-check font-size-16 text-center">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input"
+                                                                                    id="tasks-activeCheck4">
+                                                                                <label class="form-check-label"
+                                                                                    for="tasks-activeCheck4"></label>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <a class="text-muted" href="#">AI
+                                                                                Product
+                                                                                Detail</a>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p class="ms-4 mb-0">Product Design</p>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            <p class="ms-4 text-muted mb-0">
+                                                                                <i
+                                                                                    class="bx bx-message-rounded-dots"></i>
+                                                                                4
+                                                                            </p>
+                                                                        </td>
+
+                                                                        <td>27 May, 2023</td>
+                                                                        <td><span
+                                                                                class="badge text-bg-primary">Active</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div
+                                                                                class="form-check font-size-16 text-center">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input"
+                                                                                    id="tasks-activeCheck5">
+                                                                                <label class="form-check-label"
+                                                                                    for="tasks-activeCheck5"></label>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <a class="text-muted" href="#">AI
+                                                                                Product
+                                                                                Detail</a>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p class="ms-4 mb-0">Product Design</p>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            <p class="ms-4 text-muted mb-0">
+                                                                                <i
+                                                                                    class='bx bx-message-rounded-dots'></i>
+                                                                                7
+                                                                            </p>
+                                                                        </td>
+
+                                                                        <td>27 May, 2023</td>
+                                                                        <td><span
+                                                                                class="badge text-bg-success">Done</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div
+                                                                                class="form-check font-size-16 text-center">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input"
+                                                                                    id="tasks-activeCheck6">
+                                                                                <label class="form-check-label"
+                                                                                    for="tasks-activeCheck6"></label>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <a class="text-muted" href="#">AI
+                                                                                Product
+                                                                                Detail</a>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p class="ms-4 mb-0">Product Design</p>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            <p class="ms-4 text-muted mb-0">
+                                                                                <i
+                                                                                    class="bx bx-message-rounded-dots"></i>
+                                                                                8
+                                                                            </p>
+                                                                        </td>
+
+                                                                        <td>27 May, 2023</td>
+                                                                        <td><span
+                                                                                class="badge text-bg-primary">Active</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div
+                                                                                class="form-check font-size-16 text-center">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input"
+                                                                                    id="tasks-activeCheck7">
+                                                                                <label class="form-check-label"
+                                                                                    for="tasks-activeCheck7"></label>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <a class="text-muted" href="#">AI
+                                                                                Product
+                                                                                Detail</a>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p class="ms-4 mb-0">Product Design</p>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            <p class="ms-4 text-muted mb-0">
+                                                                                <i
+                                                                                    class="bx bx-message-rounded-dots"></i>
+                                                                                3
+                                                                            </p>
+                                                                        </td>
+
+                                                                        <td>27 May, 2023</td>
+                                                                        <td><span
+                                                                                class="badge text-bg-primary">Active</span>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade p-0 border-0" id="followers-tab-pane"
+                                                role="tabpanel" aria-labelledby="followers-tab" tabindex="0">
+                                                <div class="row">
+                                                    <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="card mb-25">
+                                                            <div class="card-body">
+                                                                <div class="text-center">
+                                                                    <div class="friend-single-img">
+                                                                        <img src="img/bg-img/per-3.jpg " alt="">
+                                                                    </div>
+                                                                    <div class="mt-2">
+                                                                        <p class="mb-0">Ajoy Dash</p>
+                                                                        <p class="mb-2">ajoy526@gmail.com</p>
+                                                                        <span class="badge text-bg-primary">Team
+                                                                            Member</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-footer text-center">
+                                                                <div class="btn-list"> <button
+                                                                        class="btn btn-sm btn-danger m-1">Block</button>
+                                                                    <button
+                                                                        class="btn btn-sm btn-primary m-1">Unfollow</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="card mb-25">
+                                                            <div class="card-body">
+                                                                <div class="text-center">
+                                                                    <div class="friend-single-img">
+                                                                        <img src="img/bg-img/per-3.jpg " alt="">
+                                                                    </div>
+                                                                    <div class="mt-2">
+                                                                        <p class="mb-0">Bishwajit Dash</p>
+                                                                        <p class="mb-2">ajoy526@gmail.com</p>
+                                                                        <span class="badge text-bg-primary">Team
+                                                                            Member</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-footer text-center">
+                                                                <div class="btn-list"> <button
+                                                                        class="btn btn-sm btn-danger m-1">Block</button>
+                                                                    <button
+                                                                        class="btn btn-sm btn-primary m-1">Unfollow</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="card mb-25">
+                                                            <div class="card-body">
+                                                                <div class="text-center">
+                                                                    <div class="friend-single-img">
+                                                                        <img src="img/bg-img/person_1.jpg " alt="">
+                                                                    </div>
+                                                                    <div class="mt-2">
+                                                                        <p class="mb-0">Nazrul Islam</p>
+                                                                        <p class="mb-2">ajoy526@gmail.com</p>
+                                                                        <span class="badge text-bg-primary">Team
+                                                                            Member</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-footer text-center">
+                                                                <div class="btn-list"> <button
+                                                                        class="btn btn-sm btn-danger m-1">Block</button>
+                                                                    <button
+                                                                        class="btn btn-sm btn-primary m-1">Unfollow</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="card mb-25">
+                                                            <div class="card-body">
+                                                                <div class="text-center">
+                                                                    <div class="friend-single-img">
+                                                                        <img src="img/bg-img/per-2.jpg " alt="">
+                                                                    </div>
+                                                                    <div class="mt-2">
+                                                                        <p class="mb-0">Ajoy Dash</p>
+                                                                        <p class="mb-2">ajoy526@gmail.com</p>
+                                                                        <span class="badge text-bg-primary">Team
+                                                                            Member</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-footer text-center">
+                                                                <div class="btn-list"> <button
+                                                                        class="btn btn-sm btn-danger m-1">Block</button>
+                                                                    <button
+                                                                        class="btn btn-sm btn-primary m-1">Unfollow</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="card mb-25">
+                                                            <div class="card-body">
+                                                                <div class="text-center">
+                                                                    <div class="friend-single-img">
+                                                                        <img src="img/bg-img/person_1.jpg " alt="">
+                                                                    </div>
+                                                                    <div class="mt-2">
+                                                                        <p class="mb-0">Ajoy Dash</p>
+                                                                        <p class="mb-2">ajoy526@gmail.com</p>
+                                                                        <span class="badge text-bg-primary">Team
+                                                                            Member</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-footer text-center">
+                                                                <div class="btn-list"> <button
+                                                                        class="btn btn-sm btn-danger m-1">Block</button>
+                                                                    <button
+                                                                        class="btn btn-sm btn-primary m-1">Unfollow</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="card mb-25">
+                                                            <div class="card-body">
+                                                                <div class="text-center">
+                                                                    <div class="friend-single-img">
+                                                                        <img src="img/bg-img/per-2.jpg " alt="">
+                                                                    </div>
+                                                                    <div class="mt-2">
+                                                                        <p class="mb-0">Ajoy Dash</p>
+                                                                        <p class="mb-2">ajoy526@gmail.com</p>
+                                                                        <span class="badge text-bg-primary">Team
+                                                                            Member</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-footer text-center">
+                                                                <div class="btn-list"> <button
+                                                                        class="btn btn-sm btn-danger m-1">Block</button>
+                                                                    <button
+                                                                        class="btn btn-sm btn-primary m-1">Unfollow</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane fade p-0 border-0" id="gallery-tab-pane"
+                                                role="tabpanel" aria-labelledby="gallery-tab" tabindex="0">
+                                                <div class="row">
+                                                    <!-- Single Card -->
+                                                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                                                        <a href="#" class="profile-gallery-card">
+                                                            <img src="img/bg-img/bg-1.jpg" alt="image">
+                                                        </a>
+                                                    </div>
+
+                                                    <!-- Single Card -->
+                                                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                                                        <a href="#" class="profile-gallery-card">
+                                                            <img src="img/bg-img/bg-2.jpg" alt="image">
+                                                        </a>
+                                                    </div>
+
+                                                    <!-- Single Card -->
+                                                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                                                        <a href="#" class="profile-gallery-card">
+                                                            <img src="img/bg-img/bg-1.jpg" alt="image">
+                                                        </a>
+                                                    </div>
+
+                                                    <!-- Single Card -->
+                                                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                                                        <a href="#" class="profile-gallery-card">
+                                                            <img src="img/bg-img/bg-2.jpg" alt="image">
+                                                        </a>
+                                                    </div>
+
+                                                    <!-- Single Card -->
+                                                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                                                        <a href="#" class="profile-gallery-card">
+                                                            <img src="img/bg-img/bg-1.jpg" alt="image">
+                                                        </a>
+                                                    </div>
+
+                                                    <!-- Single Card -->
+                                                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                                                        <a href="#" class="profile-gallery-card">
+                                                            <img src="img/bg-img/bg-2.jpg" alt="image">
+                                                        </a>
+                                                    </div>
+
+                                                    <!-- Single Card -->
+                                                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                                                        <a href="#" class="profile-gallery-card">
+                                                            <img src="img/bg-img/bg-1.jpg" alt="image">
+                                                        </a>
+                                                    </div>
+
+                                                    <!-- Single Card -->
+                                                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                                                        <a href="#" class="profile-gallery-card">
+                                                            <img src="img/bg-img/bg-2.jpg" alt="image">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <div class="card-title"> Followers : </div>
+                                        </div>
+                                        <ul class="followers-area">
+                                            <!-- Single Card -->
+                                            <li
+                                                class="single-followers-area d-flex align-items-center justify-content-between">
+                                                <div class="followers-area-info d-flex align-items-center">
+                                                    <div class="followers-img">
+                                                        <img src="img/bg-img/per-2.jpg" alt="">
+                                                    </div>
+                                                    <div class="followers-meta">
+                                                        <h5>Ajoy Chandra</h5>
+                                                        <p>priv258@gmail.com</p>
+                                                    </div>
+                                                </div>
+                                                <div class="follow-btn">
+                                                    <a class="btn btn-outline-primary font-13" href="#"><i
+                                                            class='bx bx-plus'></i> Follow</a>
+                                                </div>
+                                            </li>
+                                            <!-- Single Card -->
+                                            <li
+                                                class="single-followers-area d-flex align-items-center justify-content-between">
+                                                <div class="followers-area-info d-flex align-items-center">
+                                                    <div class="followers-img">
+                                                        <img src="img/bg-img/per-3.jpg" alt="">
+                                                    </div>
+                                                    <div class="followers-meta">
+                                                        <h5>Nazrul Islam</h5>
+                                                        <p>nazr15@gmail.com</p>
+                                                    </div>
+                                                </div>
+                                                <div class="follow-btn">
+                                                    <a class="btn btn-outline-primary font-13" href="#"><i
+                                                            class='bx bx-plus'></i> Follow</a>
+                                                </div>
+                                            </li>
+                                            <!-- Single Card -->
+                                            <li
+                                                class="single-followers-area d-flex align-items-center justify-content-between">
+                                                <div class="followers-area-info d-flex align-items-center">
+                                                    <div class="followers-img">
+                                                        <img src="img/bg-img/person_1.jpg" alt="">
+                                                    </div>
+                                                    <div class="followers-meta">
+                                                        <h5>Ajoy Chandra</h5>
+                                                        <p>ajoypr8@gmail.com</p>
+                                                    </div>
+                                                </div>
+                                                <div class="follow-btn">
+                                                    <a class="btn btn-outline-primary font-13" href="#"><i
+                                                            class='bx bx-plus'></i> Follow</a>
+                                                </div>
+                                            </li>
+                                            <!-- Single Card -->
+                                            <li
+                                                class="single-followers-area d-flex align-items-center justify-content-between">
+                                                <div class="followers-area-info d-flex align-items-center">
+                                                    <div class="followers-img">
+                                                        <img src="img/bg-img/per-2.jpg" alt="">
+                                                    </div>
+                                                    <div class="followers-meta">
+                                                        <h5>Ajoy Chandra</h5>
+                                                        <p>ajoyiv@gmail.com</p>
+                                                    </div>
+                                                </div>
+                                                <div class="follow-btn">
+                                                    <a class="btn btn-outline-primary font-13" href="#"><i
+                                                            class='bx bx-plus'></i> Follow</a>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <div class="card-title"> Recent Post : </div>
+                                        </div>
+                                        <ul class="followers-area">
+                                            <!-- Single Card -->
+                                            <li class="single-followers-area">
+                                                <div class="followers-area-info d-flex align-items-center">
+                                                    <div class="recent-post-img">
+                                                        <img src="img/bg-img/bg-1.jpg" alt="">
+                                                    </div>
+                                                    <div class="recent-meta">
+                                                        <h5>Clinet metting</h5>
+                                                        <p>Lorem ipsum dolor amet.</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+
+                                            <!-- Single Card -->
+                                            <li class="single-followers-area">
+                                                <div class="followers-area-info d-flex align-items-center">
+                                                    <div class="recent-post-img">
+                                                        <img src="img/bg-img/bg-1.jpg" alt="">
+                                                    </div>
+                                                    <div class="recent-meta">
+                                                        <h5>Clinet metting</h5>
+                                                        <p>Lorem ipsum dolor amet.</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+
+                                            <!-- Single Card -->
+                                            <li class="single-followers-area">
+                                                <div class="followers-area-info d-flex align-items-center">
+                                                    <div class="recent-post-img">
+                                                        <img src="img/bg-img/bg-1.jpg" alt="">
+                                                    </div>
+                                                    <div class="recent-meta">
+                                                        <h5>Clinet metting</h5>
+                                                        <p>Lorem ipsum dolor amet.</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+
+                                            <!-- Single Card -->
+                                            <li class="single-followers-area">
+                                                <div class="followers-area-info d-flex align-items-center">
+                                                    <div class="recent-post-img">
+                                                        <img src="img/bg-img/bg-1.jpg" alt="">
+                                                    </div>
+                                                    <div class="recent-meta">
+                                                        <h5>Clinet metting</h5>
+                                                        <p>Lorem ipsum dolor amet.</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <div class="card-title"> Followings : </div>
+                                        </div>
+                                        <ul class="followers-area">
+
+                                            <!-- Single Card -->
+                                            <li
+                                                class="single-followers-area d-flex align-items-center justify-content-between">
+                                                <div class="followers-area-info d-flex align-items-center">
+                                                    <div class="followers-img">
+                                                        <img src="img/bg-img/per-3.jpg" alt="">
+                                                    </div>
+                                                    <div class="followers-meta">
+                                                        <h5>Nazrul Islam</h5>
+                                                        <p>pri.nazrgmail.com</p>
+                                                    </div>
+                                                </div>
+                                                <div class="follow-btn">
+                                                    <a class="btn btn-outline-primary font-13" href="#"><i
+                                                            class='bx bx-plus'></i> Follow</a>
+                                                </div>
+                                            </li>
+                                            <!-- Single Card -->
+                                            <li
+                                                class="single-followers-area d-flex align-items-center justify-content-between">
+                                                <div class="followers-area-info d-flex align-items-center">
+                                                    <div class="followers-img">
+                                                        <img src="img/bg-img/per-2.jpg" alt="">
+                                                    </div>
+                                                    <div class="followers-meta">
+                                                        <h5>Ajoy Chandra</h5>
+                                                        <p>ajoy.privgmail.com</p>
+                                                    </div>
+                                                </div>
+                                                <div class="follow-btn">
+                                                    <a class="btn btn-outline-primary font-13" href="#"><i
+                                                            class='bx bx-plus'></i> Follow</a>
+                                                </div>
+                                            </li>
+                                            <!-- Single Card -->
+                                            <li
+                                                class="single-followers-area d-flex align-items-center justify-content-between">
+                                                <div class="followers-area-info d-flex align-items-center">
+                                                    <div class="followers-img">
+                                                        <img src="img/bg-img/person_1.jpg" alt="">
+                                                    </div>
+                                                    <div class="followers-meta">
+                                                        <h5>Ajoy Chandra</h5>
+                                                        <p>ajoy.privgmail.com</p>
+                                                    </div>
+                                                </div>
+                                                <div class="follow-btn">
+                                                    <a class="btn btn-outline-primary font-13" href="#"><i
+                                                            class='bx bx-plus'></i> Follow</a>
+                                                </div>
+                                            </li>
+                                            <!-- Single Card -->
+                                            <li
+                                                class="single-followers-area d-flex align-items-center justify-content-between">
+                                                <div class="followers-area-info d-flex align-items-center">
+                                                    <div class="followers-img">
+                                                        <img src="img/bg-img/per-2.jpg" alt="">
+                                                    </div>
+                                                    <div class="followers-meta">
+                                                        <h5>Ajoy Chandra</h5>
+                                                        <p>ajoypriv@gmail.com</p>
+                                                    </div>
+                                                </div>
+                                                <div class="follow-btn">
+                                                    <a class="btn btn-outline-primary font-13" href="#"><i
+                                                            class='bx bx-plus'></i> Follow</a>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer Area -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Footer Area -->
+                            <footer
+                                class="footer-area d-sm-flex justify-content-center align-items-center justify-content-between">
+                                <!-- Copywrite Text -->
+                                <div class="copywrite-text">
+                                    <p class="font-13">Developed by &copy; <a href="#">Theme-life</a></p>
+                                </div>
+                                <div class="fotter-icon text-center">
+                                    <p class="mb-0 font-13">2023 &copy; Flapt Admin</p>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ======================================
+    ********* Page Wrapper Area End ***********
+    ======================================= -->
+
+    <!-- Must needed plugins to the run this Template -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/default-assets/setting.js"></script>
+    <script src="js/default-assets/scrool-bar.js"></script>
+    <script src="js/todo-list.js"></script>
+
+    <!-- Active JS -->
+    <script src="js/default-assets/active.js"></script>
+
+</body>
+
+</html>

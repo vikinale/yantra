@@ -1,0 +1,398 @@
+[:template.main]
+[:/template]
+
+[:template.init]
+    [set module.theme_url][php]echo theme_url();[/php][/set]
+[:/template]
+
+
+[:template.hidden]
+    <input type="hidden" name="[get name/]" value="[get value/]" />
+[:/template]
+
+[:template.input]
+    [if "{floating} == 'true'" ]
+        <div class="form-floating [get group_class default='mb-3'/]">
+            <input type="[get type default='text' /]" id="[get id/]" name="[get name/]" value="[get value /]"
+             class="form-control [get class /]"
+             [if.not_empty "{autocomplete}"]autocomplete="[get autocomplete/]"[/if]
+             [if.not_empty "{placeholder}"]placeholder="[get placeholder/]"[/if]
+             [if "{readonly} == 'true'" ]readonly[/if]
+             [if "{required} == 'true'" ]required[/if]
+             [if "{disabled} == 'true'" ]disabled[/if]>
+            <label class="form-label" for="[get id/]">[get label /]</label>
+            <div class="form-text text-danger field-error"></div>
+        </div>
+    [/if]
+    [else "{inline} == 'true'"]
+        <label class="visually-hidden" for="[get id /]">Name</label>
+            <input type="[get type default='text' /]" id="[get id/]" name="[get name/]" value="[get value /]"
+             class="form-control [get class /]"
+             [if.not_empty "{autocomplete}"]autocomplete="[get autocomplete/]"[/if]
+             [if.not_empty "{placeholder}"]placeholder="[get placeholder/]"[/if]
+             [if "{readonly} == 'true'" ]readonly[/if]
+             [if "{required} == 'true'" ]required[/if]
+             [if "{disabled} == 'true'" ]disabled[/if]>
+        <div class="form-text text-danger field-error"></div>
+    [/else]
+    [else]
+        <div class="form-group [get group_class default='mb-3'/]">
+            <label class="form-label" for="[get id /]">[get label /] </label>
+            <input type="[get type default='text' /]" id="[get id/]" name="[get name/]" value="[get value /]"
+             class="form-control [get class /]"
+             [if.not_empty "{autocomplete}"]autocomplete="[get autocomplete/]"[/if]
+             [if.not_empty "{placeholder}"]placeholder="[get placeholder/]"[/if]
+             [if "{readonly} == 'true'" ]readonly[/if]
+             [if "{required} == 'true'" ]required[/if]
+             [if "{disabled} == 'true'" ]disabled[/if]>
+            <div class="form-text text-danger field-error"></div>
+        </div>
+    [/else]
+[:/template]
+
+[:template.textarea]
+    [if "{floating} == 'true'"]
+        <div class="form-floating [get group_class default='mb-3'/]">
+            <textarea class="form-control [get class /]" id="[get id /]"  name="[get name/]"
+                     [if.not_empty "{placeholder}"]placeholder="[get placeholder/]"[/if]
+                     [if.not_empty "{length}"]maxlength="[get length/]"[/if]
+                     [if "{readonly} == 'true'"]readonly[/if]
+                     [if "{required} == 'true'"]required[/if]
+                     [if "{disabled} == 'true'"]disabled[/if]>[get value /]</textarea>
+            <label class="[get label_class default='form-label'/]" for="[get id /]">[get label /]</label>
+            <div class="form-text text-danger field-error"></div>
+        </div>
+    [/if]
+    [else "{inline} == 'true'"]
+        <label class="visually-hidden" for="[get id /]">[get label /]</label>
+            <textarea class="form-control [get class /]" id="[get id /]"  name="[get name/]"
+                     [if.not_empty "{placeholder}"]placeholder="[get placeholder/]"[/if]
+                     [if.not_empty "{length}"]maxlength="[get length/]"[/if]
+                     [if "{readonly} == 'true'"]readonly[/if]
+                     [if "{required} == 'true'"]required[/if]
+                     [if "{disabled} == 'true'"]disabled[/if]>[get value /]</textarea>
+        <div class="form-text text-danger field-error"></div>
+    [/else]
+    [else]
+        <div class="form-group [get group_class default='mb-3'/]">
+            <label class="[get label_class default='form-label'/]" for="[get id /]">[get label /] </label>
+            <textarea class="form-control [get class /]" id="[get id /]"  name="[get name/]"
+                     [if.not_empty "{placeholder}"]placeholder="[get placeholder/]"[/if]
+                     [if.not_empty "{length}"]maxlength="[get length/]"[/if]
+                     [if "{readonly} == 'true'"]readonly[/if]
+                     [if "{required} == 'true'"]required[/if]
+                     [if "{disabled} == 'true'"]disabled[/if]>[get value /]</textarea>
+            <div class="form-text text-danger field-error"></div>
+        </div>
+    [/else]
+    [if "{length}"]
+            [actions.footer maxlength]
+                <script src="[get module.theme_url/]js/bootstrap-maxlength.min.js"></script>
+                <script type="text/javascript">
+                    $('[maxlength]').maxlength();
+                </script>
+            [/actions]
+    [/if]
+[:/template]
+
+[:template.select]
+    [if "{floating} == 'true'"]
+        <div class="form-floating [get group_class default='mb-3'/]">
+            <select class="form-control form-select [get class /]" id="[get id /]" name="[get name/]"
+             [if "{readonly} == 'true'" ]readonly[/if]
+             [if "{required} == 'true'" ]required[/if]
+             [if "{multiple} == 'true'" ]multiple[/if]
+             [if.not_empty "{size}"]size="[get size/]"[/if]
+             [if "{disabled} == 'true'" ]disabled[/if]>
+                <option value="">Select</option>
+                [foreach main="{main}"]
+                <option value="[get @item.value/]" [if "{selected} == '{@item.value}'" ]selected[/if]>[get @item.display/]</option>
+                [/foreach]
+            </select>
+             <label for="[get id /]">[get label /]</label>
+        </div>
+    [/if]
+    [else "{inline} == 'true'"]
+        <label class="[get label_class default='form-label'/]" for="[get id /]">[get label /]</label>
+        <select class="form-control form-select [get class /]" id="[get id /]" name="[get name/]"
+             [if "{readonly} == 'true'" ]readonly[/if]
+             [if "{required} == 'true'" ]required[/if]
+             [if "{multiple} == 'true'" ]multiple[/if]
+             [if.not_empty "{size}"]size="[get size/]"[/if]
+             [if "{disabled} == 'true'" ]disabled[/if]>
+             <option value="">Select</option>
+            [foreach main="{main}"]
+                <option value="[get @item.value/]" [if "{selected} == {@item.value}" ]selected[/if]>[get @item.display/]</option>
+            [/foreach]
+        </select>
+        <div class="form-text text-danger field-error"></div>
+    [/else]
+    [else]
+        <div class="form-group [get group_class default='mb-3'/]">
+            <label class="[get label_class default='form-label'/]" for="[get id /]">[get label /]</label>
+            <select class="form-control form-select [get class /]" id="[get id /]" name="[get name/]"
+             [if "{readonly} == 'true'" ]readonly[/if]
+             [if "{required} == 'true'" ]required[/if]
+             [if "{multiple} == 'true'" ]multiple[/if]
+             [if.not_empty "{size}"]size="[get size/]"[/if]
+             [if "{disabled} == 'true'" ]disabled[/if]>
+                <option value="">Select</option>
+                [foreach "{main}"]
+                 [if.not_null "{selected}"]
+                    <option value="[get @item.value/]" [if main="'{selected}' == '{@item.value}'" ]selected[/if]>[get @item.display/]</option>
+                 [/if]
+                 [else]
+                    <option value="[get @item.value/]">[get @item.display/]</option>
+                 [/else]
+
+                [/foreach]
+            </select>
+            <div class="form-text text-danger field-error"></div>
+        </div>
+    [/else]
+[:/template]
+
+[:template.datalist]
+    <div class="form-group [get group_class default='mb-3'/]">
+        <label class="[get label_class default='form-label'/]" for="[get id /]">[get label /]</label>
+        <input class="form-control" list="datalistOptions_[get id /]" id="[get id /]" name="[get name/]"
+             [if.not_empty "{placeholder}"]placeholder="[get placeholder/]"[/if]
+             [if "{readonly} == 'true'" ]readonly[/if]
+             [if "{required} == 'true'" ]required[/if]
+             [if "{disabled} == 'true'" ]disabled[/if]>
+        <datalist id="datalistOptions_[get id /]">
+            [foreach main="{main}"]
+            <option value="[get @item/]"></option>
+            [/foreach]
+        </datalist>
+        <div class="form-text text-danger field-error"></div>
+    </div>
+[:/template]
+
+[:template.checkbox]
+    <div class="form-check [get group_class default='mb-3'/]">
+        <input class="form-check-input me-3" type="checkbox" id="[get id /]" name="[get name/]" value="[get value /]" [if "{checked} == 'true'"]checked[/if] [if "{disabled} == 'true'"]disabled[/if]>
+        <label class="form-check-label" for="[get id /]">[get label /]</label>
+        [if "!({remove_error})"]
+            <div class="form-text text-danger field-error"></div>
+        [/if]
+    </div>
+[:/template]
+[:template.switch]
+    <div class="form-check form-switch form-switch-md [get group_class default='mb-3'/]">
+        <div class="form-label mb-2">Branch Status</div>
+        <input class="form-check-input me-3" type="checkbox" id="[get id /]" name="[get name/]" value="[get value /]" [if "{checked} == 'true'"]checked[/if] [if "{disabled} == 'true'"]disabled[/if]>
+        <label class="form-check-label" for="[get id /]">[get label /]</label>
+    </div>
+[:/template]
+
+[:template.radio]
+    <div class="form-check [get group_class default='mb-3'/]">
+        <input class="form-check-input me-3" type="radio" id="[get id /]" name="[get name/]" value="[get value /]" [if "{checked} == 'true'"]checked[/if] [if "{disabled} == 'true'"]disabled[/if]>
+        <label class="form-check-label" for="[get id /]">[get label /]</label>
+        [if "!({remove_error})"]
+            <div class="form-text text-danger field-error"></div>
+        [/if]
+    </div>
+[:/template]
+
+[:template.radio_group]
+    <div class="[get main_group_class/]">
+     <div class="[get label_class default='form-label'/] group-label my-0">[get label/]</div>
+    [foreach main="{main}"]
+       [ll.form-controls.radio remove_error="1"  group_class="{group_class} {@item.group_class}" label="{@item.label}" value="{@item.value}"  id="{@item.id}" name="{name}" disabled="{@item.disabled}" checked="{@item.checked}" /]
+    [/foreach]
+        <div class="form-text text-danger field-error"></div>
+    </div>
+[:/template]
+
+[:template.checkbox_group]
+    <div class="[get main_group_class/]">
+     <div class="[get label_class default='form-label'/] group-label my-0">[get label/]</div>
+    [foreach main="{main}"]
+       [ll.form-controls.checkbox remove_error="1" group_class="{group_class} {@item.group_class}" label="{@item.label}" value="{@item.value}"  id="{@item.id}" name="{name}" disabled="{@item.disabled}" checked="{@item.checked}" /]
+    [/foreach]
+        <div class="form-text text-danger field-error"></div>
+    </div>
+[:/template]
+
+[:template.file]
+    <div class="form-group [get group_class default='mb-3'/]">
+        <label class="[get label_class default='form-label'/]" for="[get id /]">[get label /]</label>
+        <input type="file" class="form-control [get class /]" [if "{multiple}"]multiple[/if] accept="[get accept/]" id="[get id /]" name="[get name/]" value="[get value /]" [if "{readonly} == 'true'"]readonly[/if] [if "{required} == 'true'"]required[/if] [if "{disabled} == 'true'"]disabled[/if]>
+        <div class="form-text text-danger field-error"></div>
+    </div>
+[:/template]
+
+[:template.submit]
+    <button type="submit" id="[get id /]" name="[get name/]" class="btn [get class default='btn-primary'/]">[get value /]</button>
+[:/template]
+
+[:template.button]
+    <button type="button" id="[get id /]" name="[get name/]" class="btn [get class default='btn-secondary'/]">[get value /]</button>
+[:/template]
+
+[:template.link_button]
+    <a href="[get url/]" id="[get id /]"  class="btn [get class default='btn-secondary'/]">[get value /]</a>
+[:/template]
+
+[:template.select2_single]
+    <div class="form-group [get group_class default='mb-3'/]">
+        <label class="[get label_class default='form-label'/]" for="[get id /]">[get label /]</label>
+        <select class="form-control select2 [get class /]" id="[get id /]" name="[get name /]" [if "{disabled} == 'true'"]disabled[/if]>
+            <option value="">Select</option>
+            [foreach "{options}"]
+                <optgroup label="[get @group.label/]">
+                    [foreach "{@group.items}"]
+                        <option value="[get @option.value/]">[get @option.text/]</option>
+                    [/foreach]
+                </optgroup>
+            [/foreach]
+        </select>
+        <div class="form-text text-danger field-error"></div>
+    </div>
+        [set theme_url][php]echo theme_url();[/php][/set]
+        [actions.footer advanceform]
+                <!-- These plugins only need for the run this page -->
+                <script src="[get theme_url/]js/select2.min.js"></script>
+                <script src="[get theme_url/]js/bootstrap-datepicker.min.js"></script>
+                <script src="[get theme_url/]js/spectrum.min.js"></script>
+                <script src="[get theme_url/]js/jquery.bootstrap-touchspin.min.js"></script>
+                <script src="[get theme_url/]js/bootstrap-filestyle.min.js"></script>
+                <script src="[get theme_url/]js/bootstrap-maxlength.min.js"></script>
+                <script src="[get theme_url/]js/form-advanced.init.js"></script>
+        [/actions]
+        [actions.header advanceform]
+                <link rel="stylesheet" href="[get theme_url/]css/select2.min.css">
+                <link rel="stylesheet" href="[get theme_url/]css/bootstrap-datepicker.min.css">
+                <link rel="stylesheet" href="[get theme_url/]css/spectrum.min.css">
+                <link rel="stylesheet" href="[get theme_url/]css/jquery.bootstrap-touchspin.css">
+        [/actions]
+[:/template]
+
+[:template.select2_multiple]
+    <div class="form-group [get group_class default='mb-3'/]">
+        <label class="[get label_class default='form-label'/]" for="[get id /]">[get label /]</label>
+        <select class="form-control select2-multiple [get class /]" id="[get id /]" name="[get name /]" multiple="multiple" data-placeholder="[get placeholder default='Choose ...'/]" [if "{disabled} == 'true'"]disabled[/if]>
+            [foreach group="{main}"]
+                <optgroup label="[get @group.label/]">
+                    [foreach option="{@group.items}"]
+                        <option value="[get @option.value/]">[get @option.display/]</option>
+                    [/foreach]
+                </optgroup>
+            [/foreach]
+        </select>
+        <div class="form-text text-danger field-error"></div>
+    </div>
+        [set theme_url][php]echo theme_url();[/php][/set]
+        [actions.footer advanceform]
+                <!-- These plugins only need for the run this page -->
+                <script src="[get theme_url/]js/select2.min.js"></script>
+                <script src="[get theme_url/]js/bootstrap-datepicker.min.js"></script>
+                <script src="[get theme_url/]js/spectrum.min.js"></script>
+                <script src="[get theme_url/]js/jquery.bootstrap-touchspin.min.js"></script>
+                <script src="[get theme_url/]js/bootstrap-filestyle.min.js"></script>
+                <script src="[get theme_url/]js/bootstrap-maxlength.min.js"></script>
+                <script src="[get theme_url/]js/form-advanced.init.js"></script>
+        [/actions]
+        [actions.header advanceform]
+                <link rel="stylesheet" href="[get theme_url/]css/select2.min.css">
+                <link rel="stylesheet" href="[get theme_url/]css/bootstrap-datepicker.min.css">
+                <link rel="stylesheet" href="[get theme_url/]css/spectrum.min.css">
+                <link rel="stylesheet" href="[get theme_url/]css/jquery.bootstrap-touchspin.css">
+        [/actions]
+[:/template]
+
+[:template.select2_no_search]
+    <div class="form-group [get group_class default='mb-3'/]">
+        <label class="[get label_class default='form-label'/]" for="[get id /]">[get label /]</label>
+        <select class="form-control select2-search-disable [get class /]" id="[get id /]" name="[get name /]" [if "{disabled} == 'true'"]disabled[/if]>
+            <option>Select</option>
+            [foreach group="{options}"]
+                <optgroup label="[get @group.label/]">
+                    [foreach option="{@group.items}"]
+                        <option value="[get @option.value/]">[get @option.text/]</option>
+                    [/foreach]
+                </optgroup>
+            [/foreach]
+        </select>
+        <div class="form-text text-danger field-error"></div>
+    </div>
+        [set theme_url][php]echo theme_url();[/php][/set]
+        [actions.footer advanceform]
+                <!-- These plugins only need for the run this page -->
+                <script src="[get theme_url/]js/select2.min.js"></script>
+                <script src="[get theme_url/]js/bootstrap-datepicker.min.js"></script>
+                <script src="[get theme_url/]js/spectrum.min.js"></script>
+                <script src="[get theme_url/]js/jquery.bootstrap-touchspin.min.js"></script>
+                <script src="[get theme_url/]js/bootstrap-filestyle.min.js"></script>
+                <script src="[get theme_url/]js/bootstrap-maxlength.min.js"></script>
+                <script src="[get theme_url/]js/form-advanced.init.js"></script>
+        [/actions]
+        [actions.header advanceform]
+                <link rel="stylesheet" href="[get theme_url/]css/select2.min.css">
+                <link rel="stylesheet" href="[get theme_url/]css/bootstrap-datepicker.min.css">
+                <link rel="stylesheet" href="[get theme_url/]css/spectrum.min.css">
+                <link rel="stylesheet" href="[get theme_url/]css/jquery.bootstrap-touchspin.css">
+        [/actions]
+[:/template]
+
+[:template.datepicker]
+    <div class="form-group [get group_class default='mb-3'/]">
+        <label class="[get label_class default='form-label'/]" for="[get id /]">[get label /]</label>
+        <div class="input-group" id="[get id /]">
+            <input type="text" class="form-control [get class /]" name="[get name /]" placeholder="[get placeholder default='dd M, yyyy'/]"
+                data-date-format="[get date_format default='dd M, yyyy'/]"
+                [if "{autoclose} == 'true'"] data-date-autoclose="true"[/if]
+                [if "{multidate} == 'true'"] data-date-multidate="true"[/if]
+                [if "{min_view_mode} == 'month'"] data-date-min-view-mode="1"[/if]
+                [if "{min_view_mode} == 'year'"] data-date-min-view-mode="2"[/if]>
+            <span class="input-group-text"><i class='bx bx-calendar'></i></span>
+        </div>
+        <div class="form-text text-danger field-error"></div>
+    </div>
+        [actions.footer datepicker]
+                <script src="[get theme_url/]js/bootstrap-datepicker.min.js"></script>
+        [/actions]
+        [actions.header datepicker]
+                <link rel="stylesheet" href="[get theme_url/]css/bootstrap-datepicker.min.css">
+        [/actions]
+[:/template]
+
+[:template.daterange_picker]
+    <div class="form-group [get group_class default='mb-3'/]">
+        <label class="[get label_class default='form-label'/]" for="[get id /]">[get label /]</label>
+
+        <div class="input-daterange input-group" id="[get id/]" data-date-format="[get date_format default='dd M, yyyy'/]" data-date-autoclose="[get autoclose default='true'/]" data-provide="datepicker" data-date-container='#[get id/]'>
+            <input type="text" class="form-control [get class_start /]"
+                name="[get name_start /]"  id="[get id_start /]"
+                value="[get start_value/]"
+                placeholder="[get start_placeholder default='Start Date'/]" />
+            <input type="text" class="form-control [get class_end /]"
+                name="[get name_end /]" id="[get id_end /]"
+                value="[get end_value/]"
+                placeholder="[get end_placeholder default='End Date'/]" />
+        </div>
+        <div class="form-text text-danger field-error"></div>
+    </div>
+        [actions.footer datepicker]
+                <script src="[get theme_url/]js/bootstrap-datepicker.min.js"></script>
+        [/actions]
+        [actions.header datepicker]
+                <link rel="stylesheet" href="[get theme_url/]css/bootstrap-datepicker.min.css">
+        [/actions]
+
+[:/template]
+[:template.editor]
+    <div class="[get group_class default='mb-3'/]">
+        <div id="[get id/]"></div>
+    </div>
+        [actions.footer checkeditor]
+             <script src="[get module.theme_url/]js/checkeditor.js"></script>
+        [/actions]
+        [actions.footer]
+              <script type="text/javascript">
+                  ClassicEditor.create(document.querySelector("#[get id/]")).then(function(e){e.ui.view.editable.element.style.height="150px"}).catch(function(e){console.error(e)});
+              </script>
+        [/actions]
+[:/template]

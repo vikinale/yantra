@@ -1,0 +1,955 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Title -->
+    <title>Fojota- Bootstrap Admin Template</title>
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <!-- Plugins File -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <!-- These plugins only need for the run this page -->
+    <link rel="stylesheet" href="css/select2.min.css">
+    <link rel="stylesheet" href="css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="css/spectrum.min.css">
+    <link rel="stylesheet" href="css/jquery.bootstrap-touchspin.css">
+
+    <!-- Master Stylesheet [If you remove this CSS file, your file will be broken undoubtedly.] -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-book">
+            <div class="inner">
+                <div class="left"></div>
+                <div class="middle"></div>
+                <div class="right"></div>
+            </div>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /Preloader -->
+
+    <!-- Choose Layout -->
+    <div class="choose-layout-area">
+        <div class="setting-trigger-icon" id="settingTrigger">
+            <i class="ti-settings"></i>
+        </div>
+        <div class="choose-layout" id="chooseLayout">
+            <div class="quick-setting-tab">
+                <div class="widgets-todo-list-area">
+                    <h4 class="todo-title">Todo List:</h4>
+                    <form id="form-add-todo" class="form-add-todo">
+                        <input type="text" id="new-todo-item" class="new-todo-item form-control" name="todo"
+                            placeholder="Add New">
+                        <input type="submit" id="add-todo-item" class="add-todo-item" value="+">
+                    </form>
+
+                    <form id="form-todo-list">
+                        <ul id="flaptToDo-list" class="todo-list">
+                            <li><label class="ckbox"><input type="checkbox" name="todo-item-done" class="todo-item-done"
+                                        value="test"><span></span></label>Go to Market
+                                <i class="todo-item-delete ti-close"></i></li>
+
+                            <li><label class="ckbox"><input type="checkbox" name="todo-item-done" class="todo-item-done"
+                                        value="hello"><span></span></label>Meeting with AD
+                                <i class="todo-item-delete ti-close"></i></li>
+
+                            <li><label class="ckbox"><input type="checkbox" name="todo-item-done" class="todo-item-done"
+                                        value="hello"><span></span></label>Check Mail
+                                <i class="todo-item-delete ti-close"></i></li>
+
+                            <li><label class="ckbox"><input type="checkbox" name="todo-item-done" class="todo-item-done"
+                                        value="hello"><span></span></label>Work for Theme
+                                <i class="todo-item-delete ti-close"></i></li>
+
+                            <li><label class="ckbox"><input type="checkbox" name="todo-item-done" class="todo-item-done"
+                                        value="hello"><span></span></label>Create a Plugin
+                                <i class="todo-item-delete ti-close"></i></li>
+
+                            <li><label class="ckbox"><input type="checkbox" name="todo-item-done" class="todo-item-done"
+                                        value="hello"><span></span></label>Fixed Template Issues
+                                <i class="todo-item-delete ti-close"></i></li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================
+    ******* Page Wrapper Area Start **********
+    ======================================= -->
+    <div class="flapt-page-wrapper">
+        <!-- Sidemenu Area -->
+        <div class="flapt-sidemenu-wrapper">
+            <!-- Desktop Logo -->
+            <div class="flapt-logo">
+                <a href="index.html"><img class="desktop-logo" src="img/core-img/logo.png" alt="Desktop Logo"> <img
+                        class="small-logo" src="img/core-img/small-logo.png" alt="Mobile Logo"></a>
+            </div>
+
+            <!-- Side Nav -->
+            <div class="flapt-sidenav" id="flaptSideNav">
+                <!-- Side Menu Area -->
+                <div class="side-menu-area">
+                    <!-- Sidebar Menu -->
+                    <nav>
+                        <ul class="sidebar-menu" data-widget="tree">
+                            <li class="menu-header-title">Dashboard</li>
+                            <li class="treeview">
+                                <a class="menu-active" href="javascript:void(0)"><i class='bx bx-home-heart'></i>
+                                    <span>Dashboard</span>
+                                    <i class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="index.html">Dashboard 1</a></li>
+                                     <li><a href="index-2.html">Dashboard 2</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="javascript:void(0)"><i class='bx bxs-cart'></i><span>Shop</span> <i
+                                        class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="product.html">Products</a></li>
+                                    <li><a href="product-details.html">Products Details</a></li>
+                                    <li><a href="order.html">Orders</a></li>
+                                    <li><a href="cart.html">Cart</a></li>
+                                    <li><a href="checkout.html">Checkout</a></li>
+                                    <li><a href="invoice.html">Invoice</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-header-title">Apps</li>
+                            <li><a href="calendar.html"><i class='bx bx-calendar'></i><span>Calendar</span></a></li>
+                            <li><a href="chat-box.html"><i class='bx bx-message-rounded-dots'></i><span>Chat</span></a>
+                            </li>
+                            <li class="treeview">
+                                <a href="javascript:void(0)"><i class="bx bx-envelope"></i> <span>Email</span> <i
+                                        class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="mail-inbox.html">Inbox</a></li>
+                                    <li><a href="mail-view.html">Mail View</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="widgets.html"><i class="zmdi zmdi-widgets"></i><span>Widgets</span></a></li>
+                            <li class="menu-header-title">Custom</li>
+                            <li class="treeview">
+                                <a href="javascript:void(0)"><i class="bx bx-file"></i><span>Pages</span> <i
+                                        class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="account.html">Account Settings</a></li>
+                                    <li><a href="filemanager.html">File Manager</a></li>
+                                    <li><a href="profile.html">Profile</a></li>
+                                    <li><a href="kanban-board.html">Kanban Board</a></li>
+                                    <li><a href="timeline.html">Timeline</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="nestable-list.html">Nestable List</a></li>
+                                    <li><a href="notification.html">Notification</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="javascript:void(0)"><i
+                                        class="bx bx-user-circle"></i><span>Authentication</span> <i
+                                        class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="login.html">Login</a></li>
+                                    <li><a href="register.html">Register</a></li>
+                                    <li><a href="forget-password.html">Forget Password</a></li>
+                                    <li><a href="lock-screen.html">Lock Screen</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-header-title">Components</li>
+                            <li class="treeview">
+                                <a href="javascript:void(0)"><i class="bx bx-tone"></i> <span>UI Elements</span> <i
+                                        class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="accordion.html">Accordion</a></li>
+                                    <li><a href="alert.html">Alert</a></li>
+                                    <li><a href="badge.html">Badge</a></li>
+                                    <li><a href="buttons.html">Button</a></li>
+                                    <li><a href="breadcrumb.html">Breadcrumb</a></li>
+                                    <li><a href="card.html">Card</a></li>
+                                    <li><a href="carousel.html">Carousel</a></li>
+                                    <li><a href="collapse.html">Collapse</a></li>
+                                    <li><a href="modals.html">Modals</a></li>
+                                    <li><a href="list-group.html">List Group</a></li>
+                                    <li><a href="dropdown.html">Dropdown</a></li>
+                                    <li><a href="progressbar.html">Progressbar</a></li>
+                                    <li><a href="preloader.html">Preloader</a></li>
+                                    <li><a href="popovers.html">Popovers</a></li>
+                                    <li><a href="pagination.html">Pagination</a></li>
+                                    <li><a href="scrollspy.html">Scrollspy</a></li>
+                                    <li><a href="session-timeout.html">Session timeout</a></li>
+                                    <li><a href="offcanvas.html">Offcanvas</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="javascript:void(0)"><i class='bx bx-bar-chart-square'></i><span>Charts</span>
+                                    <i class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="apex-chart.html">Apex Chart</a></li>
+                                    <li><a href="chart-js.html">Chart Js</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="treeview active">
+                                <a href="javascript:void(0)"><i class="bx bxs-eraser"></i><span>Forms</span> <i
+                                        class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="basic-form.html">Basic Form</a></li>
+                                    <li class="active"><a href="form-advanced.html">Basic Advanced</a></li>
+                                    <li><a href="form-editor.html">Form Editor</a></li>
+                                    <li><a href="clipboard.html">Clipboard</a></li>
+                                    <li><a href="form-validation.html">Validation</a></li>
+                                    <li><a href="form-wizard.html">Form Wizard</a></li>
+                                    <li><a href="form-mask.html">Input Mask</a></li>
+                                    <li><a href="form-upload.html">File upload</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="javascript:void(0)"><i class="bx bx-list-ul"></i><span>Tables</span> <i
+                                        class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="basic-table.html">Basic Table</a></li>
+                                    <li><a href="data-table.html">Data Table</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="javascript:void(0)"><i class="bx bx-list-ul"></i><span>Icons</span> <i
+                                        class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="elegant-icons.html">Elegant icon</a></li>
+                                    <li><a href="et-line-icons.html">Etline icon</a></li>
+                                    <li><a href="font-awesome.html">Font-awsome</a></li>
+                                    <li><a href="matarial-icons.html">Matarial Icon</a></li>
+                                    <li><a href="pe-7-stroke.html">Pe-7-Stroke</a></li>
+                                    <li><a href="themify-icons.html">Themify Icon</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="javascript:void(0)"><i class="bx bx-share-alt"></i> <span>Dropdown</span> <i
+                                        class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="#">Level One</a></li>
+                                    <li class="treeview">
+                                        <a href="#">Level One <i class="fa fa-angle-right"></i></a>
+                                        <ul class="treeview-menu">
+                                            <li><a href="#">Level Two</a></li>
+                                            <li><a href="#">Level Two</a></li>
+                                            <li><a href="#">Level Two</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Level One</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Upgrade Card -->
+                <div class="upgrade-card card">
+                    <div class="card-body">
+                        <img class="mb-4" src="./img/bg-img/1.png" alt="">
+                        <p>Upgrade to pro!</p>
+                        <a class="btn btn-sm btn-warning" href="#">Upgrade Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div class="flapt-page-content">
+            <!-- Top Header Area -->
+            <header class="top-header-area d-flex align-items-center justify-content-between">
+                <div class="left-side-content-area d-flex align-items-center">
+                    <!-- Mobile Logo -->
+                    <div class="mobile-logo">
+                        <a href="index.html"><img src="img/core-img/small-logo.png" alt="Mobile Logo"></a>
+                    </div>
+
+                    <!-- Triggers -->
+                    <div class="flapt-triggers">
+                        <div class="menu-collasped" id="menuCollasped">
+                            <i class='bx bx-grid-alt'></i>
+                        </div>
+                        <div class="mobile-menu-open" id="mobileMenuOpen">
+                            <i class='bx bx-grid-alt'></i>
+                        </div>
+                    </div>
+
+                    <!-- Left Side Nav -->
+                    <ul class="left-side-navbar d-flex align-items-center">
+                        <li class="hide-phone app-search">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="bx bx-search-alt"></span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="right-side-navbar d-flex align-items-center justify-content-end">
+                    <!-- Mobile Trigger -->
+                    <div class="right-side-trigger" id="rightSideTrigger">
+                        <i class='bx bx-menu-alt-right'></i>
+                    </div>
+
+                    <!-- Top Bar Nav -->
+                    <ul class="right-side-content d-flex align-items-center">
+                        <li class="nav-item dropdown">
+                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"><span><i
+                                        class='bx bx-world'></i></span></button>
+                            <div class="dropdown-menu language-dropdown dropdown-menu-right">
+                                <div class="user-profile-area">
+                                    <a href="#" class="dropdown-item mb-15"><img src="img/core-img/l5.jpg" alt="Image">
+                                        <span>USA</span></a>
+                                    <a href="#" class="dropdown-item mb-15"><img src="img/core-img/l2.jpg" alt="Image">
+                                        <span>German</span></a>
+                                    <a href="#" class="dropdown-item mb-15"><img src="img/core-img/l3.jpg" alt="Image">
+                                        <span>Italian</span></a>
+                                    <a href="#" class="dropdown-item"><img src="img/core-img/l4.jpg" alt="Image">
+                                        <span>Russian</span></a>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"><i class='bx bx-envelope'></i></button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <!-- Message Area -->
+                                <div class="top-message-area">
+                                    <!-- Heading -->
+                                    <div class="message-heading">
+                                        <div class="heading-title">
+                                            <h6 class="mb-0">All Messages</h6>
+                                        </div>
+                                        <span>10</span>
+                                    </div>
+
+                                    <div class="message-box" id="messageBox">
+                                        <a href="#" class="dropdown-item">
+                                            <i class='bx bx-dollar-circle'></i>
+                                            <div>
+                                                <span>Did you know?</span>
+                                                <p class="mb-0 font-12">Adipisicing elit. Ipsa, porro!</p>
+                                            </div>
+                                        </a>
+
+                                        <a href="#" class="dropdown-item">
+                                            <i class='bx bx-shopping-bag'></i>
+                                            <div>
+                                                <span>Congratulations!
+                                                </span>
+                                                <p class="mb-0 font-12">Consectetur adipisicing elit.</p>
+                                            </div>
+                                        </a>
+
+                                        <a href="#" class="dropdown-item">
+                                            <i class='bx bx-wallet-alt'></i>
+                                            <div>
+                                                <span>Hello Obeta</span>
+                                                <p class="mb-0 font-12">Consectetur adipisicing elit.</p>
+                                            </div>
+                                        </a>
+
+                                        <a href="#" class="dropdown-item">
+                                            <i class='bx bx-border-all'></i>
+                                            <div>
+                                                <span>Your order is placed</span>
+                                                <p class="mb-0 font-12">Consectetur adipisicing elit.</p>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="dropdown-item">
+                                            <i class='bx bx-wallet-alt'></i>
+                                            <div>
+                                                <span>Haslina Obeta</span>
+                                                <p class="mb-0 font-12">Consectetur adipisicing elit.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"><i class='bx bx-bell bx-tada'></i> <span
+                                    class="active-status"></span></button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <!-- Top Notifications Area -->
+                                <div class="top-notifications-area">
+                                    <!-- Heading -->
+                                    <div class="notifications-heading">
+                                        <div class="heading-title">
+                                            <h6>Notifications</h6>
+                                        </div>
+                                        <span>11</span>
+                                    </div>
+
+                                    <div class="notifications-box" id="notificationsBox">
+                                        <a href="#" class="dropdown-item">
+                                            <i class='bx bx-shopping-bag'></i>
+                                            <div>
+                                                <span>Your order is placed</span>
+                                                <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
+                                            </div>
+                                        </a>
+
+                                        <a href="#" class="dropdown-item">
+                                            <i class='bx bx-wallet-alt'></i>
+                                            <div>
+                                                <span>Haslina Obeta</span>
+                                                <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
+                                            </div>
+                                        </a>
+
+                                        <a href="#" class="dropdown-item">
+                                            <i class='bx bx-dollar-circle'></i>
+                                            <div>
+                                                <span>Your order is Dollar</span>
+                                                <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
+                                            </div>
+                                        </a>
+
+                                        <a href="#" class="dropdown-item">
+                                            <i class='bx bx-border-all'></i>
+                                            <div>
+                                                <span>Your order is placed</span>
+                                                <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="dropdown-item">
+                                            <i class='bx bx-wallet-alt'></i>
+                                            <div>
+                                                <span>Haslina Obeta</span>
+                                                <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"><img src="img/bg-img/person_1.jpg"
+                                    alt=""></button>
+                            <div class="dropdown-menu profile dropdown-menu-right">
+                                <!-- User Profile Area -->
+                                <div class="user-profile-area">
+                                    <a href="#" class="dropdown-item"><i class="bx bx-user font-15"
+                                            aria-hidden="true"></i> My profile</a>
+                                    <a href="#" class="dropdown-item"><i class="bx bx-wallet font-15"
+                                            aria-hidden="true"></i> My wallet</a>
+                                    <a href="#" class="dropdown-item"><i class="bx bx-wrench font-15"
+                                            aria-hidden="true"></i> settings</a>
+                                    <a href="#" class="dropdown-item"><i class="bx bx-power-off font-15"
+                                            aria-hidden="true"></i> Sign-out</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <div class="main-content">
+                <div class="content-wraper-area">
+                    <div class="container-fluid">
+                        <div class="row g-4">
+                            <div class="col-12">
+                                <div class="card ">
+                                    <div class="card-body card-breadcrumb">
+                                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                                            <h4 class="mb-0">Form Advanced</h4>
+                                            <div class="page-title-right">
+                                                <ol class="breadcrumb m-0">
+                                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Form</a>
+                                                    </li>
+                                                    <li class="breadcrumb-item active">Form Advanced</li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h4>Select2</h4>
+                                            <p class="mb-0">A mobile and touch friendly input spinner component for
+                                                Bootstrap</p>
+                                        </div>
+
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Single Select</label>
+                                                        <select class="form-control select2">
+                                                            <option>Select</option>
+                                                            <optgroup label="Alaskan/Hawaiian Time Zone">
+                                                                <option value="AK">Alaska</option>
+                                                                <option value="HI">Hawaii</option>
+                                                            </optgroup>
+                                                            <optgroup label="Pacific Time Zone">
+                                                                <option value="CA">California</option>
+                                                                <option value="NV">Nevada</option>
+                                                                <option value="OR">Oregon</option>
+                                                                <option value="WA">Washington</option>
+                                                            </optgroup>
+                                                            <optgroup label="Mountain Time Zone">
+                                                                <option value="AZ">Arizona</option>
+                                                                <option value="CO">Colorado</option>
+                                                                <option value="ID">Idaho</option>
+                                                                <option value="MT">Montana</option>
+                                                                <option value="NE">Nebraska</option>
+                                                                <option value="NM">New Mexico</option>
+                                                                <option value="ND">North Dakota</option>
+                                                                <option value="UT">Utah</option>
+                                                                <option value="WY">Wyoming</option>
+                                                            </optgroup>
+                                                            <optgroup label="Central Time Zone">
+                                                                <option value="AL">Alabama</option>
+                                                                <option value="AR">Arkansas</option>
+                                                                <option value="IL">Illinois</option>
+                                                                <option value="IA">Iowa</option>
+                                                                <option value="KS">Kansas</option>
+                                                                <option value="KY">Kentucky</option>
+                                                                <option value="LA">Louisiana</option>
+                                                                <option value="MN">Minnesota</option>
+                                                                <option value="MS">Mississippi</option>
+                                                                <option value="MO">Missouri</option>
+                                                                <option value="OK">Oklahoma</option>
+                                                                <option value="SD">South Dakota</option>
+                                                                <option value="TX">Texas</option>
+                                                                <option value="TN">Tennessee</option>
+                                                                <option value="WI">Wisconsin</option>
+                                                            </optgroup>
+                                                            <optgroup label="Eastern Time Zone">
+                                                                <option value="CT">Connecticut</option>
+                                                                <option value="DE">Delaware</option>
+                                                                <option value="FL">Florida</option>
+                                                                <option value="GA">Georgia</option>
+                                                                <option value="IN">Indiana</option>
+                                                                <option value="ME">Maine</option>
+                                                                <option value="MD">Maryland</option>
+                                                                <option value="MA">Massachusetts</option>
+                                                                <option value="MI">Michigan</option>
+                                                                <option value="NH">New Hampshire</option>
+                                                                <option value="NJ">New Jersey</option>
+                                                                <option value="NY">New York</option>
+                                                                <option value="NC">North Carolina</option>
+                                                                <option value="OH">Ohio</option>
+                                                                <option value="PA">Pennsylvania</option>
+                                                                <option value="RI">Rhode Island</option>
+                                                                <option value="SC">South Carolina</option>
+                                                                <option value="VT">Vermont</option>
+                                                                <option value="VA">Virginia</option>
+                                                                <option value="WV">West Virginia</option>
+                                                            </optgroup>
+                                                        </select>
+
+                                                    </div>
+                                                    <div>
+                                                        <label class="form-label">Multiple Select</label>
+
+                                                        <select class="select2 form-control select2-multiple"
+                                                            multiple="multiple" data-placeholder="Choose ...">
+                                                            <optgroup label="Alaskan/Hawaiian Time Zone">
+                                                                <option value="AK">Alaska</option>
+                                                                <option value="HI">Hawaii</option>
+                                                            </optgroup>
+                                                            <optgroup label="Pacific Time Zone">
+                                                                <option value="CA">California</option>
+                                                                <option value="NV">Nevada</option>
+                                                                <option value="OR">Oregon</option>
+                                                                <option value="WA">Washington</option>
+                                                            </optgroup>
+                                                            <optgroup label="Mountain Time Zone">
+                                                                <option value="AZ">Arizona</option>
+                                                                <option value="CO">Colorado</option>
+                                                                <option value="ID">Idaho</option>
+                                                                <option value="MT">Montana</option>
+                                                                <option value="NE">Nebraska</option>
+                                                                <option value="NM">New Mexico</option>
+                                                                <option value="ND">North Dakota</option>
+                                                                <option value="UT">Utah</option>
+                                                                <option value="WY">Wyoming</option>
+                                                            </optgroup>
+                                                            <optgroup label="Central Time Zone">
+                                                                <option value="AL">Alabama</option>
+                                                                <option value="AR">Arkansas</option>
+                                                                <option value="IL">Illinois</option>
+                                                                <option value="IA">Iowa</option>
+                                                                <option value="KS">Kansas</option>
+                                                                <option value="KY">Kentucky</option>
+                                                                <option value="LA">Louisiana</option>
+                                                                <option value="MN">Minnesota</option>
+                                                                <option value="MS">Mississippi</option>
+                                                                <option value="MO">Missouri</option>
+                                                                <option value="OK">Oklahoma</option>
+                                                                <option value="SD">South Dakota</option>
+                                                                <option value="TX">Texas</option>
+                                                                <option value="TN">Tennessee</option>
+                                                                <option value="WI">Wisconsin</option>
+                                                            </optgroup>
+                                                            <optgroup label="Eastern Time Zone">
+                                                                <option value="CT">Connecticut</option>
+                                                                <option value="DE">Delaware</option>
+                                                                <option value="FL">Florida</option>
+                                                                <option value="GA">Georgia</option>
+                                                                <option value="IN">Indiana</option>
+                                                                <option value="ME">Maine</option>
+                                                                <option value="MD">Maryland</option>
+                                                                <option value="MA">Massachusetts</option>
+                                                                <option value="MI">Michigan</option>
+                                                                <option value="NH">New Hampshire</option>
+                                                                <option value="NJ">New Jersey</option>
+                                                                <option value="NY">New York</option>
+                                                                <option value="NC">North Carolina</option>
+                                                                <option value="OH">Ohio</option>
+                                                                <option value="PA">Pennsylvania</option>
+                                                                <option value="RI">Rhode Island</option>
+                                                                <option value="SC">South Carolina</option>
+                                                                <option value="VT">Vermont</option>
+                                                                <option value="VA">Virginia</option>
+                                                                <option value="WV">West Virginia</option>
+                                                            </optgroup>
+                                                        </select>
+
+                                                    </div>
+
+
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <div class="mb-0">
+                                                        <label class="form-label">Search Disable</label>
+                                                        <select class="form-control select2-search-disable">
+                                                            <option>Select</option>
+                                                            <optgroup label="Alaskan/Hawaiian Time Zone">
+                                                                <option value="AK">Alaska</option>
+                                                                <option value="HI">Hawaii</option>
+                                                            </optgroup>
+                                                            <optgroup label="Pacific Time Zone">
+                                                                <option value="CA">California</option>
+                                                                <option value="NV">Nevada</option>
+                                                                <option value="OR">Oregon</option>
+                                                                <option value="WA">Washington</option>
+                                                            </optgroup>
+                                                        </select>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h4>Colorpicker</h4>
+                                            <p>Examples of Spectrum Colorpicker.</p>
+                                        </div>
+                                        <form action="#">
+                                            <div class="mb-3">
+                                                <label class="form-label">Simple input field</label>
+                                                <input type="text" class="form-control" id="colorpicker-default"
+                                                    value="#50a5f1">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Show Alpha</label>
+                                                <input type="text" class="form-control" id="colorpicker-showalpha"
+                                                    value="rgba(244, 106, 106, 0.6)">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Show Palette Only</label>
+                                                <input type="text" class="form-control" id="colorpicker-showpaletteonly"
+                                                    value="#34c38f">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Toggle Palette Only</label>
+                                                <input type="text" class="form-control"
+                                                    id="colorpicker-togglepaletteonly" value="#50a5f1">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label">Show Initial</label>
+                                                <input type="text" class="form-control" id="colorpicker-showintial"
+                                                    value="#f1b44c">
+                                            </div>
+                                            <div>
+                                                <label class="form-label">Show Input And Initial</label>
+                                                <input type="text" class="form-control"
+                                                    id="colorpicker-showinput-intial" value="#f46a6a">
+                                            </div>
+
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h4>Datepicker</h4>
+                                            <p>Examples of twitter bootstrap datepicker.</p>
+                                        </div>
+
+                                        <form action="#">
+                                            <div class="mb-4">
+                                                <label class="form-label">Default Functionality</label>
+                                                <div class="input-group" id="datepicker1">
+                                                    <input type="text" class="form-control" placeholder="dd M, yyyy"
+                                                        data-date-format="dd M, yyyy" data-date-container='#datepicker1'
+                                                        data-provide="datepicker">
+
+                                                    <span class="input-group-text"><i class='bx bx-calendar'></i></span>
+                                                </div><!-- input-group -->
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <label class="form-label">Auto Close</label>
+                                                <div class="input-group" id="datepicker2">
+                                                    <input type="text" class="form-control" placeholder="dd M, yyyy"
+                                                        data-date-format="dd M, yyyy" data-date-container='#datepicker2'
+                                                        data-provide="datepicker" data-date-autoclose="true">
+
+                                                    <span class="input-group-text"><i class='bx bx-calendar'></i></span>
+                                                </div><!-- input-group -->
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <label class="form-label">Multiple Date</label>
+                                                <div class="input-group" id="datepicker3">
+                                                    <input type="text" class="form-control" placeholder="dd M, yyyy"
+                                                        data-provide="datepicker" data-date-container='#datepicker3'
+                                                        data-date-format="dd M, yyyy" data-date-multidate="true">
+
+                                                    <span class="input-group-text"><i class='bx bx-calendar'></i></span>
+                                                </div><!-- input-group -->
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <label class="form-label">Month View</label>
+                                                <div class="position-relative" id="datepicker4">
+                                                    <input type="text" class="form-control"
+                                                        data-date-container='#datepicker4' data-provide="datepicker"
+                                                        data-date-format="MM yyyy" data-date-min-view-mode="1">
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <label class="form-label">Year View</label>
+                                                <div class="position-relative" id="datepicker5">
+                                                    <input type="text" class="form-control" data-provide="datepicker"
+                                                        data-date-container='#datepicker5' data-date-format="dd M, yyyy"
+                                                        data-date-min-view-mode="2">
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <label class="form-label">Date Range</label>
+
+                                                <div class="input-daterange input-group" id="datepicker6"
+                                                    data-date-format="dd M, yyyy" data-date-autoclose="true"
+                                                    data-provide="datepicker" data-date-container='#datepicker6'>
+                                                    <input type="text" class="form-control" id="formrow-firstname-input" placeholder="Start Date">
+                                                    <input type="text" class="form-control" id="formrow-lastname-input" placeholder="last Date">
+                                                   
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h4>Bootstrap MaxLength</h4>
+                                            <p>This plugin integrates by default with
+                                                Twitter bootstrap using badges to display the maximum lenght of the
+                                                field where the user is inserting text. </p>
+                                        </div>
+
+                                        <label class="mb-1">Default usage</label>
+                                        <p class="text-muted mb-3 font-14">
+                                            The badge will show up by default when the remaining chars are 10 or less:
+                                        </p>
+                                        <input type="text" class="form-control" maxlength="25" name="defaultconfig"
+                                            id="defaultconfig">
+
+                                        <div class="mt-3">
+                                            <label class="mb-1">Threshold value</label>
+                                            <p class="text-muted mb-3 font-14">
+                                                Do you want the badge to show up when there are 20 chars or less? Use
+                                                the
+                                                <code>threshold</code> option:
+                                            </p>
+                                            <input type="text" maxlength="25" name="thresholdconfig"
+                                                class="form-control" id="thresholdconfig">
+                                        </div>
+
+                                        <div class="mt-3">
+                                            <label class="mb-1">All the options</label>
+                                            <p class="text-muted mb-3 font-14">
+                                                Please note: if the <code>alwaysShow</code> option is enabled, the
+                                                <code>threshold</code> option is ignored.
+                                            </p>
+                                            <input type="text" class="form-control" maxlength="25" name="alloptions"
+                                                id="alloptions">
+                                        </div>
+
+                                        <div class="mt-3">
+                                            <label class="mb-1">Position</label>
+                                            <p class="text-muted mb-3 font-14">
+                                                All you need to do is specify the <code>placement</code> option, with
+                                                one of
+                                                those strings. If none
+                                                is specified, the positioning will be defauted to 'bottom'.
+                                            </p>
+                                            <input type="text" class="form-control" maxlength="25" name="placement"
+                                                id="placement">
+                                        </div>
+
+                                        <div class="mt-3">
+                                            <label class="mb-1">Textarea</label>
+                                            <p class="text-muted mb-3 font-14">
+                                                Bootstrap maxlength supports textarea as well as inputs. Even on old IE.
+                                            </p>
+                                            <textarea id="textarea" class="form-control" maxlength="225" rows="3"
+                                                placeholder="This textarea has a limit of 225 chars."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h4>Bootstrap TouchSpin</h4>
+                                            <p>A mobile and touch friendly input spinner component for
+                                                Bootstrap</p>
+
+                                        </div>
+
+                                        <form>
+                                            <div class="mb-3">
+                                                <label class="form-label">Using data attributes</label>
+                                                <input data-bs-toggle="touchspin" type="text" value="55"
+                                                    id="vertical-spin">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Example with postfix (large)</label>
+                                                <input id="demo1" type="text" value="55" name="demo1">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">With prefix </label>
+                                                <input id="demo2" type="text" value="0" name="demo2"
+                                                    class=" form-control">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label">Init with empty value:</label>
+                                                <input id="demo3" type="text" value="" name="demo3">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Value attribute is not set (applying
+                                                    settings.initval)</label>
+                                                <input id="demo3_21" type="text" value="" name="demo3_21">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Value is set explicitly to 33 (skipping
+                                                    settings.initval) </label>
+                                                <input id="demo3_22" type="text" value="33" name="demo3_22">
+                                            </div>
+
+                                            <div>
+                                                <label class="form-label">Vertical button alignment:</label>
+                                                <input id="demo_vertical" type="text" value="" name="demo_vertical">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Area -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Footer Area -->
+                            <footer
+                                class="footer-area d-sm-flex justify-content-center align-items-center justify-content-between">
+                                <!-- Copywrite Text -->
+                                <div class="copywrite-text">
+                                    <p class="font-13">Developed by &copy; <a href="#">Theme-life</a></p>
+                                </div>
+                                <div class="fotter-icon text-center">
+                                    <p class="mb-0 font-13">2023 &copy; Flapt Admin</p>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================
+    ********* Page Wrapper Area End ***********
+    ======================================= -->
+
+    <!-- Must needed plugins to the run this Template -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/default-assets/setting.js"></script>
+    <script src="js/default-assets/scrool-bar.js"></script>
+    <script src="js/todo-list.js"></script>
+
+    <!-- These plugins only need for the run this page -->
+    <script src="js/select2.min.js"></script>
+    <script src="js/bootstrap-datepicker.min.js"></script>
+    <script src="js/spectrum.min.js"></script>
+    <script src="js/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="js/bootstrap-filestyle.min.js"></script>
+    <script src="js/bootstrap-maxlength.min.js"></script>
+    <script src="js/form-advanced.init.js"></script>
+
+    <!-- Active JS -->
+    <script src="js/default-assets/active.js"></script>
+
+</body>
+
+</html>

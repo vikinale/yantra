@@ -1,0 +1,11 @@
+[:template.init]
+    [set env.site_url][php]echo site_url("");[/php][/set]
+    [set env.theme_url][php]echo theme_url("");[/php][/set]
+[:/template]
+
+[:template.site_url]
+   [php]echo site_url("[get appends/]");[/php]
+[:/template]
+[:template.theme_url]
+    [php]echo theme_url("[get appends/]");[/php]
+[:/template]

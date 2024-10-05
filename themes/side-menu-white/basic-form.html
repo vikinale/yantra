@@ -1,0 +1,1084 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Title -->
+    <title>Fojota- Bootstrap Admin Template</title>
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <!-- Plugins File -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <!-- Master Stylesheet [If you remove this CSS file, your file will be broken undoubtedly.] -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-book">
+            <div class="inner">
+                <div class="left"></div>
+                <div class="middle"></div>
+                <div class="right"></div>
+            </div>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /Preloader -->
+
+    <!-- Choose Layout -->
+    <div class="choose-layout-area">
+        <div class="setting-trigger-icon" id="settingTrigger">
+            <i class="ti-settings"></i>
+        </div>
+        <div class="choose-layout" id="chooseLayout">
+            <div class="quick-setting-tab">
+                <div class="widgets-todo-list-area">
+                    <h4 class="todo-title">Todo List:</h4>
+                    <form id="form-add-todo" class="form-add-todo">
+                        <input type="text" id="new-todo-item" class="new-todo-item form-control" name="todo"
+                            placeholder="Add New">
+                        <input type="submit" id="add-todo-item" class="add-todo-item" value="+">
+                    </form>
+
+                    <form id="form-todo-list">
+                        <ul id="flaptToDo-list" class="todo-list">
+                            <li><label class="ckbox"><input type="checkbox" name="todo-item-done" class="todo-item-done"
+                                        value="test"><span></span></label>Go to Market
+                                <i class="todo-item-delete ti-close"></i></li>
+
+                            <li><label class="ckbox"><input type="checkbox" name="todo-item-done" class="todo-item-done"
+                                        value="hello"><span></span></label>Meeting with AD
+                                <i class="todo-item-delete ti-close"></i></li>
+
+                            <li><label class="ckbox"><input type="checkbox" name="todo-item-done" class="todo-item-done"
+                                        value="hello"><span></span></label>Check Mail
+                                <i class="todo-item-delete ti-close"></i></li>
+
+                            <li><label class="ckbox"><input type="checkbox" name="todo-item-done" class="todo-item-done"
+                                        value="hello"><span></span></label>Work for Theme
+                                <i class="todo-item-delete ti-close"></i></li>
+
+                            <li><label class="ckbox"><input type="checkbox" name="todo-item-done" class="todo-item-done"
+                                        value="hello"><span></span></label>Create a Plugin
+                                <i class="todo-item-delete ti-close"></i></li>
+
+                            <li><label class="ckbox"><input type="checkbox" name="todo-item-done" class="todo-item-done"
+                                        value="hello"><span></span></label>Fixed Template Issues
+                                <i class="todo-item-delete ti-close"></i></li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================
+    ******* Page Wrapper Area Start **********
+    ======================================= -->
+    <div class="flapt-page-wrapper">
+        <!-- Sidemenu Area -->
+        <div class="flapt-sidemenu-wrapper">
+            <!-- Desktop Logo -->
+            <div class="flapt-logo">
+                <a href="index.html"><img class="desktop-logo" src="img/core-img/logo.png" alt="Desktop Logo"> <img
+                        class="small-logo" src="img/core-img/small-logo.png" alt="Mobile Logo"></a>
+            </div>
+
+            <!-- Side Nav -->
+            <div class="flapt-sidenav" id="flaptSideNav">
+                <!-- Side Menu Area -->
+                <div class="side-menu-area">
+                    <!-- Sidebar Menu -->
+                    <nav>
+                        <ul class="sidebar-menu" data-widget="tree">
+                            <li class="menu-header-title">Dashboard</li>
+                            <li class="treeview">
+                                <a class="menu-active" href="javascript:void(0)"><i class='bx bx-home-heart'></i>
+                                    <span>Dashboard</span>
+                                    <i class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="index.html">Dashboard 1</a></li>
+                                     <li><a href="index-2.html">Dashboard 2</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="javascript:void(0)"><i class='bx bxs-cart'></i><span>Shop</span> <i
+                                        class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="product.html">Products</a></li>
+                                    <li><a href="product-details.html">Products Details</a></li>
+                                    <li><a href="order.html">Orders</a></li>
+                                    <li><a href="cart.html">Cart</a></li>
+                                    <li><a href="checkout.html">Checkout</a></li>
+                                    <li><a href="invoice.html">Invoice</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-header-title">Apps</li>
+                            <li><a href="calendar.html"><i class='bx bx-calendar'></i><span>Calendar</span></a></li>
+                            <li><a href="chat-box.html"><i class='bx bx-message-rounded-dots'></i><span>Chat</span></a>
+                            </li>
+                            <li class="treeview">
+                                <a href="javascript:void(0)"><i class="bx bx-envelope"></i> <span>Email</span> <i
+                                        class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="mail-inbox.html">Inbox</a></li>
+                                    <li><a href="mail-view.html">Mail View</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="widgets.html"><i class="zmdi zmdi-widgets"></i><span>Widgets</span></a></li>
+                            <li class="menu-header-title">Custom</li>
+                            <li class="treeview">
+                                <a href="javascript:void(0)"><i class="bx bx-file"></i><span>Pages</span> <i
+                                        class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="account.html">Account Settings</a></li>
+                                    <li><a href="filemanager.html">File Manager</a></li>
+                                    <li><a href="profile.html">Profile</a></li>
+                                    <li><a href="kanban-board.html">Kanban Board</a></li>
+                                    <li><a href="timeline.html">Timeline</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="nestable-list.html">Nestable List</a></li>
+                                    <li><a href="notification.html">Notification</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="javascript:void(0)"><i
+                                        class="bx bx-user-circle"></i><span>Authentication</span> <i
+                                        class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="login.html">Login</a></li>
+                                    <li><a href="register.html">Register</a></li>
+                                    <li><a href="forget-password.html">Forget Password</a></li>
+                                    <li><a href="lock-screen.html">Lock Screen</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-header-title">Components</li>
+                            <li class="treeview">
+                                <a href="javascript:void(0)"><i class="bx bx-tone"></i> <span>UI Elements</span> <i
+                                        class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="accordion.html">Accordion</a></li>
+                                    <li><a href="alert.html">Alert</a></li>
+                                    <li><a href="badge.html">Badge</a></li>
+                                    <li><a href="buttons.html">Button</a></li>
+                                    <li><a href="breadcrumb.html">Breadcrumb</a></li>
+                                    <li><a href="card.html">Card</a></li>
+                                    <li><a href="carousel.html">Carousel</a></li>
+                                    <li><a href="collapse.html">Collapse</a></li>
+                                    <li><a href="modals.html">Modals</a></li>
+                                    <li><a href="list-group.html">List Group</a></li>
+                                    <li><a href="dropdown.html">Dropdown</a></li>
+                                    <li><a href="progressbar.html">Progressbar</a></li>
+                                    <li><a href="preloader.html">Preloader</a></li>
+                                    <li><a href="popovers.html">Popovers</a></li>
+                                    <li><a href="pagination.html">Pagination</a></li>
+                                    <li><a href="scrollspy.html">Scrollspy</a></li>
+                                    <li><a href="session-timeout.html">Session timeout</a></li>
+                                    <li><a href="offcanvas.html">Offcanvas</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="javascript:void(0)"><i class='bx bx-bar-chart-square'></i><span>Charts</span>
+                                    <i class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="apex-chart.html">Apex Chart</a></li>
+                                    <li><a href="chart-js.html">Chart Js</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="treeview active">
+                                <a href="javascript:void(0)"><i class="bx bxs-eraser"></i><span>Forms</span> <i
+                                        class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li class="active"><a href="basic-form.html">Basic Form</a></li>
+                                    <li><a href="form-advanced.html">Basic Advanced</a></li>
+                                    <li><a href="form-editor.html">Form Editor</a></li>
+                                    <li><a href="clipboard.html">Clipboard</a></li>
+                                    <li><a href="form-validation.html">Validation</a></li>
+                                    <li><a href="form-wizard.html">Form Wizard</a></li>
+                                    <li><a href="form-mask.html">Input Mask</a></li>
+                                    <li><a href="form-upload.html">File upload</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="javascript:void(0)"><i class="bx bx-list-ul"></i><span>Tables</span> <i
+                                        class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="basic-table.html">Basic Table</a></li>
+                                    <li><a href="data-table.html">Data Table</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="javascript:void(0)"><i class="bx bx-list-ul"></i><span>Icons</span> <i
+                                        class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="elegant-icons.html">Elegant icon</a></li>
+                                    <li><a href="et-line-icons.html">Etline icon</a></li>
+                                    <li><a href="font-awesome.html">Font-awsome</a></li>
+                                    <li><a href="matarial-icons.html">Matarial Icon</a></li>
+                                    <li><a href="pe-7-stroke.html">Pe-7-Stroke</a></li>
+                                    <li><a href="themify-icons.html">Themify Icon</a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="javascript:void(0)"><i class="bx bx-share-alt"></i> <span>Dropdown</span> <i
+                                        class="fa fa-angle-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="#">Level One</a></li>
+                                    <li class="treeview">
+                                        <a href="#">Level One <i class="fa fa-angle-right"></i></a>
+                                        <ul class="treeview-menu">
+                                            <li><a href="#">Level Two</a></li>
+                                            <li><a href="#">Level Two</a></li>
+                                            <li><a href="#">Level Two</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Level One</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Upgrade Card -->
+                <div class="upgrade-card card">
+                    <div class="card-body">
+                        <img class="mb-4" src="./img/bg-img/1.png" alt="">
+                        <p>Upgrade to pro!</p>
+                        <a class="btn btn-sm btn-warning" href="#">Upgrade Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div class="flapt-page-content">
+            <!-- Top Header Area -->
+            <header class="top-header-area d-flex align-items-center justify-content-between">
+                <div class="left-side-content-area d-flex align-items-center">
+                    <!-- Mobile Logo -->
+                    <div class="mobile-logo">
+                        <a href="index.html"><img src="img/core-img/small-logo.png" alt="Mobile Logo"></a>
+                    </div>
+
+                    <!-- Triggers -->
+                    <div class="flapt-triggers">
+                        <div class="menu-collasped" id="menuCollasped">
+                            <i class='bx bx-grid-alt'></i>
+                        </div>
+                        <div class="mobile-menu-open" id="mobileMenuOpen">
+                            <i class='bx bx-grid-alt'></i>
+                        </div>
+                    </div>
+
+                    <!-- Left Side Nav -->
+                    <ul class="left-side-navbar d-flex align-items-center">
+                        <li class="hide-phone app-search">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="bx bx-search-alt"></span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="right-side-navbar d-flex align-items-center justify-content-end">
+                    <!-- Mobile Trigger -->
+                    <div class="right-side-trigger" id="rightSideTrigger">
+                        <i class='bx bx-menu-alt-right'></i>
+                    </div>
+
+                    <!-- Top Bar Nav -->
+                    <ul class="right-side-content d-flex align-items-center">
+
+                        <li class="nav-item dropdown">
+                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"><span><i
+                                        class='bx bx-world'></i></span></button>
+                            <div class="dropdown-menu language-dropdown dropdown-menu-right">
+                                <div class="user-profile-area">
+                                    <a href="#" class="dropdown-item mb-15"><img src="img/core-img/l5.jpg" alt="Image">
+                                        <span>USA</span></a>
+                                    <a href="#" class="dropdown-item mb-15"><img src="img/core-img/l2.jpg" alt="Image">
+                                        <span>German</span></a>
+                                    <a href="#" class="dropdown-item mb-15"><img src="img/core-img/l3.jpg" alt="Image">
+                                        <span>Italian</span></a>
+                                    <a href="#" class="dropdown-item"><img src="img/core-img/l4.jpg" alt="Image">
+                                        <span>Russian</span></a>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"><i class='bx bx-envelope'></i></button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <!-- Message Area -->
+                                <div class="top-message-area">
+                                    <!-- Heading -->
+                                    <div class="message-heading">
+                                        <div class="heading-title">
+                                            <h6 class="mb-0">All Messages</h6>
+                                        </div>
+                                        <span>10</span>
+                                    </div>
+
+                                    <div class="message-box" id="messageBox">
+                                        <a href="#" class="dropdown-item">
+                                            <i class='bx bx-dollar-circle'></i>
+                                            <div>
+                                                <span>Did you know?</span>
+                                                <p class="mb-0 font-12">Adipisicing elit. Ipsa, porro!</p>
+                                            </div>
+                                        </a>
+
+                                        <a href="#" class="dropdown-item">
+                                            <i class='bx bx-shopping-bag'></i>
+                                            <div>
+                                                <span>Congratulations!
+                                                </span>
+                                                <p class="mb-0 font-12">Consectetur adipisicing elit.</p>
+                                            </div>
+                                        </a>
+
+                                        <a href="#" class="dropdown-item">
+                                            <i class='bx bx-wallet-alt'></i>
+                                            <div>
+                                                <span>Hello Obeta</span>
+                                                <p class="mb-0 font-12">Consectetur adipisicing elit.</p>
+                                            </div>
+                                        </a>
+
+                                        <a href="#" class="dropdown-item">
+                                            <i class='bx bx-border-all'></i>
+                                            <div>
+                                                <span>Your order is placed</span>
+                                                <p class="mb-0 font-12">Consectetur adipisicing elit.</p>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="dropdown-item">
+                                            <i class='bx bx-wallet-alt'></i>
+                                            <div>
+                                                <span>Haslina Obeta</span>
+                                                <p class="mb-0 font-12">Consectetur adipisicing elit.</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"><i class='bx bx-bell bx-tada'></i> <span
+                                    class="active-status"></span></button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <!-- Top Notifications Area -->
+                                <div class="top-notifications-area">
+                                    <!-- Heading -->
+                                    <div class="notifications-heading">
+                                        <div class="heading-title">
+                                            <h6>Notifications</h6>
+                                        </div>
+                                        <span>11</span>
+                                    </div>
+
+                                    <div class="notifications-box" id="notificationsBox">
+                                        <a href="#" class="dropdown-item">
+                                            <i class='bx bx-shopping-bag'></i>
+                                            <div>
+                                                <span>Your order is placed</span>
+                                                <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
+                                            </div>
+                                        </a>
+
+                                        <a href="#" class="dropdown-item">
+                                            <i class='bx bx-wallet-alt'></i>
+                                            <div>
+                                                <span>Haslina Obeta</span>
+                                                <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
+                                            </div>
+                                        </a>
+
+                                        <a href="#" class="dropdown-item">
+                                            <i class='bx bx-dollar-circle'></i>
+                                            <div>
+                                                <span>Your order is Dollar</span>
+                                                <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
+                                            </div>
+                                        </a>
+
+                                        <a href="#" class="dropdown-item">
+                                            <i class='bx bx-border-all'></i>
+                                            <div>
+                                                <span>Your order is placed</span>
+                                                <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="dropdown-item">
+                                            <i class='bx bx-wallet-alt'></i>
+                                            <div>
+                                                <span>Haslina Obeta</span>
+                                                <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"><img src="img/bg-img/person_1.jpg"
+                                    alt=""></button>
+                            <div class="dropdown-menu profile dropdown-menu-right">
+                                <!-- User Profile Area -->
+                                <div class="user-profile-area">
+                                    <a href="#" class="dropdown-item"><i class="bx bx-user font-15"
+                                            aria-hidden="true"></i> My profile</a>
+                                    <a href="#" class="dropdown-item"><i class="bx bx-wallet font-15"
+                                            aria-hidden="true"></i> My wallet</a>
+                                    <a href="#" class="dropdown-item"><i class="bx bx-wrench font-15"
+                                            aria-hidden="true"></i> settings</a>
+                                    <a href="#" class="dropdown-item"><i class="bx bx-power-off font-15"
+                                            aria-hidden="true"></i> Sign-out</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <div class="main-content">
+                <div class="content-wraper-area">
+                    <!-- Basic Form area Start -->
+                    <div class="container-fluid">
+                        <div class="row g-4">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body card-breadcrumb">
+                                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                                            <h4 class="mb-0">Basic Form</h4>
+                                            <div class="page-title-right">
+                                                <ol class="breadcrumb m-0">
+                                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Form</a>
+                                                    </li>
+                                                    <li class="breadcrumb-item active">Basic Form</li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6">
+                                <div class="card card-h-100">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h4 class="card-title">Form Layouts</h4>
+                                        </div>
+                                        <form>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="formrow-firstname-input">First
+                                                    name</label>
+                                                <input type="text" class="form-control" id="formrow-firstname-input">
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label"
+                                                            for="formrow-email-input">Email</label>
+                                                        <input type="email" class="form-control"
+                                                            id="formrow-email-input">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label"
+                                                            for="formrow-password-input">Password</label>
+                                                        <input type="password" class="form-control"
+                                                            id="formrow-password-input">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="form-check mt-3">
+                                                    <input type="checkbox" class="form-check-input"
+                                                        id="formrow-customCheck">
+                                                    <label class="form-check-label" for="formrow-customCheck">Check me
+                                                        out</label>
+                                                </div>
+                                            </div>
+                                            <div class="mt-4">
+                                                <button type="submit" class="btn btn-primary w-md">Submit</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h4 class="card-title">Horizontal Form</h4>
+                                        </div>
+                                        <form>
+                                            <div class="row mb-4">
+                                                <label for="horizontal-firstname-input"
+                                                    class="col-sm-3 col-form-label">First name</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control"
+                                                        id="horizontal-firstname-input">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-4">
+                                                <label for="horizontal-email-input"
+                                                    class="col-sm-3 col-form-label">Email</label>
+                                                <div class="col-sm-9">
+                                                    <input type="email" class="form-control"
+                                                        id="horizontal-email-input">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-4">
+                                                <label for="horizontal-password-input"
+                                                    class="col-sm-3 col-form-label">Password</label>
+                                                <div class="col-sm-9">
+                                                    <input type="password" class="form-control"
+                                                        id="horizontal-password-input">
+                                                </div>
+                                            </div>
+
+                                            <div class="row justify-content-end">
+                                                <div class="col-sm-9">
+                                                    <div class="form-check mb-4">
+                                                        <input type="checkbox" class="form-check-input"
+                                                            id="horizontal-customCheck">
+                                                        <label class="form-check-label"
+                                                            for="horizontal-customCheck">Remember me</label>
+                                                    </div>
+                                                    <div>
+                                                        <button type="submit"
+                                                            class="btn btn-primary w-md">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h4>Textual Inputs</h4>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-xl-6">
+                                                <div class="mb-3 row">
+                                                    <label for="example-text-input"
+                                                        class="col-md-2 col-form-label">Text</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="text" value="Hello World"
+                                                            id="example-text-input">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="example-search-input"
+                                                        class="col-md-2 col-form-label">Search</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="search" value="Search Here"
+                                                            id="example-search-input">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="example-email-input"
+                                                        class="col-md-2 col-form-label">Email</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="email"
+                                                            value="email@example.com" id="example-email-input">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="example-url-input"
+                                                        class="col-md-2 col-form-label">URL</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="url"
+                                                            value="https://getbootstrap.com" id="example-url-input">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="example-tel-input"
+                                                        class="col-md-2 col-form-label">Telephone</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="tel" value="1-(222)-333-74444"
+                                                            id="example-tel-input">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="example-password-input"
+                                                        class="col-md-2 col-form-label">Password</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="password" value="hunter2"
+                                                            id="example-password-input">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="example-number-input"
+                                                        class="col-md-2 col-form-label">Number</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="number" value="42"
+                                                            id="example-number-input">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 mb-lg-0 row">
+                                                    <label for="example-datetime-local-input"
+                                                        class="col-md-2 col-form-label">Date and time</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="datetime-local"
+                                                            value="2023-05-16T05:07:00"
+                                                            id="example-datetime-local-input">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-6">
+                                                <div class="row mb-3 mt-3 mt-xl-0">
+                                                    <label for="example-date-input"
+                                                        class="col-md-2 col-form-label">Date</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="date" value="2023-08-20"
+                                                            id="example-date-input">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="example-month-input"
+                                                        class="col-md-2 col-form-label">Month</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="month" value="2023-08"
+                                                            id="example-month-input">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="example-week-input"
+                                                        class="col-md-2 col-form-label">Week</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="week" value="2023-W33"
+                                                            id="example-week-input">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="example-time-input"
+                                                        class="col-md-2 col-form-label">Time</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="time" value="13:45:00"
+                                                            id="example-time-input">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="example-color-input"
+                                                        class="col-md-2 col-form-label">Color
+                                                        picker</label>
+                                                    <div class="col-md-10">
+                                                        <input type="color"
+                                                            class="form-control form-control-color mw-100"
+                                                            id="example-color-input" value="#038edc"
+                                                            title="Choose your color">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label class="col-md-2 col-form-label">Select</label>
+                                                    <div class="col-md-10">
+                                                        <select class="form-select">
+                                                            <option>Select</option>
+                                                            <option>Large select</option>
+                                                            <option>Small select</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <label for="exampleDataList"
+                                                        class="col-md-2 col-form-label">Datalists</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" list="datalistOptions"
+                                                            id="exampleDataList" placeholder="Type to search...">
+                                                        <datalist id="datalistOptions">
+                                                            <option value="San Francisco">
+                                                            </option>
+                                                            <option value="New York">
+                                                            </option>
+                                                            <option value="Seattle">
+                                                            </option>
+                                                            <option value="Los Angeles">
+                                                            </option>
+                                                            <option value="Chicago">
+                                                            </option>
+                                                        </datalist>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h4 class="card-title">Inline Forms</h4>
+                                        </div>
+                                        <form class="row gx-3 gy-2 align-items-center">
+                                            <div class="col-sm-5">
+                                                <label class="visually-hidden" for="specificSizeInputName">Name</label>
+                                                <input type="text" class="form-control" id="specificSizeInputName"
+                                                    placeholder="Enter Name">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <label class="visually-hidden"
+                                                    for="specificSizeInputGroupUsername">Username</label>
+                                                <input type="text" class="form-control"
+                                                    id="specificSizeInputGroupUsername" placeholder="Username">
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        id="autoSizingCheck2">
+                                                    <label class="form-check-label" for="autoSizingCheck2">
+                                                        Remember me
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h4 class="card-title">Sizing</h4>
+                                        </div>
+
+                                        <form>
+                                            <div class="mb-4">
+                                                <label class="form-label" for="default-input">Default input</label>
+                                                <input class="form-control" type="text" id="default-input"
+                                                    placeholder="Default input">
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <label class="form-label" for="form-sm-input">Form Small input</label>
+                                                <input class="form-control form-control-sm" type="text"
+                                                    id="form-sm-input" placeholder=".form-control-sm">
+                                            </div>
+
+                                            <div class="mb-0">
+                                                <label class="form-label" for="form-lg-input">Form Large input</label>
+                                                <input class="form-control form-control-lg" type="text"
+                                                    id="form-lg-input" placeholder=".form-control-lg">
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h4 class="card-title">Switches</h4>
+                                        </div>
+
+                                        <div>
+                                            <div class="form-check form-switch form-switch-md mb-2">
+                                                <input class="form-check-input me-3" type="checkbox"
+                                                    id="flexSwitchCheckDefault">
+                                                <label class="form-check-label" for="flexSwitchCheckDefault">Default
+                                                    switch checkbox input</label>
+                                            </div>
+
+                                            <div class="form-check form-switch form-switch-md mb-2">
+                                                <input class="form-check-input me-3" type="checkbox"
+                                                    id="flexSwitchCheckChecked" checked="">
+                                                <label class="form-check-label" for="flexSwitchCheckChecked">Checked
+                                                    switch checkbox input</label>
+                                            </div>
+
+                                            <div class="form-check form-switch form-switch-md mb-2">
+                                                <input class="form-check-input me-3" type="checkbox"
+                                                    id="flexSwitchCheckDisabled" disabled="">
+                                                <label class="form-check-label" for="flexSwitchCheckDisabled">Disabled
+                                                    switch checkbox
+                                                    input</label>
+                                            </div>
+
+                                            <div class="form-check form-switch form-switch-md">
+                                                <input class="form-check-input me-3" type="checkbox"
+                                                    id="flexSwitchCheckCheckedDisabled" checked="" disabled="">
+                                                <label class="form-check-label"
+                                                    for="flexSwitchCheckCheckedDisabled">Disabled checked switch
+                                                    checkbox input</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h4 class="card-title">Checkboxes</h4>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div>
+                                                    <div class="form-check mb-2">
+                                                        <input class="form-check-input" type="checkbox" id="formCheck1">
+                                                        <label class="form-check-label" for="formCheck1">
+                                                            Form Checkbox
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="formCheck2"
+                                                            checked="">
+                                                        <label class="form-check-label" for="formCheck2">
+                                                            Form Checkbox checked
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 ms-auto">
+                                                <div class="mt-md-0 mt-4">
+                                                    <div>
+                                                        <div class="form-check form-check-right mb-2">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="formCheckRight1">
+                                                            <label class="form-check-label" for="formCheckRight1">
+                                                                Form Checkbox Right
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="form-check form-check-right">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="formCheckRight2" checked="">
+                                                            <label class="form-check-label" for="formCheckRight2">
+                                                                Form Checkbox Right checked
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title justify-content-between d-flex align-items-center">
+                                            <h4 class="card-title">Radio</h4>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div>
+                                                    <div class="form-check mb-2">
+                                                        <input class="form-check-input" type="radio" name="formRadios"
+                                                            id="formRadios1" checked="">
+                                                        <label class="form-check-label" for="formRadios1">
+                                                            Form Radio
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="formRadios"
+                                                            id="formRadios2">
+                                                        <label class="form-check-label" for="formRadios2">
+                                                            Form Radio checked
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 ms-auto">
+                                                <div class="mt-md-0 mt-4">
+                                                    <div>
+                                                        <div class="form-check form-check-right mb-2">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="formRadiosRight" id="formRadiosRight1" checked="">
+                                                            <label class="form-check-label" for="formRadiosRight1">
+                                                                Form Radio Right
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div>
+                                                        <div class="form-check form-check-right">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="formRadiosRight" id="formRadiosRight2">
+                                                            <label class="form-check-label" for="formRadiosRight2">
+                                                                Form Radio Right checked
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h4 class="card-title">File Browser</h4>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="formFile" class="form-label">Default file input example</label>
+                                            <input class="form-control" type="file" id="formFile">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="formFileSm" class="form-label">Small file input example</label>
+                                            <input class="form-control form-control-sm" id="formFileSm" type="file">
+                                        </div>
+                                        <div>
+                                            <label for="formFileLg" class="form-label">Large file input example</label>
+                                            <input class="form-control form-control-lg" id="formFileLg" type="file">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h4 class="card-title">Form Floationg</h4>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="email" class="form-control" id="floatingInput"
+                                                placeholder="name@example.com">
+                                            <label for="floatingInput">Email address</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="password" class="form-control" id="floatingPassword"
+                                                placeholder="Password">
+                                            <label for="floatingPassword">Password</label>
+                                        </div>
+                                        <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Leave a comment here"
+                                                id="floatingTextarea2" style="height: 100px"></textarea>
+                                            <label for="floatingTextarea2">Comments</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h4 class="card-title">Select Floationg</h4>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="email" class="form-control" id="floatingInputGrid"
+                                                placeholder="name@example.com" value="mdo@example.com">
+                                            <label for="floatingInputGrid">Email address</label>
+                                        </div>
+
+                                        <div class="form-floating mb-3">
+                                            <select class="form-select" id="floatingSelectGrid"
+                                                aria-label="Floating label select example">
+                                                <option selected="">Open this select menu</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                            <label for="floatingSelectGrid">Works with selects</label>
+                                        </div>
+                                        <div class="form-floating">
+                                            <select class="form-select" id="floatingSelect"
+                                                aria-label="Floating label select example">
+                                                <option selected="">Open this select menu</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                            <label for="floatingSelect">Works with selects</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Footer Area -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Footer Area -->
+                            <footer
+                                class="footer-area d-sm-flex justify-content-center align-items-center justify-content-between">
+                                <!-- Copywrite Text -->
+                                <div class="copywrite-text">
+                                    <p class="font-13">Developed by &copy; <a href="#">Theme-life</a></p>
+                                </div>
+                                <div class="fotter-icon text-center">
+                                    <p class="mb-0 font-13">2023 &copy; Flapt Admin</p>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================
+    ********* Page Wrapper Area End ***********
+    ======================================= -->
+
+    <!-- Must needed plugins to the run this Template -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/default-assets/setting.js"></script>
+    <script src="js/default-assets/scrool-bar.js"></script>
+    <script src="js/todo-list.js"></script>
+
+    <!-- Active JS -->
+    <script src="js/default-assets/active.js"></script>
+
+</body>
+
+</html>

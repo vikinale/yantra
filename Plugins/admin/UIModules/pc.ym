@@ -1,0 +1,57 @@
+[:template.breadcrumb]
+        <div [if "{id}"]id="[get id/]"[/if] class="card-body card-breadcrumb [get main_class/]">
+                        <div class="page-title-box d-flex align-items-center justify-content-between">
+                            <h4 class="mb-0">[get title/]</h4>
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                [if.is_array "{main}"]
+                                 [foreach main="{main}"]
+                                     <li class="breadcrumb-item [get @item.active/]">
+                                        [if.is_string "{@item.href}"]
+                                            <a href="[get @item.href/]">[get @item.text/]</a>
+                                        [/if]
+                                        [else]
+                                            [get @item.text/]
+                                        [/else]
+                                     </li>
+                                 [/foreach]
+                                [/if]
+                                </ol>
+                            </div>
+                        </div>
+        </div>
+[:/template]
+
+[:template.user_table]
+                    <div id="[get id/]-table">
+                        <div id="permissions-filters">
+
+                        </div>
+                         <div class="table-container bg-white">
+                             <table class="table table-bordered table-striped table-light"></table>
+                         </div>
+                         <div class="pagination-container"></div>
+                    </div>
+                    [actions.footer]
+                        <script type="text/javascript">
+                                //Permission Data Table
+                                const config = {
+                                    perPage: 3,
+                                    orderColumns: { 'ID': 'ASC' }
+                                };
+                                const table = new yantra.JsonTable('#[get id/]-table',
+                                    app.url('admin/users/table'),
+                                    Array({name: 'username',db_name:"user_login", label: 'Username', sortable: true, order:'ASC',render:function (value,rec)
+                                            {
+                                                let url = app.url('admin/users/'+rec.ID);
+                                                return `<a class="btn btn-sm btn-link" href="${url}"> ${value} </a>`;
+                                            }},
+                                        { name: 'user_email', label: 'Email', sortable: true },
+                                        { name: 'first_name', label: 'First name', sortable: false },
+                                        { name: 'last_name', label: 'Last name', sortable: false }
+                                    )
+                                    ,config);
+
+                        </script>
+                    [/actions]
+[:/template]

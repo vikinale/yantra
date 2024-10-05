@@ -1,0 +1,140 @@
+[:template.main]
+    This is main template
+[:/template]
+
+[:template.input]
+    [if "{floating} == 'true'" ]
+        <div class="form-floating [get group_class default='mb-3'/]">
+            <input type="[get type default='text' /]" id="[get id/]" name="[get name/]" value="[get value /]"
+             class="form-control [get class /]"
+             [if.not_empty "{autocomplete}" ]autocomplete="[get autocomplete/]"[/if]
+             [if.not_empty "{placeholder}" ]placeholder="[get placeholder/]"[/if]
+             [if "{readonly} == 'true'" ]readonly[/if]
+             [if "{required} == 'true'" ]required[/if]
+             [if "{disabled} == 'true'" ]disabled[/if]/>
+
+            <label class="form-label" for="[get id/]">[get label /]</label>
+            <div class="form-text text-danger field-error"></div>
+        </div>
+    [/if]
+    [else "{inline} == 'true'"]
+        <label class="visually-hidden" for="[get id /]">Name</label>
+        <input class="form-control [get class /]" id="[get id /]" name="[get name/]" value="[get value /]" [if "{readonly} == 'true'" ]readonly[/if] [if "{required} == 'true'" ]required[/if] [if "{disabled} == 'true'" ]disabled[/if]>
+        <div class="form-text text-danger field-error"></div>
+    [/else]
+    [else]
+        <div class="form-group [get group_class default='mb-3'/]">
+            <label class="form-label" for="[get id /]">[get label /] </label>
+            <input type="[get type default='text' /]" id="[get id/]" name="[get name/]" value="[get value /]"
+             class="form-control [get class /]"
+             autocomplete="[get autocomplete/]"
+             [if.not_empty "{autocomplete}"]autocomplete="[get autocomplete/]"[/if]
+             [if.not_empty "{placeholder}"]placeholder="[get placeholder/]"[/if]
+             [if "{readonly} == 'true'" ]readonly[/if]
+             [if "{required} == 'true'" ]required[/if]
+             [if "{disabled} == 'true'" ]disabled[/if]>
+            <div class="form-text text-danger field-error"></div>
+        </div>
+    [/else]
+[:/template]
+
+[:template.textarea]
+    [if "{floating} == 'true'" ]
+        <div class="form-floating [get group_class default='mb-3'/]">
+            <textarea class="form-control [get class /]" id="[get id /]" placeholder="[get placeholder/]" name="[get name/]" [if "{readonly} == 'true'" ]readonly[/if] [if "{required} == 'true'" ]required[/if] [if "{disabled} == 'true'" ]disabled[/if]>[get value /]</textarea>
+            <label class="form-label" for="[get id/]">[get label /]</label>
+            <div class="form-text text-danger field-error"></div>
+        </div>
+    [/if]
+    [else "{inline} == 'true'"]
+        <label class="visually-hidden" for="[get id /]">Name</label>
+        <textarea class="form-control [get class /]" id="[get id /]" placeholder="[get placeholder/]" name="[get name/]" [if "{readonly} == 'true'" ]readonly[/if] [if "{required} == 'true'" ]required[/if] [if "{disabled} == 'true'" ]disabled[/if]>[get value /]</textarea>
+        <div class="form-text text-danger field-error"></div>
+    [/else]
+    [else]
+        <div class="form-group [get group_class default='mb-3'/]">
+            <label class="form-label" for="[get id /]">[get label /] </label>
+            <textarea class="form-control [get class /]" id="[get id/]" placeholder="[get placeholder/]" name="[get name/]" [if "{readonly} == 'true'" ]readonly[/if] [if "{required} == 'true'" ]required[/if] [if "{disabled} == 'true'" ]disabled[/if]>[get value /]</textarea>
+            <div class="form-text text-danger field-error"></div>
+        </div>
+    [/else]
+[:/template]
+
+[:template.select]
+    [if "{floating} == 'true'" ]
+        <div class="form-floating [get group_class default='mb-3'/]">
+            <select class="form-control form-select [get class /]" id="[get id /]" name="[get name/]" [if "{readonly} == 'true'" ]readonly[/if] [if "{required} == 'true'" ]required[/if] [if "{disabled} == 'true'" ]disabled[/if]>
+                <option>Select</option>
+                [foreach main="{{main}}"]
+                <option value="[get @item.value/]">[get @item.display/]</option>
+                [/foreach]
+            </select>
+             <label for="[get id /]">[get label /] </label>
+        </div>
+    [/if]
+    [else "{inline} == 'true'"]
+        <label class="form-label" for="[get id /]">[get label /] </label>
+        <select class="form-control form-select [get class /]" id="[get id /]" name="[get name/]" [if "{readonly} == 'true'" ]readonly[/if] [if "{required} == 'true'" ]required[/if] [if "{disabled} == 'true'" ]disabled[/if]>
+            <option>Select</option>
+            [foreach main="{{main}}"]
+            <option value="[get @item.value/]">[get @item.display/]</option>
+            [/foreach]
+        </select>
+        <div class="form-text text-danger field-error"></div>
+    [/else]
+    [else]
+        <div class="form-group [get group_class default='mb-3'/]">
+            <label class="form-label" for="[get id /]">[get label /] </label>
+            <select class="form-control form-select [get class /]" id="[get id /]" name="[get name/]" [if "{readonly} == 'true'" ]readonly[/if] [if "{required} == 'true'" ]required[/if] [if "{disabled} == 'true'" ]disabled[/if]>
+                <option>Select</option>
+                [foreach main="{{main}}"]
+                <option value="[get @item.value/]">[get @item.display/]</option>
+                [/foreach]
+            </select>
+            <div class="form-text text-danger field-error"></div>
+        </div>
+    [/else]
+[:/template]
+
+[:template.datalist]
+    <div class="form-group [get group_class default='mb-3'/]">
+        <label class="form-label" for="[get id /]">[get label /] </label>
+        <input class="form-control" list="datalistOptions_[get id /]" id="[get id /]" name="[get name/]"  placeholder="Type to search..." [if "{readonly} == 'true'" ]readonly[/if] [if "{required} == 'true'" ]required[/if] [if "{disabled} == 'true'" ]disabled[/if]>
+        <datalist id="datalistOptions_[get id /]">
+            [foreach main="{{main}}"]
+            <option value="[get @item/]"></option>
+            [/foreach]
+        </datalist>
+        <div class="form-text text-danger field-error"></div>
+    </div>
+[:/template]
+
+[:template.checkbox]
+    <div class="form-check [get group_class default='mb-3'/]">
+        <input class="form-check-input me-3" type="checkbox" id="[get id /]" name="[get name/]" value="[get value /]" [if "{checked} == 'true'" ]checked[/if] [if "{disabled} == 'true'" ]disabled[/if]>
+        <label class="form-check-label" for="[get id /]">[get label /] </label>
+        <div class="form-text text-danger field-error"></div>
+    </div>
+[:/template]
+
+[:template.radio]
+    <div class="form-check [get group_class default='mb-3'/]">
+        <input class="form-check-input me-3" type="radio" id="[get id /]" name="[get name/]" value="[get value /]" [if "{checked} == 'true'" ]checked[/if] [if "{disabled} == 'true'" ]disabled[/if]>
+        <label class="form-check-label" for="[get id /]">[get label /] </label>
+        <div class="form-text text-danger field-error"></div>
+    </div>
+[:/template]
+
+[:template.file]
+    <div class="form-group [get group_class default='mb-3'/]">
+        <label class="form-label" for="[get id /]">[get label /] </label>
+        <input type="file" class="form-control [get class /]" id="[get id /]" name="[get name/]" value="[get value /]" [if "{readonly} == 'true'" ]readonly[/if] [if "{required} == 'true'" ]required[/if] [if "{disabled} == 'true'" ]disabled[/if]>
+        <div class="form-text text-danger field-error"></div>
+    </div>
+[:/template]
+
+[:template.submit]
+    <button type="submit" id="[get id /]" name="[get name/]"  class="btn [get class default='btn-primary'/]">[get value /]</button>
+[:/template]
+
+
