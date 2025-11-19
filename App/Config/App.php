@@ -1,16 +1,25 @@
 <?php
 return [
-    'name'      => 'yantra',
+    'name'      => 'Yantra',
     'site'      => 'yantra',
+    'base_url'  => 'http://localhost/yantra',
     'content'     => 'content',
-    'theme'     => 'Kaveri',
-    'plugins'   => ['admin'],
+    'theme'     => 'camping',
+    'plugins'   => ['AngleSmartApi'],
     'language'  => 'en',
     'timezone'  => 'UTC',
     'charset'   => 'UTF-8',
+    'default_controller' => 'Home',
+    'default_method'     => 'index',
+    'ai'        => [
+        'api_key' => 'your_yantra_ai_api_key_here',
+        'model'   => 'gpt-4.1-mini'
+    ],
     'proxyIPs'  => [],
     'email'     => [
-        'userAgent'=>'yantra',
+        'from_email' => 'no-reply@pawnacamping.com', // Default sender email
+        'from_name' => 'Pawna Camping', // Default sender name
+        'userAgent'=>'Yantra',
         'protocol'=>'mail',
         'mailPath'=>'/usr/sbin/sendmail',
         'SMTPUser'=>'',

@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Yantra Table — Inline Edit with Keyboard UX & Validations</title>
+
+  <!-- optional: include your yantra-table css -->
+  <link rel="stylesheet" href="../css/yantra-table.css">
+
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; background:#f6f7f9; padding:24px; }
+    .card { background:#fff; padding:18px; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.06); max-width:1000px; margin:auto; }
+    h1 { margin:0 0 12px 0; font-size:20px; }
+    .small { padding:6px 10px; border-radius:6px; background:#f3f4f6; border:1px solid #d0d7de; cursor:pointer; }
+    .btn-save { background:#1976d2; color:#fff; border:0; padding:6px 10px; border-radius:6px; cursor:pointer; }
+    .btn-cancel { background:#efefef; border:0; padding:6px 10px; border-radius:6px; cursor:pointer; }
+    .inline-input { width:100%; box-sizing:border-box; padding:6px 8px; border-radius:4px; border:1px solid #ddd; font-size:14px; }
+    .actions-col { display:flex; gap:6px; align-items:center; }
+    .error-inline { color:#b00020; font-size:0.85rem; margin-left:6px; display:none; }
+    .hint { font-size:12px; color:#666; margin-left:8px; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Client-side Table — Inline Edit (Keyboard-friendly + Validations)</h1>
+  <div style="margin-bottom:12px;">
+    <button id="btnReset" class="small">Reset Sample Data</button>
+    <span id="info" style="margin-left:12px;color:#1976d2;font-weight:600"></span>
+    <span class="hint">• Save: Ctrl/Cmd + Enter • Enter: next field • Esc: cancel</span>
+  </div>
+
+  <div id="tableContainer"></div>
+</div>
+
+
+<script src="../js/yantra.js"></script>
+<script src="../js/yantra.table.js"></script>
+
+<!-- validations.js (small optimistic rules, registerable) -->
+<script>
+/**
+ * validations.js
+ * Exposes window.yantraValidationRules - a map of ruleName -> fn(value, param) -> true | errorMessage
+ * Also exposes registerValidators(registry) to register these into a ValidatorRegistry if provided.
+ */
+(function () {
+  const isEmpty = v => v === null || v === undefined || (typeof v === 'string' && v.trim() === '');
+
+  const rules = {
+    required: (v) => (isEmpty(v) ? 'Required' : true),
+    minLength: (v, p) => {
+      if (isEmpty(v)) return true;
+      const n = Number(p || 0);
+      return (String(v).length >= n) ? true : ('Must be at least ' + n + ' characters');
+    },
+    maxLength: (v, p) => {
+      if (isEmpty(v)) return true;
+      const n = Number(p || 999999);
+      return (String(v).length <= n) ? true : ('Must be at most ' + n + ' characters');
+    },
+    integer: (v) => {
+      if (isEmpty(v)) return true;
+      return (/^-?\d+$/).test(String(v)) ? true : 'Must be an integer';
+    },
+    number: (v) => {
+      if (isEmpty(v)) return true;
+      return (!isNaN(Number(v))) ? true : 'Must be a number';
+    },
+    min: (v, p) => {
+      if (isEmpty(v)) return true;
+      const val = Number(v);
+      const n = Number(p || 0);
+      return (!isNaN(val) && val >= n) ? true : ('Must be ≥ ' + n);
+    },
+    max: (v, p) => {
+      if (isEmpty(v)) return true;
+      const val = Number(v);
+      const n = Number(p || 0);
+      return (!isNaN(val) && val <= n) ? true : ('Must be ≤ ' + n);
+    },
+    email: (v) => {
+      if (isEmpty(v)) return true;
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(String(v)) ? true : 'Invalid email';
+    },
+    regex: (v, p) => {
+      if (isEmpty(v)) return true;
+      try {
+        const re = new RegExp(p);
+        return re.test(String(v)) ? true : 'Invalid format';
+      } catch (e) { return true; }
+    }
+  };
+
+  // expose rules
+  window.yantraValidationRules = rules;
+
+  // helper to register into a ValidatorRegistry-like object (optional)
+  window.registerValidators = function (registry) {
+    if (!registry || typeof registry.register !== 'function') return;
+    for (const k in rules) {
+      registry.register(k, rules[k]);
+    }
+  };
+})();
+</script>
+
+<script>
+/* ---------------------------
+   Sample client-side dataset
+   --------------------------- */
+const initialData = [
+  { id: 1, name: "Alice", status: "active",editable: false , amount: 120, created: "2025-01-10" },
+  { id: 2, name: "Bob", status: "inactive", amount: 75, created: "2025-02-11" },
+  { id: 3, name: "Charlie", status: "active", amount: 560, created: "2025-02-18" },
+  { id: 4, name: "David", status: "active", amount: 40, created: "2025-03-01" },
+  { id: 5, name: "Evelyn", status: "inactive", amount: 200, created: "2025-03-10" }
+];
+
+let tableData = initialData.slice(); // working copy
+
+/* ---------------------------
+   Table columns (with Actions)
+   --------------------------- */
+const columns = [
+  { key: 'id', label: 'ID', sortable: true },
+  { key: 'name', label: 'Name', sortable: true },
+  { key: 'status', label: 'Status', sortable: true },
+  { key: 'amount', label: 'Amount', sortable: true, render: r => '₹' + Number(r.amount).toLocaleString() },
+  { key: 'created', label: 'Created', sortable: true },
+  {
+    key: '_actions',
+    label: 'Actions',
+    sortable: false,
+    render: (row) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'actions-col';
+      const edit = document.createElement('button');
+      edit.type = 'button';
+      edit.className = 'small btn-edit';
+      edit.textContent = 'Edit';
+      edit.dataset.id = row.id;
+      wrap.appendChild(edit);
+      const del = document.createElement('button');
+      del.type = 'button';
+      del.className = 'small btn-delete';
+      del.textContent = 'Delete';
+      del.dataset.id = row.id;
+      wrap.appendChild(del);
+      return wrap;
+    }
+  }
+];
+
+/* ---------------------------
+   Create the table (client-side)
+   --------------------------- */
+const table = yantra.createTable('#tableContainer', {
+  columns,
+  data: tableData,
+  pageSize: 5,
+  searchable: true,
+  filters: [
+    { key: 'status', label: 'Status', type: 'select', options: [{value:'',label:'All'},{value:'active',label:'Active'},{value:'inactive',label:'Inactive'}] }
+  ],
+  selectable: false
+});
+
+/* UI info */
+function updateInfo() {
+  const total = table.state && table.state.total ? table.state.total : tableData.length;
+  document.getElementById('info').textContent = `Rows: ${total}`;
+}
+table.on('refresh', ({ state }) => updateInfo());
+updateInfo();
+
+/* ---------------------------
+   Inline edit implementation WITH keyboard & validations
+   --------------------------- */
+
+let editingRow = null; // { tr, id, originalCells, rowIndex, inputs }
+
+/**
+ * Validation rules by column (optimistic)
+ * rule format: ['required', 'minLength:2', 'min:0']
+ */
+const validationMap = {
+  name: ['required', 'minLength:2'],
+  status: ['required'],
+  amount: ['required', 'number', 'min:0']
+};
+
+// helper: run validations for a column using window.yantraValidationRules
+function runValidatorsFor(columnKey, value) {
+  const rules = validationMap[columnKey] || [];
+  for (let i = 0; i < rules.length; ++i) {
+    const r = rules[i];
+    const idx = r.indexOf(':');
+    const name = idx === -1 ? r : r.slice(0, idx);
+    const param = idx === -1 ? null : r.slice(idx + 1);
+    const fn = window.yantraValidationRules && window.yantraValidationRules[name];
+    if (!fn) continue; // unknown rule => skip
+    try {
+      const res = fn(value, param);
+      if (res !== true) return res; // error message
+    } catch (e) {
+      return 'Invalid';
+    }
+  }
+  return true;
+}
+
+function beginInlineEdit(tr) {
+  if (editingRow) {
+    yantra.toast('Finish current edit first', { group: 'table' });
+    return;
+  }
+  const rowIndex = Number(tr.dataset.rowIndex);
+  const rowData = table.state.data[rowIndex];
+  if (!rowData) return;
+
+  const tds = Array.from(tr.children);
+  const originalCells = tds.map(td => td.innerHTML);
+
+  const inputs = []; // keep list of input elements in order
+  for (let ci = 0; ci < table.opts.columns.length; ++ci) {
+    const col = table.opts.columns[ci];
+    const td = tds[ci];
+    if (!td) continue;
+    if (col.key === '_actions') continue;
+
+    const key = col.key;
+    const value = rowData[key] != null ? rowData[key] : '';
+
+    let inputEl;
+    if (key === 'status') {
+      inputEl = document.createElement('select');
+      inputEl.className = 'inline-input';
+      const opts = ['', 'active', 'inactive'];
+      opts.forEach(o => {
+        const op = document.createElement('option'); op.value = o; op.textContent = (o === '' ? '--' : o);
+        if (String(o) === String(value)) op.selected = true;
+        inputEl.appendChild(op);
+      });
+    } else if (key === 'amount' || typeof value === 'number') {
+      inputEl = document.createElement('input');
+      inputEl.type = 'number';
+      inputEl.className = 'inline-input';
+      inputEl.value = value;
+    } else if (key === 'created') {
+      inputEl = document.createElement('input');
+      inputEl.type = 'date';
+      inputEl.className = 'inline-input';
+      inputEl.value = (typeof value === 'string' && value.length >= 10) ? value.slice(0,10) : '';
+    } else {
+      inputEl = document.createElement('input');
+      inputEl.type = 'text';
+      inputEl.className = 'inline-input';
+      inputEl.value = value;
+    }
+
+    // append input and error node
+    td.innerHTML = '';
+    td.appendChild(inputEl);
+    const err = document.createElement('div');
+    err.className = 'error-inline';
+    err.style.display = 'none';
+    td.appendChild(err);
+
+    inputs.push({ key, inputEl, err });
+  }
+
+  // action cell: Save/Cancel + general error message
+  const actionCellIndex = table.opts.columns.findIndex(c => c.key === '_actions');
+  const actionTd = tds[actionCellIndex];
+  const saveBtn = document.createElement('button'); saveBtn.type = 'button'; saveBtn.className = 'btn-save'; saveBtn.textContent = 'Save';
+  const cancelBtn = document.createElement('button'); cancelBtn.type = 'button'; cancelBtn.className = 'btn-cancel'; cancelBtn.textContent = 'Cancel';
+  const genErr = document.createElement('span'); genErr.className = 'error-inline'; genErr.style.display = 'none';
+  actionTd.innerHTML = '';
+  actionTd.appendChild(saveBtn);
+  actionTd.appendChild(cancelBtn);
+  actionTd.appendChild(genErr);
+
+  // record editing state
+  editingRow = { tr, id: rowData.id, originalCells, rowIndex, inputs, saveBtn, cancelBtn, genErr };
+
+  // focus management: focus first input
+  setTimeout(() => {
+    if (inputs.length > 0) inputs[0].inputEl.focus();
+    // select text if text input
+    const first = inputs[0] && inputs[0].inputEl;
+    if (first && first.select) first.select();
+  }, 10);
+
+  // helpers for keyboard actions
+  function moveFocusNext(currentEl, direction = 1) {
+    // direction: 1 => next, -1 => prev
+    const flat = editingRow.inputs.map(x => x.inputEl);
+    let idx = flat.indexOf(currentEl);
+    if (idx === -1) return;
+    idx += direction;
+    if (idx < 0) idx = 0;
+    if (idx >= flat.length) idx = flat.length - 1;
+    flat[idx].focus();
+    if (flat[idx].select) flat[idx].select();
+  }
+
+  function validateAllAndShow() {
+    // run validations; show inline errors
+    let ok = true;
+    editingRow.inputs.forEach(item => {
+      const val = item.inputEl.value;
+      const res = runValidatorsFor(item.key, val);
+      if (res !== true) {
+        item.err.textContent = res;
+        item.err.style.display = 'inline-block';
+        ok = false;
+      } else {
+        item.err.textContent = '';
+        item.err.style.display = 'none';
+      }
+    });
+    if (!ok) editingRow.genErr.style.display = 'none';
+    return ok;
+  }
+
+  function onCancel() {
+    // restore original cells
+    for (let i = 0; i < tds.length; ++i) tds[i].innerHTML = originalCells[i];
+    editingRow = null;
+  }
+
+  async function onSave() {
+    // optimistic validation
+    editingRow.genErr.style.display = 'none';
+    if (!validateAllAndShow()) {
+      // focus first invalid
+      const invalid = editingRow.inputs.find(it => it.err.style.display === 'inline-block');
+      if (invalid) invalid.inputEl.focus();
+      return;
+    }
+
+    // build updated object
+    const updated = Object.assign({}, table.opts.data.find(r => Number(r.id) === Number(editingRow.id)) || {});
+    editingRow.inputs.forEach(item => {
+      const key = item.key;
+      let v = item.inputEl.value;
+      if (key === 'amount') v = (v === '' ? null : Number(v));
+      updated[key] = v;
+    });
+
+    // commit to master data (client-side)
+    const master = table.opts.data;
+    const mIdx = master.findIndex(r => Number(r.id) === Number(editingRow.id));
+    if (mIdx !== -1) {
+      master[mIdx] = Object.assign({}, master[mIdx], updated);
+    }
+    // re-render table
+    table.setData(master);
+    yantra.toast('Saved', { group: 'table' });
+    editingRow = null;
+  }
+
+  // attach listeners
+  saveBtn.addEventListener('click', onSave);
+  cancelBtn.addEventListener('click', onCancel);
+
+  // keyboard handlers for inputs:
+  editingRow.inputs.forEach(({ inputEl }) => {
+    inputEl.addEventListener('keydown', (ev) => {
+      const mac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+      const ctrlKey = mac ? ev.metaKey : ev.ctrlKey;
+      if (ev.key === 'Escape') {
+        ev.preventDefault();
+        onCancel();
+        return;
+      }
+      if ((ctrlKey) && ev.key.toLowerCase() === 'enter') {
+        ev.preventDefault();
+        onSave();
+        return;
+      }
+      if (ev.key === 'Enter') {
+        // move to next input
+        ev.preventDefault();
+        moveFocusNext(inputEl, 1);
+      }
+      // allow Tab/Shift+Tab naturally
+    });
+  });
+
+  // global keyboard for Save (Ctrl/Cmd+Enter) while editing
+  function globalKeyHandler(ev) {
+    const mac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+    const ctrlKey = mac ? ev.metaKey : ev.ctrlKey;
+    if (!editingRow) return;
+    if ((ctrlKey) && ev.key.toLowerCase() === 'enter') {
+      ev.preventDefault();
+      onSave();
+    } else if (ev.key === 'Escape') {
+      ev.preventDefault();
+      onCancel();
+    }
+  }
+  document.addEventListener('keydown', globalKeyHandler);
+
+  // when editing ends (save or cancel) remove global handler to avoid leaks.
+  const cleanup = () => {
+    document.removeEventListener('keydown', globalKeyHandler);
+  };
+
+  // wrap onSave/onCancel to call cleanup
+  const origOnSave = onSave;
+  onSave = function wrappedSave() { origOnSave().finally(cleanup); };
+  const origOnCancel = onCancel;
+  onCancel = function wrappedCancel() { origOnCancel(); cleanup(); };
+
+  // replace button listeners with wrapped versions
+  saveBtn.replaceWith(saveBtn.cloneNode(true));
+  const newSave = actionTd.querySelector('.btn-save');
+  newSave.addEventListener('click', onSave);
+  cancelBtn.replaceWith(cancelBtn.cloneNode(true));
+  const newCancel = actionTd.querySelector('.btn-cancel');
+  newCancel.addEventListener('click', onCancel);
+}
+
+/* Delegated click: Edit / Delete */
+table.el.addEventListener('click', (ev) => {
+  const editBtn = ev.target.closest('.btn-edit');
+  if (editBtn) {
+    const tr = editBtn.closest('tr');
+    if (!tr) return;
+    beginInlineEdit(tr);
+    return;
+  }
+  const delBtn = ev.target.closest('.btn-delete');
+  if (delBtn) {
+    const id = Number(delBtn.dataset.id);
+    if (!confirm('Delete row id ' + id + '?')) return;
+    const idx = tableData.findIndex(r => Number(r.id) === id);
+    if (idx !== -1) {
+      tableData.splice(idx, 1);
+      table.setData(tableData);
+      yantra.toast('Deleted');
+    }
+    return;
+  }
+});
+
+/* reset sample data */
+document.getElementById('btnReset').addEventListener('click', () => {
+  tableData = initialData.slice();
+  table.setData(tableData);
+  yantra.toast('Data reset');
+});
+</script>
+</body>
+</html>

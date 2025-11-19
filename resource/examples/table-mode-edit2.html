@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Yantra Table — Client-side Modal Edit</title>
+
+  <!-- recommended: include your yantra-table stylesheet -->
+  <link rel="stylesheet" href="../css/yantra-table.css">
+
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; background:#f6f7f9; padding:24px; }
+    .card { background:#fff; padding:18px; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.06); max-width:1000px; margin:auto; }
+    h1 { margin:0 0 12px 0; font-size:20px; }
+    .top-actions { display:flex; gap:8px; align-items:center; margin-bottom:12px; }
+    .small { padding:6px 10px; border-radius:6px; background:#f3f4f6; border:1px solid #d0d7de; cursor:pointer; }
+    /* modal styles */
+    .yt-modal { display:none; position:fixed; inset:0; z-index:100000; }
+    .yt-modal[aria-hidden="false"] { display:block; }
+    .yt-modal-backdrop { position:absolute; inset:0; background:rgba(0,0,0,0.45); }
+    .yt-modal-panel { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); background:#fff; border-radius:8px; padding:16px; min-width:340px; box-shadow:0 10px 40px rgba(0,0,0,0.2); }
+    .form-row { margin-bottom:10px; }
+    label { display:block; font-weight:600; font-size:.9rem; margin-bottom:6px; }
+    input[type="text"], input[type="number"], select { width:100%; padding:8px 10px; border-radius:6px; border:1px solid #ddd; font-size:14px; }
+    .modal-actions { display:flex; gap:8px; justify-content:flex-end; margin-top:8px; }
+    .btn-primary { background:#1976d2; color:white; border:0; padding:8px 12px; border-radius:6px; cursor:pointer; }
+    .yf-error { color:#b00020; font-size:.85rem; margin-top:6px; }
+    .actions-col { display:flex; gap:6px; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Client-side Table — Modal Edit</h1>
+  <div class="top-actions">
+    <button id="btnAdd" class="small">Add Row</button>
+    <button id="btnReload" class="small">Reset Sample Data</button>
+    <div style="flex:1"></div>
+    <span id="info" style="color:#1976d2;font-weight:600"></span>
+  </div>
+
+  <div id="tableContainer"></div>
+</div>
+
+<!-- Modal HTML -->
+<div id="editModal" class="yt-modal" aria-hidden="true">
+  <div class="yt-modal-backdrop"></div>
+  <div class="yt-modal-panel" role="dialog" aria-modal="true" aria-labelledby="editTitle">
+    <h3 id="editTitle">Edit Row</h3>
+
+    <form id="editForm" method="post" action="#">
+      <input type="hidden" id="field_id" name="id" />
+
+      <div class="form-row">
+        <label for="field_name">Name</label>
+        <input id="field_name" name="name" type="text" />
+        <div class="yf-error" id="err_name" style="display:none"></div>
+      </div>
+
+      <div class="form-row">
+        <label for="field_status">Status</label>
+        <select id="field_status" name="status">
+          <option value="">-- select --</option>
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+        <div class="yf-error" id="err_status" style="display:none"></div>
+      </div>
+
+      <div class="form-row">
+        <label for="field_amount">Amount</label>
+        <input id="field_amount" name="amount" type="number" />
+        <div class="yf-error" id="err_amount" style="display:none"></div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" id="btnCancel" class="small">Cancel</button>
+        <button type="submit" id="btnSave" class="btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="../js/yantra.js"></script>
+<script src="../js/yantra.table.js"></script>
+
+<script>
+/* ---------------------------
+   Sample client-side dataset
+   --------------------------- */
+let initialData = [
+    { id: 1, name: "Alpha",   status: "active",  amount: 120, created: "2025-01-10" },
+    { id: 2, name: "Bravo",   status: "inactive",amount: 75,  created: "2025-02-11" },
+    { id: 3, name: "Charlie", status: "active",  amount: 560, created: "2025-02-18" },
+    { id: 4, name: "Delta",   status: "active",  amount: 40,  created: "2025-03-01" },
+    { id: 5, name: "Echo",    status: "inactive",amount: 200, created: "2025-03-10" },
+    { id: 6, name: "Foxtrot", status: "active",  amount: 330, created: "2025-03-12" },
+    { id: 7, name: "Golf",    status: "active",  amount: 90,  created: "2025-03-19" },
+    { id: 8, name: "Hotel",   status: "inactive",amount: 150, created: "2025-03-22" },
+    { id: 9, name: "India",   status: "active",  amount: 180, created: "2025-03-25" },
+    { id:10, name: "Juliet",  status: "inactive",amount: 900, created: "2025-04-01" },
+    { id:11, name: "Kilo",    status: "active",  amount: 300, created: "2025-04-02" },
+    { id:12, name: "Lima",    status: "active",  amount: 50,  created: "2025-04-05" },
+    { id:13, name: "Mike",    status: "inactive",amount: 220, created: "2025-04-06" },
+    { id:14, name: "November",status: "active",  amount: 130, created: "2025-04-08" },
+    { id:15, name: "Oscar",   status: "inactive",amount: 480, created: "2025-04-10" }
+];
+
+// working copy
+let tableData = initialData.slice(); // clone
+
+/* ---------------------------
+   Table columns (Actions column provides Edit)
+   --------------------------- */
+const columns = [
+  { key: 'id', label: 'ID', sortable: true },
+  { key: 'name', label: 'Name', sortable: true },
+  { key: 'status', label: 'Status', sortable: true },
+  { key: 'amount', label: 'Amount', sortable: true, render: r => '₹' + Number(r.amount).toLocaleString() },
+  { key: 'created', label: 'Created', sortable: true },
+  {
+    key: '_actions',
+    label: 'Actions',
+    sortable: false,
+    render: (row) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'actions-col';
+      const edit = document.createElement('button');
+      edit.type = 'button';
+      edit.className = 'small btn-edit';
+      edit.textContent = 'Edit';
+      edit.dataset.id = row.id; // store id for client lookup
+      wrap.appendChild(edit);
+      const del = document.createElement('button');
+      del.type = 'button';
+      del.className = 'small btn-delete';
+      del.textContent = 'Delete';
+      del.dataset.id = row.id;
+      wrap.appendChild(del);
+      return wrap;
+    }
+  }
+];
+
+/* ---------------------------
+   Create the table (client-side)
+   --------------------------- */
+const table = yantra.createTable('#tableContainer', {
+  columns,
+  data: tableData,
+  pageSize: 5,
+  searchable: true,
+  filters: [
+    { key: 'status', label: 'Status', type: 'select', options: [{value:'',label:'All'},{value:'active',label:'Active'},{value:'inactive',label:'Inactive'}] }
+  ],
+  selectable: 'multi'
+});
+
+/* update info */
+function updateInfo() {
+  const s = table.state || {};
+  const total = s.total || tableData.length;
+  document.getElementById('info').textContent = `Rows: ${total}`;
+}
+table.on('refresh', ({ state }) => updateInfo());
+updateInfo();
+
+/* ---------------------------
+   Modal form wiring (client-side update)
+   --------------------------- */
+const modal = document.getElementById('editModal');
+const formEl = document.getElementById('editForm');
+const fldId = document.getElementById('field_id');
+const fldName = document.getElementById('field_name');
+const fldStatus = document.getElementById('field_status');
+const fldAmount = document.getElementById('field_amount');
+const errName = document.getElementById('err_name');
+const errStatus = document.getElementById('err_status');
+const errAmount = document.getElementById('err_amount');
+const btnCancel = document.getElementById('btnCancel');
+
+function showModal(show) {
+  modal.setAttribute('aria-hidden', show ? 'false' : 'true');
+  if (show) {
+    // clear previous errors
+    [errName, errStatus, errAmount].forEach(e => { e.style.display = 'none'; e.textContent = ''; });
+  }
+}
+
+btnCancel.addEventListener('click', () => showModal(false));
+
+/* validation helper (simple) */
+function validateForm() {
+  let ok = true;
+  // reset
+  [errName, errStatus, errAmount].forEach(e => { e.style.display = 'none'; e.textContent = ''; });
+
+  const name = fldName.value && fldName.value.trim();
+  if (!name) { errName.textContent = 'Name is required'; errName.style.display = 'block'; ok = false; }
+  else if (name.length < 2) { errName.textContent = 'Name must be at least 2 characters'; errName.style.display = 'block'; ok = false; }
+
+  const status = fldStatus.value;
+  if (!status) { errStatus.textContent = 'Status is required'; errStatus.style.display = 'block'; ok = false; }
+
+  const amt = fldAmount.value;
+  if (amt === '' || amt === null) { errAmount.textContent = 'Amount is required'; errAmount.style.display = 'block'; ok = false; }
+  else if (Number(amt) < 0) { errAmount.textContent = 'Amount must be >= 0'; errAmount.style.display = 'block'; ok = false; }
+
+  return ok;
+}
+
+/* open modal for editing a row by id */
+function openEditModalById(id) {
+  const idNum = Number(id);
+  const row = tableData.find(r => Number(r.id) === idNum);
+  if (!row) return;
+  fldId.value = row.id;
+  fldName.value = row.name || '';
+  fldStatus.value = row.status || '';
+  fldAmount.value = row.amount != null ? row.amount : '';
+  showModal(true);
+}
+
+/* delete row by id */
+function deleteRowById(id) {
+  const idNum = Number(id);
+  const idx = tableData.findIndex(r => Number(r.id) === idNum);
+  if (idx === -1) return;
+  if (!confirm('Delete row id ' + idNum + '?')) return;
+  tableData.splice(idx, 1);
+  table.setData(tableData);
+  yantra.toast('Row deleted');
+}
+
+/* handle delegated clicks (edit / delete buttons inside table) */
+table.el.addEventListener('click', (ev) => {
+  const editBtn = ev.target.closest('.btn-edit');
+  if (editBtn) {
+    const id = editBtn.dataset.id;
+    openEditModalById(id);
+    return;
+  }
+  const delBtn = ev.target.closest('.btn-delete');
+  if (delBtn) {
+    deleteRowById(delBtn.dataset.id);
+    return;
+  }
+});
+
+/* handle form submit (client-side update or add) */
+formEl.addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (!validateForm()) return;
+
+  const idVal = fldId.value;
+  const isNew = !idVal;
+  if (isNew) {
+    // create new id
+    const nextId = tableData.reduce((m, r) => Math.max(m, Number(r.id || 0)), 0) + 1;
+    const newRow = {
+      id: nextId,
+      name: fldName.value.trim(),
+      status: fldStatus.value,
+      amount: Number(fldAmount.value),
+      created: new Date().toISOString().slice(0,10)
+    };
+    tableData.unshift(newRow); // add to start
+    table.setData(tableData);
+    yantra.toast('Added');
+    showModal(false);
+    return;
+  }
+
+  // update existing row
+  const idNum = Number(idVal);
+  const idx = tableData.findIndex(r => Number(r.id) === idNum);
+  if (idx === -1) {
+    yantra.toast('Row not found');
+    showModal(false);
+    return;
+  }
+
+  tableData[idx].name = fldName.value.trim();
+  tableData[idx].status = fldStatus.value;
+  tableData[idx].amount = Number(fldAmount.value);
+
+  // refresh table to show changes
+  table.setData(tableData);
+  yantra.toast('Saved');
+  showModal(false);
+});
+
+/* Add row button -> open empty modal for create */
+document.getElementById('btnAdd').addEventListener('click', () => {
+  fldId.value = '';
+  fldName.value = '';
+  fldStatus.value = '';
+  fldAmount.value = '';
+  showModal(true);
+});
+
+/* Reset sample data */
+document.getElementById('btnReload').addEventListener('click', () => {
+  tableData = initialData.slice();
+  table.setData(tableData);
+  yantra.toast('Data reset');
+});
+
+/* small UX: click outside modal panel closes it */
+modal.addEventListener('click', (ev) => {
+  if (ev.target.classList && ev.target.classList.contains('yt-modal-backdrop')) showModal(false);
+});
+</script>
+</body>
+</html>

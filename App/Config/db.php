@@ -4,7 +4,7 @@ return [
     'DSN'       => '',
     'driver'    => 'mysql',
     'host'      => 'localhost',
-    'database'  => 'yantra',
+    'database'  => 'yantradb',
     'username'  => 'root',
     'password'  => '',
     'charset'   => 'utf8mb4',

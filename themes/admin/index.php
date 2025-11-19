@@ -1,64 +1,39 @@
-<?php
-global $router, $request, $response, $env;
-require_once 'functions.php';
-?>
+<?php ?>
 <!doctype html>
-<html lang="en">
+<html lang="<?php $page->renderLang(); ?>">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title><?php echo $title ?? 'Kaveri'; ?></title>
-
-    <link rel="icon" href="<?= theme_url(); ?>img/core-img/favicon.ico" />
-
-    <link rel="stylesheet" href="<?= theme_url(); ?>css/bootstrap.min.css" />
-    <link rel="stylesheet" href="<?= theme_url(); ?>css/animate.css" />
-    <link rel="stylesheet" href="<?= theme_url(); ?>css/introjs.min.css" />
-
-    <?php do_action('page-head'); ?>
-    <link rel="stylesheet" href="<?= theme_url(); ?>style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><?php $page->renderTitle(); ?></title>
+  <?php do_action('page_meta', $page); ?>
+  <link rel="stylesheet" href="<?php echo theme_url('style.css'); ?>"/>
+  <?php do_action('head_links', $page); ?>
+  <?php do_action('head_scripts', $page); ?>
+  <?php do_action('critical_css', $page); ?>
 </head>
-<body class="<?= $body_class??''; ?>">
-<?= $pagetop??''; ?>
-
-<!-- ======================================
-******* Page Wrapper Area Start **********
-======================================= -->
- <div class="flapt-page-wrapper">
-     <!-- Sidemenu Area -->
-
-     <?= $sidebar??''; ?>
-
-     <!-- Page Content -->
-     <div class="flapt-page-content">
-         <!-- Top Header Area -->
-         <?= $topnav??''; ?>
-
-         <!-- Main Content Area -->
-         <div class="main-content <?= $main_div_class??''; ?>">
-             <?= $content??''; ?>
-
-             <!-- Footer Area -->
-             <?= $footer??''; ?>
-         </div>
-     </div>
- </div>
-<!-- ======================================
-********* Page Wrapper Area End ***********
-======================================= -->
-
-<!-- Must needed plugins to the run this Template -->
-
-<script src="<?= site_url('js/yantra.js'); ?>"></script>
-<script src="<?= theme_url(); ?>js/jquery.min.js"></script>
-<script src="<?= theme_url(); ?>js/bootstrap.bundle.min.js"></script>
-<script src="<?= theme_url(); ?>js/default-assets/setting.js"></script>
-<script src="<?= theme_url(); ?>js/default-assets/scrool-bar.js"></script>
-<script src="<?= theme_url(); ?>js/todo-list.js"></script>
-
- <?php do_action('page-bottom'); ?>
-
-<!-- Active JS -->
-<script src="<?= theme_url(); ?>js/default-assets/active.js"></script>
+<body>
+  <?php include_once "header.php"; ?>
+  <!-- App layout -->
+  <div class="app">
+    <nav id="sidebar" class="sidebar" aria-label="Main navigation">
+      <?php
+        // Sidebar content: use page meta 'sidebar' or empty string, apply filters
+        $sidebarHtml = apply_filter('page_sidebar', $page->get('sidebar'));
+        echo (string)$sidebarHtml;
+      ?>
+    </nav>
+    <!-- Main content -->
+    <main class="content" role="main">
+      <div class="container">
+        <?php
+          // Main content: apply filters to the raw content and echo
+          $content = apply_filter('page_content', $page->getContent());
+          // If the filter returned something non-string, cast to string to avoid warnings
+          echo (string)$content;
+        ?>
+      </div>
+    </main>
+  </div>
+  <?php include_once "footer.php"; ?>
 </body>
 </html>

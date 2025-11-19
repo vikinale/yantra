@@ -4,30 +4,45 @@ namespace System;
 
 class PluginManager {
     private static $plugins = [];
+ 
 
     public static function loadPlugins(array $ActivePluginsList): void
     {
-        // Example: Load all plugins from Plugins directory
         $pluginDir = __DIR__ . '/../Plugins/';
-        $pluginFolders = glob($pluginDir . '*', GLOB_ONLYDIR);
 
-        foreach ($ActivePluginsList as $folder){
+        foreach ($ActivePluginsList as $folder) {
             $pluginName = basename($folder);
-            if(file_exists($pluginDir.$folder . '/index.php')){
-                include_once $pluginDir.$folder . '/index.php';
+            $pluginPath = $pluginDir . $pluginName . '/';
+
+            // Skip if plugin directory doesn't exist
+            if (!is_dir($pluginPath)) {
+                continue;
             }
-            $pluginFile = $pluginDir.$folder . '/' . $pluginName . '.php';
-            if (file_exists($pluginFile)) {
-                include_once $pluginFile;
-                $pluginClass = "Plugins\\$pluginName\\$pluginName";
+
+            // 1️⃣ Load index.php if it exists
+            $indexFile = $pluginPath . 'index.php';
+            if (file_exists($indexFile)) {
+                include_once $indexFile;
+            }
+
+            // 2️⃣ Load main plugin class file if it exists (same name as folder)
+            $mainFile = $pluginPath . $pluginName . '.php';
+            if (file_exists($mainFile)) {
+                include_once $mainFile;
+
+                // Determine expected namespaced class
+                $pluginClass = "Plugins\\{$pluginName}\\{$pluginName}";
+
+                // If class exists, instantiate and store it
                 if (class_exists($pluginClass)) {
                     self::$plugins[] = new $pluginClass();
                 } else {
-                    echo $pluginFile;
+                    error_log("Plugin class {$pluginClass} not found in {$mainFile}");
                 }
             }
         }
     }
+
 
     public static function activatePlugins(): void
     {

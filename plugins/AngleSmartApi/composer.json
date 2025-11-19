@@ -1,0 +1,22 @@
+{
+
+    "name": "smartapi-php/angelbroking",
+    
+    "type": "library",
+    "license":"MIT",
+    "authors": [
+        {
+            "name": "Angel Broking",
+            "email": "anam@magnusideas.com"
+        }
+    ],
+    "autoload": {
+        "psr-4":{
+             "AngelBroking\\" : "/src/"
+        }
+       
+    },
+    "require": {
+        "spomky-labs/otphp": "^11.3"
+    }
+}

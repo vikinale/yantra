@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Yantra Table — Client Example</title>
+
+  <!-- Table CSS -->
+  <link rel="stylesheet" href="../css/yantra-table.css">
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto;
+      background: #f6f7f9;
+      padding: 24px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 { margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h2>Yantra Table — Client-Side Example</h2>
+  <p>This table is fully client-side, with filters, sorting, search & pagination.</p>
+
+  <div id="exampleTable"></div>
+</div>
+
+<!-- Your Scripts -->
+<script src="../js/yantra.js"></script>
+<script src="../js/yantra.table.js"></script>
+
+<script>
+// -----------------------------------------------------------
+// Sample client-side dataset
+// -----------------------------------------------------------
+const sampleData = [
+  { id: 1,  name: "Alice",    status: "active",   amount: 120,  created: "2025-01-10" },
+  { id: 2,  name: "Bob",      status: "inactive", amount: 75,   created: "2025-02-11" },
+  { id: 3,  name: "Charlie",  status: "active",   amount: 560,  created: "2025-02-18" },
+  { id: 4,  name: "David",    status: "active",   amount: 40,   created: "2025-03-01" },
+  { id: 5,  name: "Evelyn",   status: "inactive", amount: 200,  created: "2025-03-10" },
+  { id: 6,  name: "Frank",    status: "active",   amount: 330,  created: "2025-03-12" },
+  { id: 7,  name: "Grace",    status: "active",   amount: 90,   created: "2025-03-19" },
+  { id: 8,  name: "Hector",   status: "inactive", amount: 150,  created: "2025-03-22" },
+  { id: 9,  name: "Irene",    status: "active",   amount: 180,  created: "2025-03-25" },
+  { id: 10, name: "Jason",    status: "inactive", amount: 900,  created: "2025-04-01" },
+  { id: 11, name: "Kim",      status: "active",   amount: 300,  created: "2025-04-02" },
+  { id: 12, name: "Liam",     status: "active",   amount: 50,   created: "2025-04-05" },
+  { id: 13, name: "Mona",     status: "inactive", amount: 220,  created: "2025-04-06" },
+  { id: 14, name: "Nina",     status: "active",   amount: 130,  created: "2025-04-08" },
+  { id: 15, name: "Oscar",    status: "inactive", amount: 480,  created: "2025-04-10" }
+];
+
+// -----------------------------------------------------------
+// Table column definitions
+// -----------------------------------------------------------
+const columns = [
+  { key: "id",     label: "ID",     sortable: true },
+  { key: "name",   label: "Name",   sortable: true },
+  { key: "status", label: "Status", sortable: true },
+  { key: "amount", label: "Amount", sortable: true, render: (r) => "₹" + r.amount },
+  { key: "created", label: "Created Date", sortable: true }
+];
+
+// -----------------------------------------------------------
+// Filters definition
+// -----------------------------------------------------------
+const filters = [
+  {
+    key: "status",
+    label: "Status",
+    type: "select",
+    options: [
+      { value:"",        label:"All" },
+      { value:"active",  label:"Active" },
+      { value:"inactive",label:"Inactive" },
+    ]
+  },
+  {
+    key: "amount",
+    label: "Amount Range",
+    type: "range",
+    placeholderMin: "Min ₹",
+    placeholderMax: "Max ₹"
+  },
+  {
+    key: "created",
+    label: "Created After",
+    type: "date"
+  }
+];
+
+// -----------------------------------------------------------
+// Create table instance
+// -----------------------------------------------------------
+const table = yantra.createTable("#exampleTable", {
+  columns,
+  data: sampleData,
+  filters,
+  pageSize: 5,
+  searchable: true,
+  selectable: "multi"
+});
+
+// -----------------------------------------------------------
+// Listen to events (optional)
+// -----------------------------------------------------------
+table.on("rowClick", ({ row }) => {
+  alert("Clicked row: " + row.name);
+});
+
+table.on("rowSelect", ({ selectedIndex, row }) => {
+  console.log("Selected row:", selectedIndex, row);
+});
+
+table.on("filtersChanged", ({ filters }) => {
+  console.log("Filters changed:", filters);
+});
+
+table.on("sortChanged", (sort) => {
+  console.log("Table sorted:", sort);
+});
+
+table.on("refresh", ({ state }) => {
+  console.log("Table refreshed. Total:", state.total);
+});
+</script>
+
+</body>
+</html>

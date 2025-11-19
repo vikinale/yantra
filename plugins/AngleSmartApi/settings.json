@@ -1,0 +1,13 @@
+{
+  "client_code": "V394742",
+  "password": "1122",
+  "totp_secret": "T6HHKULJQJLGKNOJ5UNRJ2BWPU",
+  "api_key": "qtarPDQJ",
+  "api_secret": "f3364077-aeca-4c15-8a15-75c3dd615aec",
+  "base_url": "https://apiconnect.angelone.in",
+  "token_cache_file": "/path/to/angel_tokens.json",
+  "client_local_ip": "192.168.1.5",
+  "client_public_ip": "203.0.113.5",
+  "mac_address": "AA:BB:CC:DD:EE:FF",
+  "state": "live"
+}

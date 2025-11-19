@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Yantra Table — Inline Edit (Client-side)</title>
+
+  <!-- optional: include your yantra-table css -->
+  <link rel="stylesheet" href="../css/yantra-table.css">
+
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; background:#f6f7f9; padding:24px; }
+    .card { background:#fff; padding:18px; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.06); max-width:1000px; margin:auto; }
+    h1 { margin:0 0 12px 0; font-size:20px; }
+    .small { padding:6px 10px; border-radius:6px; background:#f3f4f6; border:1px solid #d0d7de; cursor:pointer; }
+    .btn-save { background:#1976d2; color:#fff; border:0; padding:6px 10px; border-radius:6px; cursor:pointer; }
+    .btn-cancel { background:#efefef; border:0; padding:6px 10px; border-radius:6px; cursor:pointer; }
+    .inline-input { width:100%; box-sizing:border-box; padding:6px 8px; border-radius:4px; border:1px solid #ddd; font-size:14px; }
+    .actions-col { display:flex; gap:6px; align-items:center; }
+    .error-inline { color:#b00020; font-size:0.85rem; margin-left:6px; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Client-side Table — Inline Edit</h1>
+  <div style="margin-bottom:12px;">
+    <button id="btnReset" class="small">Reset Sample Data</button>
+    <span id="info" style="margin-left:12px;color:#1976d2;font-weight:600"></span>
+  </div>
+
+  <div id="tableContainer"></div>
+</div>
+
+<!-- include yantra core + table module -->
+<script src="../js/yantra.js"></script>
+<script src="../js/yantra.table.js"></script>
+
+<script>
+/* ---------------------------
+   Sample client-side dataset
+   --------------------------- */
+const initialData = [
+  { id: 1, name: "Alice", status: "active", amount: 120, created: "2025-01-10" },
+  { id: 2, name: "Bob", status: "inactive", amount: 75, created: "2025-02-11" },
+  { id: 3, name: "Charlie", status: "active", amount: 560, created: "2025-02-18" },
+  { id: 4, name: "David", status: "active", amount: 40, created: "2025-03-01" },
+  { id: 5, name: "Evelyn", status: "inactive", amount: 200, created: "2025-03-10" }
+];
+
+let tableData = initialData.slice(); // working copy
+
+/* ---------------------------
+   Table columns (with Actions)
+   --------------------------- */
+const columns = [
+  { key: 'id', label: 'ID', sortable: true },
+  { key: 'name', label: 'Name', sortable: true },
+  { key: 'status', label: 'Status', sortable: true },
+  { key: 'amount', label: 'Amount', sortable: true, render: r => '₹' + Number(r.amount).toLocaleString() },
+  { key: 'created', label: 'Created', sortable: true },
+  {
+    key: '_actions',
+    label: 'Actions',
+    sortable: false,
+    render: (row) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'actions-col';
+      const edit = document.createElement('button');
+      edit.type = 'button';
+      edit.className = 'small btn-edit';
+      edit.textContent = 'Edit';
+      edit.dataset.id = row.id;
+      wrap.appendChild(edit);
+      const del = document.createElement('button');
+      del.type = 'button';
+      del.className = 'small btn-delete';
+      del.textContent = 'Delete';
+      del.dataset.id = row.id;
+      wrap.appendChild(del);
+      return wrap;
+    }
+  }
+];
+
+/* ---------------------------
+   Create the table (client-side)
+   --------------------------- */
+const table = yantra.createTable('#tableContainer', {
+  columns,
+  data: tableData,
+  pageSize: 5,
+  searchable: true,
+  filters: [
+    { key: 'status', label: 'Status', type: 'select', options: [{value:'',label:'All'},{value:'active',label:'Active'},{value:'inactive',label:'Inactive'}] }
+  ],
+  selectable: false
+});
+
+/* UI info */
+function updateInfo() {
+  const total = table.state && table.state.total ? table.state.total : tableData.length;
+  document.getElementById('info').textContent = `Rows: ${total}`;
+}
+table.on('refresh', ({ state }) => updateInfo());
+updateInfo();
+
+/* ---------------------------
+   Inline edit implementation
+   --------------------------- */
+
+// Only one row can be in edit mode at a time
+let editingRow = null; // { tr, id, originalCells: [{html,..}], rowIndex }
+
+/**
+ * Begin inline edit on a table row element (tr)
+ * @param {HTMLTableRowElement} tr
+ */
+function beginInlineEdit(tr) {
+  if (editingRow) {
+    yantra.toast('Finish current edit first', { group: 'table' });
+    return;
+  }
+  const rowIndex = Number(tr.dataset.rowIndex); // global index within current table.data
+  const rowData = table.state.data[rowIndex];
+  if (!rowData) return;
+
+  const tds = Array.from(tr.children); // includes action cell
+  const originalCells = tds.map(td => td.innerHTML);
+
+  // build inputs for each column except actions
+  // columns order including selectable? our table not selectable so columns align
+  for (let ci = 0; ci < table.opts.columns.length; ++ci) {
+    const col = table.opts.columns[ci];
+    const td = tds[ci];
+    if (!td) continue;
+    if (col.key === '_actions') continue; // handle later
+
+    // render input based on column type heuristics
+    const key = col.key;
+    const value = rowData[key] != null ? rowData[key] : '';
+
+    let inputEl;
+    if (key === 'status') {
+      inputEl = document.createElement('select');
+      inputEl.className = 'inline-input';
+      const opts = ['', 'active', 'inactive'];
+      opts.forEach(o => {
+        const op = document.createElement('option'); op.value = o; op.textContent = (o === '' ? '--' : o); 
+        if (String(o) === String(value)) op.selected = true;
+        inputEl.appendChild(op);
+      });
+    } else if (typeof value === 'number' || key === 'amount') {
+      inputEl = document.createElement('input');
+      inputEl.type = 'number';
+      inputEl.className = 'inline-input';
+      inputEl.value = value;
+    } else if (key === 'created') {
+      inputEl = document.createElement('input');
+      inputEl.type = 'date';
+      inputEl.className = 'inline-input';
+      // if value like YYYY-MM-DD, set directly; otherwise try to format
+      inputEl.value = (typeof value === 'string' && value.length >= 10) ? value.slice(0,10) : '';
+    } else {
+      inputEl = document.createElement('input');
+      inputEl.type = 'text';
+      inputEl.className = 'inline-input';
+      inputEl.value = value;
+    }
+
+    // clear cell and append input
+    td.innerHTML = '';
+    td.appendChild(inputEl);
+  }
+
+  // action cell: replace with Save/Cancel
+  const actionCellIndex = table.opts.columns.findIndex(c => c.key === '_actions');
+  const actionTd = tds[actionCellIndex];
+  const saveBtn = document.createElement('button'); saveBtn.type = 'button'; saveBtn.className = 'btn-save'; saveBtn.textContent = 'Save';
+  const cancelBtn = document.createElement('button'); cancelBtn.type = 'button'; cancelBtn.className = 'btn-cancel'; cancelBtn.textContent = 'Cancel';
+  const errSpan = document.createElement('span'); errSpan.className = 'error-inline'; errSpan.style.display = 'none';
+  actionTd.innerHTML = '';
+  actionTd.appendChild(saveBtn);
+  actionTd.appendChild(cancelBtn);
+  actionTd.appendChild(errSpan);
+
+  // store editingRow
+  editingRow = {
+    tr,
+    id: rowData.id,
+    originalCells,
+    rowIndex
+  };
+
+  // focus first input
+  const firstInput = tr.querySelector('.inline-input');
+  if (firstInput) firstInput.focus();
+
+  // handlers
+  saveBtn.addEventListener('click', onSaveClick);
+  cancelBtn.addEventListener('click', onCancelClick);
+
+  // Enter key to save, Escape to cancel (on inputs)
+  const inputs = tr.querySelectorAll('.inline-input');
+  inputs.forEach(inp => {
+    inp.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Escape') { ev.preventDefault(); onCancelClick(); }
+      if (ev.key === 'Enter') { ev.preventDefault(); onSaveClick(); }
+    });
+  });
+
+  function onCancelClick() {
+    // restore original cells
+    for (let i = 0; i < tds.length; ++i) tds[i].innerHTML = originalCells[i];
+    editingRow = null;
+  }
+
+  function onSaveClick() {
+    // read inputs, validate
+    const updated = Object.assign({}, rowData); // shallow copy
+    let valid = true;
+    let message = '';
+
+    // iterate columns to extract values
+    for (let ci = 0; ci < table.opts.columns.length; ++ci) {
+      const col = table.opts.columns[ci];
+      const td = tds[ci];
+      if (!td) continue;
+      if (col.key === '_actions') continue;
+      const inp = td.querySelector('.inline-input');
+      if (!inp) continue;
+      let val = inp.value;
+      if (col.key === 'amount') {
+        val = val === '' ? null : Number(val);
+      }
+      if (col.key === 'name') {
+        if (!val || String(val).trim().length < 2) { valid = false; message = 'Name required (≥2)'; break; }
+        val = String(val).trim();
+      }
+      if (col.key === 'status') {
+        if (!val) { valid = false; message = 'Status required'; break; }
+      }
+      if (col.key === 'amount') {
+        if (val === null || isNaN(val)) { valid = false; message = 'Amount required'; break; }
+        if (Number(val) < 0) { valid = false; message = 'Amount must be ≥ 0'; break; }
+      }
+      if (col.key === 'created') {
+        // keep as-is (date string)
+      }
+      updated[col.key] = val;
+    }
+
+    if (!valid) {
+      errSpan.textContent = message;
+      errSpan.style.display = 'inline-block';
+      return;
+    }
+
+    // commit to tableData (table.opts.data)
+    const globalIdx = editingRow.rowIndex;
+    // table.state.data is the current data set (after filters/search). Since this is client-side entire dataset,
+    // we update the master tableData (which is the same array referenced by table.opts.data)
+    const master = table.opts.data;
+    // find item by id (safer)
+    const mIdx = master.findIndex(r => Number(r.id) === Number(editingRow.id));
+    if (mIdx !== -1) {
+      master[mIdx] = Object.assign({}, master[mIdx], updated);
+    } else {
+      // fallback: update by rowIndex if present
+      if (master[globalIdx]) master[globalIdx] = Object.assign({}, master[globalIdx], updated);
+    }
+
+    // refresh table view (will re-render)
+    table.setData(master);
+    yantra.toast('Saved', { group: 'table' });
+    editingRow = null;
+  }
+}
+
+/* ---------------------------
+   Delegated click: Edit / Delete
+   --------------------------- */
+table.el.addEventListener('click', (ev) => {
+  const editBtn = ev.target.closest('.btn-edit');
+  if (editBtn) {
+    const tr = editBtn.closest('tr');
+    if (!tr) return;
+    beginInlineEdit(tr);
+    return;
+  }
+  const delBtn = ev.target.closest('.btn-delete');
+  if (delBtn) {
+    const id = Number(delBtn.dataset.id);
+    if (!confirm('Delete row id ' + id + '?')) return;
+    const idx = tableData.findIndex(r => Number(r.id) === id);
+    if (idx !== -1) {
+      tableData.splice(idx, 1);
+      table.setData(tableData);
+      yantra.toast('Deleted');
+    }
+    return;
+  }
+});
+
+/* reset sample data */
+document.getElementById('btnReset').addEventListener('click', () => {
+  tableData = initialData.slice();
+  table.setData(tableData);
+  yantra.toast('Data reset');
+});
+</script>
+</body>
+</html>

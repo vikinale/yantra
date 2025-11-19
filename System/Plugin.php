@@ -24,22 +24,22 @@ abstract class Plugin
     //** Default Functions for a plugin */
     public function getPluginName(): string
     {
-        return $this->plugin_name;
+        return $this->name;
     }
 
     public function getPluginDescription(): string
     {
-        return $this->plugin_description;
+        return $this->description;
     }
 
     public function getPluginVersion(): string
     {
-        return $this->plugin_version;
+        return $this->ver;
     }
 
     public function getPluginAuthor(): string
     {
-        return $this->plugin_author;
+        return $this->author;
     }
 
     abstract public function path();

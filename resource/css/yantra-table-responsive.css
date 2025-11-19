@@ -1,0 +1,70 @@
+/* responsive helpers for yantra table */
+
+/* 1) horizontal scrolling container for wide tables */
+.yantra-table-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+}
+.yt-table-outer {
+  width: 100%;
+  overflow-x: auto;         /* horizontal scroll on small screens */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 2) sticky header (optional, enable by adding class 'sticky-header' to wrapper) */
+.yantra-table-wrapper.sticky-header .yt-table thead th {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+
+/* 3) compact table look for small mid sizes */
+@media (max-width: 900px) {
+  .yt-table th, .yt-table td { padding: 8px 6px; font-size: 13px; }
+  .small { padding: 5px 6px; font-size: 13px; }
+}
+
+/* 4) card (stacked) view (use wrapper class 'cards-view') */
+.yantra-table-wrapper.cards-view .yt-table-outer { display: none; }
+.yantra-table-wrapper.cards-view .yt-cards { display: block; }
+.yantra-table-wrapper .yt-cards { display: none; margin-top: 8px; gap: 8px; }
+
+/* card style */
+.yt-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+  border: 1px solid #f0f0f0;
+}
+.yt-card-row { display:flex; gap:8px; margin-bottom:6px; align-items:center; }
+.yt-card-row .label { min-width: 90px; color:#666; font-size:13px; }
+.yt-card-row .value { flex:1; font-size:14px; color:#111; }
+
+/* 5) responsive-hide class will be applied to wrapper; hide created via inline style rules (in JS) */
+
+/* 6) improve touch target on small screens */
+@media (max-width: 600px) {
+  .small, .btn-inline-save, .btn-inline-cancel, .btn-edit { padding: 10px 12px; font-size: 15px; }
+  .inline-input { padding: 10px 8px; font-size: 15px; }
+}
+
+/* view toggle button */
+.yt-view-toggle { display:inline-block; margin-left:8px; }
+.yt-view-toggle .yt-toggle-btn {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 8px;
+  border-radius:8px;
+  background:#f3f4f6;
+  border:1px solid #e5e7eb;
+  cursor:pointer;
+  font-size:13px;
+}
+@media (min-width: 1200px) {
+  /* hide toggle on very large screens if you prefer */
+  .yt-view-toggle { display:none; }
+}

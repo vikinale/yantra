@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Yantra Table — Server-side Edit (Modal) Demo</title>
+
+  <!-- table styles -->
+  <link rel="stylesheet" href="../css/yantra-table.css">
+
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; background:#f3f4f6; padding:24px; }
+    .card { background: #fff; padding:18px; border-radius:10px; box-shadow:0 8px 30px rgba(0,0,0,0.06); max-width:1100px; margin:auto; }
+    h1 { margin-top:0; font-size:20px; }
+    .top-actions { display:flex; gap:8px; align-items:center; margin-bottom:12px; }
+    .small { padding:6px 10px; border-radius:6px; background:#f3f4f6; border:1px solid #d0d7de; cursor:pointer; }
+    /* modal styles */
+    .yt-modal { display:none; position:fixed; inset:0; z-index:100000; }
+    .yt-modal[aria-hidden="false"] { display:block; }
+    .yt-modal-backdrop { position:absolute; inset:0; background:rgba(0,0,0,0.45); }
+    .yt-modal-panel { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); background:#fff; border-radius:8px; padding:16px; min-width:330px; box-shadow:0 10px 40px rgba(0,0,0,0.2); }
+    .form-row { margin-bottom:10px; }
+    label { display:block; font-weight:600; font-size:.9rem; margin-bottom:6px;}
+    input[type="text"], input[type="number"], select { width:100%; padding:8px 10px; border-radius:6px; border:1px solid #ddd; font-size:14px;}
+    .modal-actions { display:flex; gap:8px; justify-content:flex-end; margin-top:8px; }
+    .btn-primary { background:#1976d2; color:white; border:0; padding:8px 12px; border-radius:6px; cursor:pointer;}
+    .btn-danger { background:#d32f2f; color:white; border:0; padding:8px 12px; border-radius:6px; cursor:pointer;}
+    .yf-error { color:#b00020; font-size:.85rem; margin-top:6px; }
+    .actions-col { display:flex; gap:6px; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Reports — Server-side table with Modal Edit (demo)</h1>
+  <div class="top-actions">
+    <button id="reloadBtn" class="small">Reload</button>
+    <span id="status" style="color:#1976d2;font-weight:600"></span>
+  </div>
+
+  <div id="reportsTable"></div>
+</div>
+
+<!-- Modal HTML (hidden initially) -->
+<div id="editModal" class="yt-modal" aria-hidden="true">
+  <div class="yt-modal-backdrop"></div>
+  <div class="yt-modal-panel" role="dialog" aria-modal="true" aria-labelledby="editTitle">
+    <h3 id="editTitle">Edit Report</h3>
+
+    <form id="editForm" method="post" action="">
+      <input type="hidden" id="field_id" name="id" />
+
+      <div class="form-row">
+        <label for="field_name">Name</label>
+        <input id="field_name" name="name" type="text" data-validate="required|minLength:2" />
+      </div>
+
+      <div class="form-row">
+        <label for="field_status">Status</label>
+        <select id="field_status" name="status" data-validate="required">
+          <option value="">-- select --</option>
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label for="field_amount">Amount</label>
+        <input id="field_amount" name="amount" type="number" data-validate="required|integer|min:0" />
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" id="btnCancel" class="small">Cancel</button>
+        <button type="submit" id="btnSave" class="btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="../js/yantra.js"></script>
+<script src="../js/yantra.table.js"></script>
+
+<script>
+/*
+  MOCK SERVER (in-memory)
+  - Provides GET /api/reports (paged), GET /api/reports/:id, PUT /api/reports/:id
+  - We override window.fetch only for /api/reports* endpoints, otherwise delegate to original fetch.
+*/
+(function setupMockServer() {
+  const originalFetch = window.fetch.bind(window);
+
+  // sample in-memory dataset
+  let store = [
+    { id: 1, name: "Alpha",   status: "active",  amount: 120, created: "2025-01-10" },
+    { id: 2, name: "Bravo",   status: "inactive",amount: 75,  created: "2025-02-11" },
+    { id: 3, name: "Charlie", status: "active",  amount: 560, created: "2025-02-18" },
+    { id: 4, name: "Delta",   status: "active",  amount: 40,  created: "2025-03-01" },
+    { id: 5, name: "Echo",    status: "inactive",amount: 200, created: "2025-03-10" },
+    { id: 6, name: "Foxtrot", status: "active",  amount: 330, created: "2025-03-12" },
+    { id: 7, name: "Golf",    status: "active",  amount: 90,  created: "2025-03-19" },
+    { id: 8, name: "Hotel",   status: "inactive",amount: 150, created: "2025-03-22" },
+    { id: 9, name: "India",   status: "active",  amount: 180, created: "2025-03-25" },
+    { id:10, name: "Juliet",  status: "inactive",amount: 900, created: "2025-04-01" },
+    { id:11, name: "Kilo",    status: "active",  amount: 300, created: "2025-04-02" },
+    { id:12, name: "Lima",    status: "active",  amount: 50,  created: "2025-04-05" },
+    { id:13, name: "Mike",    status: "inactive",amount: 220, created: "2025-04-06" },
+    { id:14, name: "November",status: "active",  amount: 130, created: "2025-04-08" },
+    { id:15, name: "Oscar",   status: "inactive",amount: 480, created: "2025-04-10" }
+  ];
+
+  function parseQuery(search) {
+    const out = {};
+    const q = (search || '').replace(/^\?/, '');
+    if (!q) return out;
+    q.split('&').forEach(part => {
+      const [k, v] = part.split('=').map(decodeURIComponent);
+      if (!k) return;
+      out[k] = v === undefined ? '' : v;
+    });
+    return out;
+  }
+
+  // helper: apply server-side filtering / search / sort / paging
+  function serverQuery(params) {
+    let rows = store.slice();
+
+    // filters: filter_<key> or filter_<key>_min/_max
+    Object.keys(params).forEach(k => {
+      if (!k.startsWith('filter_')) return;
+      const rest = k.slice(7); // key or key_min
+      const m = rest.match(/^(.+?)_(min|max)$/);
+      if (m) {
+        const key = m[1], dir = m[2];
+        const val = params[k];
+        if (!val) return;
+        if (dir === 'min') rows = rows.filter(r => Number(r[key]) >= Number(val));
+        else rows = rows.filter(r => Number(r[key]) <= Number(val));
+      } else {
+        const key = rest;
+        const val = params[k];
+        if (!val) return;
+        const valLower = val.toLowerCase();
+        rows = rows.filter(r => (r[key] || '').toString().toLowerCase().indexOf(valLower) !== -1);
+      }
+    });
+
+    // q search across columns
+    if (params.q) {
+      const q = params.q.toLowerCase();
+      rows = rows.filter(r => {
+        return Object.keys(r).some(k => String(r[k]).toLowerCase().indexOf(q) !== -1);
+      });
+    }
+
+    // sort
+    if (params.sortKey) {
+      const key = params.sortKey;
+      const dir = (params.sortDir === 'desc') ? -1 : 1;
+      rows.sort((a,b) => {
+        const va = a[key], vb = b[key];
+        if (va === vb) return 0;
+        if (va === undefined || va === null) return 1 * dir;
+        if (vb === undefined || vb === null) return -1 * dir;
+        if (!isNaN(Number(va)) && !isNaN(Number(vb))) return (Number(va) < Number(vb) ? -1 : 1) * dir;
+        return (String(va) < String(vb) ? -1 : 1) * dir;
+      });
+    }
+
+    // paging
+    const page = Math.max(1, Number(params.page || 1));
+    const pageSize = Math.max(1, Number(params.pageSize || 10));
+    const total = rows.length;
+    const start = (page - 1) * pageSize;
+    const data = rows.slice(start, start + pageSize);
+
+    return { data, total, page, pageSize };
+  }
+
+  // override fetch for our endpoints
+  window.fetch = async function(input, init) {
+    try {
+      const url = (typeof input === 'string') ? input : (input && input.url ? input.url : '');
+      const u = new URL(url, location.origin);
+      if (!u.pathname.startsWith('/api/reports')) {
+        return originalFetch(input, init);
+      }
+
+      // simulate small network latency
+      await new Promise(r => setTimeout(r, 260));
+
+      // GET list or GET single or PUT update
+      if ((init && init.method && init.method.toUpperCase() === 'PUT') || (typeof init === 'object' && init && init.method && init.method.toUpperCase() === 'PUT')) {
+        // PUT /api/reports/:id
+        const parts = u.pathname.split('/').filter(Boolean);
+        const id = Number(parts[parts.length - 1]);
+        // support FormData or JSON body
+        let bodyObj = {};
+        if (init && init.body instanceof FormData) {
+          for (const [k,v] of init.body.entries()) bodyObj[k] = v;
+        } else if (init && init.body) {
+          try { bodyObj = JSON.parse(init.body); } catch (e) { /* ignore */ }
+        }
+
+        const idx = store.findIndex(r => Number(r.id) === id);
+        if (idx === -1) {
+          return new Response(JSON.stringify({ error: 'Not found' }), { status: 404, headers: { 'Content-Type': 'application/json' } });
+        }
+        // basic server-side validation example
+        if (!bodyObj.name || bodyObj.name.length < 2) {
+          return new Response(JSON.stringify({ errors: { name: 'Name required and must be >=2 chars' } }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+        }
+        // update fields
+        store[idx].name = bodyObj.name;
+        store[idx].status = bodyObj.status;
+        store[idx].amount = Number(bodyObj.amount || store[idx].amount);
+        // respond with updated record
+        return new Response(JSON.stringify({ data: store[idx] }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+      }
+
+      if (u.pathname === '/api/reports' && (!u.pathname.match(/\/\d+$/))) {
+        // list endpoint
+        const params = parseQuery(u.search);
+        const result = serverQuery(params);
+        return new Response(JSON.stringify({ data: result.data, total: result.total }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+      }
+
+      // GET single /api/reports/:id
+      const parts = u.pathname.split('/').filter(Boolean);
+      const maybeId = Number(parts[parts.length - 1]);
+      if (!isNaN(maybeId)) {
+        const row = store.find(r => Number(r.id) === Number(maybeId));
+        if (!row) return new Response(JSON.stringify({ error: 'Not found' }), { status: 404, headers: { 'Content-Type': 'application/json' } });
+        return new Response(JSON.stringify({ data: row }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+      }
+
+      return originalFetch(input, init);
+    } catch (err) {
+      return new Response(JSON.stringify({ error: String(err) }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+    }
+  };
+})();
+
+
+// -----------------------------
+// Table setup (server mode) with Edit action
+// -----------------------------
+const columns = [
+  { key: 'id', label: 'ID', sortable: true },
+  { key: 'name', label: 'Name', sortable: true },
+  { key: 'status', label: 'Status', sortable: true },
+  { key: 'amount', label: 'Amount', sortable: true, render: r => '₹' + Number(r.amount).toLocaleString() },
+  { key: 'created', label: 'Created', sortable: true },
+  {
+    key: '_actions',
+    label: 'Actions',
+    sortable: false,
+    render: (row) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'actions-col';
+      const edit = document.createElement('button');
+      edit.type = 'button';
+      edit.className = 'small btn-edit';
+      edit.textContent = 'Edit';
+      edit.dataset.id = row.id; // store id for server-side
+      wrap.appendChild(edit);
+      const view = document.createElement('button');
+      view.type = 'button';
+      view.className = 'small';
+      view.textContent = 'View';
+      view.addEventListener('click', () => {
+        alert('View: ' + JSON.stringify(row, null, 2));
+      });
+      wrap.appendChild(view);
+      return wrap;
+    }
+  }
+];
+
+const table = yantra.createTable('#reportsTable', {
+  columns,
+  serverUrl: '/api/reports',
+  pageSize: 5,
+  searchable: true,
+  filters: [
+    { key: 'status', label: 'Status', type: 'select', options: [{value:'',label:'All'},{value:'active',label:'Active'},{value:'inactive',label:'Inactive'}] },
+    { key: 'amount', label: 'Amount range', type: 'range', placeholderMin: 'Min', placeholderMax: 'Max' }
+  ]
+});
+
+// reload btn
+document.getElementById('reloadBtn').addEventListener('click', () => {
+  table.refresh();
+});
+
+// status display for refresh events
+table.on('refresh', ({ state }) => {
+  document.getElementById('status').textContent = `Showing ${Math.min(state.total, (state.page-1)*state.pageSize+1)} - ${Math.min(state.total, state.page*state.pageSize)} of ${state.total}`;
+});
+
+// -----------------------------
+// Modal edit wiring
+// -----------------------------
+const modal = document.getElementById('editModal');
+const formEl = document.getElementById('editForm');
+const btnCancel = document.getElementById('btnCancel');
+const btnSave = document.getElementById('btnSave');
+
+function showModal(show) {
+  modal.setAttribute('aria-hidden', show ? 'false' : 'true');
+}
+
+// create YantraForm for edit form (AJAX submit)
+const editForm = new YantraForm('#editForm', {
+  ajax: true,
+  url: '/api/reports/0', // placeholder; we set per-open
+  method: 'PUT',
+  formDataMode: 'formdata'
+});
+
+// map server validation errors automatically to fields using applyServerErrors
+editForm.on('submitStart', () => {
+  btnSave.disabled = true;
+});
+editForm.on('submitEnd', () => {
+  btnSave.disabled = false;
+});
+
+// when save success -> server returned updated row; refresh table
+editForm.on('submitSuccess', (res) => {
+  // assume server returns { data: { ... } }
+  yantra.toast('Saved', { group: 'table' });
+  // refresh the table (server mode)
+  table.refresh();
+  showModal(false);
+});
+
+// handle submitError -> show toast
+editForm.on('submitError', (err) => {
+  try { 
+    // if server returns validation mapping we can call applyServerErrors
+    // but in our mock we returned 400 with { errors: { field: 'msg' } } -> map it:
+    if (err && err.body) {
+      try {
+        const body = (typeof err.body === 'string') ? JSON.parse(err.body) : err.body;
+        if (body && body.errors) {
+          // map to YantraForm applyServerErrors format:
+          const mapped = { fieldErrors: {}, globalErrors: [] };
+          for (const k in body.errors) mapped.fieldErrors[k] = body.errors[k];
+          editForm.applyServerErrors(mapped, err);
+          return;
+        }
+      } catch (e) {}
+    }
+  } catch (e) {}
+  yantra.toast('Save failed', { group: 'table' });
+});
+
+// Cancel closes modal
+btnCancel.addEventListener('click', () => showModal(false));
+
+// Delegated click handler on table container to catch Edit buttons
+table.el.addEventListener('click', (ev) => {
+  const btn = ev.target.closest('.btn-edit');
+  if (!btn) return;
+  const id = btn.dataset.id;
+  if (!id) return;
+
+  // fetch the record (GET /api/reports/:id)
+  yantra.showLoader();
+  yantra.fetchJson('/api/reports/' + encodeURIComponent(id), { method: 'GET', timeout: 8000 })
+    .then(json => {
+      const data = (json && json.data) ? json.data : json;
+      // populate form fields
+      document.getElementById('field_id').value = data.id;
+      document.getElementById('field_name').value = data.name || '';
+      document.getElementById('field_status').value = data.status || '';
+      document.getElementById('field_amount').value = (data.amount != null) ? data.amount : '';
+      // set editForm opts for correct URL & method
+      editForm.opts.url = '/api/reports/' + encodeURIComponent(data.id);
+      editForm.opts.method = 'PUT';
+      // clear previous server errors
+      // remove displayed field errors
+      const errors = formEl.querySelectorAll('.yf-error');
+      errors.forEach(e => e.remove());
+      showModal(true);
+    })
+    .catch(err => {
+      console.error('Failed to load record', err);
+      yantra.toast('Failed to load record', { group: 'table' });
+    })
+    .finally(() => yantra.hideLoader());
+});
+</script>
+</body>
+</html>
